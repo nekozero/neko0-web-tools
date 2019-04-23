@@ -1,10 +1,7 @@
-<style>
-    @media screen and (min-width: 600px) { .markdown-body img { float: right; width: 190px; } }
-</style>
 <div align="center">
     <img src="https://github.com/jojuniori/neko0-web-tools/raw/master/img/logo.png" width="256" align="center">
 </div>
-<h1 align="center">Neko0 web tools<br><br></h1>
+<h1 align="center" style="@media screen and (min-width: 600px) { float: right; width: 190px; }">Neko0 web tools<br><br></h1>
 
 **这是个Tampermonkey脚本项目，以下脚本均依赖于Tampermonkey，[Tampermonkey安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)**
 
