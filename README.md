@@ -1,7 +1,9 @@
 <div align="center">
     <img src="https://github.com/jojuniori/neko0-web-tools/raw/master/img/logo.png" width="400"">
     <br>
-    <img src="https://img.shields.io/badge/Git-Hub-brightgreen.svg">
+    <img src="https://img.shields.io/badge/not-a%20bug-brightgreen.svg">　
+    <img src="https://img.shields.io/badge/it's-a%20feature-brightgreen.svg">　
+    <img src="https://img.shields.io/badge/%F0%9F%90%BE-Neko-ff69b4.svg">
 </div>
 
 ----
