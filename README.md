@@ -1,7 +1,10 @@
 <div align="center">
-    <img src="https://github.com/jojuniori/neko0-web-tools/raw/master/img/logo.png" width="256" align="center">
+    <img src="https://github.com/jojuniori/neko0-web-tools/raw/master/img/logo.png" width="256"">
+    <br>
+    <img src="https://img.shields.io/badge/Git-Hub-brightgreen.svg">
 </div>
-<h1 align="center" style="float: right; width: 190px;">Neko0 web tools<br><br></h1>
+
+----
 
 **这是个Tampermonkey脚本项目，以下脚本均依赖于Tampermonkey，[Tampermonkey安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)**
 
@@ -9,7 +12,7 @@
 
 🛒 淘宝天猫一键好评 | [介绍](#淘宝天猫一键好评) | [安装](https://greasyfork.org/zh-CN/scripts/14744-%E6%B7%98%E5%AE%9D-%E5%A4%A9%E7%8C%AB%E4%B8%80%E9%94%AE%E5%A5%BD%E8%AF%84)
 
-🎮 Steam库存一键出售 | [介绍](#Steam库存一键出售) | [安装](https://greasyfork.org/zh-CN/scripts/35770-steam%E5%BA%93%E5%AD%98%E4%B8%80%E9%94%AE%E5%87%BA%E5%94%AE%E5%8A%9F%E8%83%BD)
+<img src="https://simpleicons.org/icons/steam.svg" height="24"> Steam库存一键出售 | [介绍](#Steam库存一键出售) | [安装](https://greasyfork.org/zh-CN/scripts/35770-steam%E5%BA%93%E5%AD%98%E4%B8%80%E9%94%AE%E5%87%BA%E5%94%AE%E5%8A%9F%E8%83%BD)
 
 📺 Iwara增强 | [介绍](#Iwara增强)
 
