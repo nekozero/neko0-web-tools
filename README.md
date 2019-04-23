@@ -3,13 +3,15 @@
 </div>
 <h1 align="center">Neko0 web tools<br><br></h1>
 
-### 这是个Tampermonkey脚本项目
+**这是个Tampermonkey脚本项目，以下脚本均依赖于Tampermonkey，[Tampermonkey安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)**
 
-🍔 饿了么全自动好评 | [介绍](#饿了么全自动好评工具) | [安装](https://greasyfork.org/zh-CN/scripts/369326-h5%E7%89%88%E9%A5%BF%E4%BA%86%E4%B9%88%E8%87%AA%E5%8A%A8%E5%A5%BD%E8%AF%84)
+🍔 饿了么全自动好评 | [介绍](#饿了么全自动好评) | [安装](https://greasyfork.org/zh-CN/scripts/369326-h5%E7%89%88%E9%A5%BF%E4%BA%86%E4%B9%88%E8%87%AA%E5%8A%A8%E5%A5%BD%E8%AF%84)
 
 🛒 淘宝天猫一键好评 | [介绍](#淘宝天猫一键好评) | [安装](https://greasyfork.org/zh-CN/scripts/14744-%E6%B7%98%E5%AE%9D-%E5%A4%A9%E7%8C%AB%E4%B8%80%E9%94%AE%E5%A5%BD%E8%AF%84)
 
 🎮 Steam库存一键出售 | [介绍](#Steam库存一键出售) | [安装](https://greasyfork.org/zh-CN/scripts/35770-steam%E5%BA%93%E5%AD%98%E4%B8%80%E9%94%AE%E5%87%BA%E5%94%AE%E5%8A%9F%E8%83%BD)
+
+📺 Iwara增强 | [介绍](#Iwara增强)
 
 ----
 
@@ -58,6 +60,24 @@
 可安装后在脚本代码中自由调整
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/steam.png)
+
+----
+
+### Iwara增强
+
+**Iwara 被 Tampermonkey 屏蔽的缘故，只能手动安装**
+
+目前提供了以下功能
+1. 复制名字：复制出 “作者 - 作品名” 格式的名字
+2. 一键复制名字 并 喜欢+关注+下载：按下即可复制名字，Like，Follow，并Download Source画质 的文件
+
+用于收藏视频作品再方便不过了
+
+按钮添加于右侧赞助按钮上方
+
+并不影响页面其他原有的按键功能
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/iwara.png)
 
 ----
 
