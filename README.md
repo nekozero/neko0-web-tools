@@ -1,3 +1,6 @@
+<style>
+    @media screen and (min-width: 600px) { .markdown-body img { float: right; width: 190px; } }
+</style>
 <div align="center">
     <img src="https://github.com/jojuniori/neko0-web-tools/raw/master/img/logo.png" width="256" align="center">
 </div>
