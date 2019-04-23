@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/jojuniori/neko0-web-tools/raw/master/img/logo.png" width="256"">
+    <img src="https://github.com/jojuniori/neko0-web-tools/raw/master/img/logo.png" width="400"">
     <br>
     <img src="https://img.shields.io/badge/Git-Hub-brightgreen.svg">
 </div>
