@@ -7,7 +7,7 @@
 // @homepageURL  https://github.com/jojuniori/neko0-web-tools
 // @grant        none
 // @run-at       document-end
-// @license      GPLv3
+// @license      AGPLv3
 // @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
 // @require      https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js
 // @include      *://*.iwara.tv/*

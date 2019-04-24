@@ -7,7 +7,7 @@
 // @homepageURL  https://github.com/jojuniori/neko0-web-tools
 // @grant        none
 // @run-at       document-end
-// @license      GPLv3
+// @license      AGPLv3
 // @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
 // @include      *://h5.ele.me/*
 // ==/UserScript==
