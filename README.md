@@ -8,7 +8,11 @@
 
 ----
 
-**这是个Tampermonkey脚本项目，以下脚本均依赖于Tampermonkey，[Tampermonkey安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)**
+**注意事项**  
+1.这是个Tampermonkey脚本项目  
+2.以下脚本均依赖于Tampermonkey  
+3.[Tampermonkey安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)  
+4.部分脚本使用了ES6特性，请勿在过旧版本的浏览器上使用
 
 🍔 饿了么全自动好评 | [介绍](#饿了么全自动好评) | [安装](https://greasyfork.org/zh-CN/scripts/369326-h5%E7%89%88%E9%A5%BF%E4%BA%86%E4%B9%88%E8%87%AA%E5%8A%A8%E5%A5%BD%E8%AF%84)
 

@@ -19,7 +19,16 @@ if (location.pathname.match('videos/') === null) {
 }
 
 // 设定好要用的样式
-let style = '<style>.block-plus {display: flex;align-items: center;justify-content: space-between;}.block-plus::before, .block-plus::after {content: unset !important;}</style>'
+let style = `<style>
+.block-plus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.block-plus::before, .block-plus::after {
+    content: unset !important;
+}
+</style>`
 $('head').prepend(style)
 
 // 文件名
@@ -28,7 +37,18 @@ let title = $('.node-info .title').text()
 let filename = username + ' - ' + title
 
 // 置入按钮
-let dom = '<div class="block block-plus"><span class="one-tap"><a href="#" class="btn btn-primary flag-processed" rel="nofollow"><i class="glyphicon glyphicon-tag"></i> 一键喜欢关注下载</a></span><span class="copy-name" data-clipboard-text="' + filename + '"><a href="#" class="btn btn-primary flag-processed" rel="nofollow"><i class="glyphicon glyphicon-bookmark"></i> 复制名字</a></span></div>'
+let dom = `<div class="block block-plus">
+<span class="one-tap">
+    <a href="#" class="btn btn-primary flag-processed" rel="nofollow">
+        <i class="glyphicon glyphicon-tag"></i> 一键喜欢关注下载
+    </a>
+</span>
+<span class="copy-name" data-clipboard-text="' + filename + '">
+    <a href="#" class="btn btn-primary flag-processed" rel="nofollow">
+        <i class="glyphicon glyphicon-bookmark"></i> 复制名字
+    </a>
+</span>
+</div>`
 $('.region.region-sidebar').prepend(dom)
 
 // 剪切板初始化
