@@ -7,7 +7,7 @@
 // @homepageURL  https://github.com/jojuniori/neko0-web-tools
 // @grant        none
 // @run-at       document-end
-// @license      GPLv3
+// @license      AGPLv3
 // @include      *://steamcommunity.com/*
 // @include      *://ratewrite.tmall.com/*
 // ==/UserScript==

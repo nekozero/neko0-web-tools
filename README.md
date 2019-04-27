@@ -92,4 +92,4 @@
 
 ### License
 
-GPLv3
+AGPLv3
