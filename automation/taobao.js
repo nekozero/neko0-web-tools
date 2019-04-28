@@ -1,17 +1,78 @@
 // ==UserScript==
-// @name         淘宝&天猫一键好评
+// @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
 // @version      1.5.5
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @homepageURL  https://github.com/jojuniori/neko0-web-tools
+// @supportURL   https://github.com/jojuniori/neko0-web-tools/issues
+// @updateURL    https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/taobao.js
+// @downloadURL  https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/taobao.js
 // @grant        none
-// @run-at       document-end
+// @run-at       document-idle
 // @license      AGPLv3
-// @require      http://libs.baidu.com/jquery/2.0.0/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @include      *://rate.taobao.com/*
 // @include      *://ratewrite.tmall.com/*
 // ==/UserScript==
+
+// 初始化设定
+let settingValueList = {
+    // 是否主动翻页
+    autoScroll: false,
+};
+for (let obj in settingValueList) {
+    if (sessionStorage.getItem(obj) === null) {
+        sessionStorage.setItem(obj, settingValueList[obj]);
+    }
+}
+
+// 置入Style
+let style = `<style>
+/* 设置框 */
+.n-box {
+    position: fixed;
+    right: 12px;
+    bottom: calc(12px + 13.333333vw);
+    width: 100px;
+    height: 100px;
+    background: white;
+    border-radius: 50px;
+    z-index: 99999;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: all 256ms;
+}
+.n-box.open {
+    width: 296px;
+    height: 296px;
+}
+/* 开关按钮 */
+.n-box .button.switch {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 256ms;
+}
+.n-box.open .button.switch {
+    transform: rotate(180deg);
+}
+</style>`
+$('head').append(style)
+
+// 置入DOM
+let dom = `<div class="n-box">
+<span class="button switch">
+    <i class="fas fa-cog fa-lg"></i>
+</span>
+</div>`
+$('body').append(dom)
 
 var host = window.location.host;
 var isTB = host === 'rate.taobao.com';

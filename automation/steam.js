@@ -1,15 +1,20 @@
 // ==UserScript==
-// @name         Steam库存一键出售功能
+// @name         [Neko0] Steam库存一键出售功能
 // @description  Steam库存页面添加一键出售按钮
 // @version      1.0.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @homepageURL  https://github.com/jojuniori/neko0-web-tools
+// @supportURL   https://github.com/jojuniori/neko0-web-tools/issues
+// @updateURL    https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/steam.js
+// @downloadURL  https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/steam.js
 // @grant        none
-// @run-at       document-end
+// @run-at       document-idle
 // @license      AGPLv3
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @include      *://steamcommunity.com/*
-// @include      *://ratewrite.tmall.com/*
 // ==/UserScript==
 
 // 选取标识
