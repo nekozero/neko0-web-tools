@@ -14,19 +14,19 @@
 3.部分脚本使用了ES6特性，请勿在过旧版本的浏览器上使用  
 [Tampermonkey安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)  
 
-🍔 饿了么全自动好评 | [介绍](#饿了么全自动好评) | [安装](https://greasyfork.org/zh-CN/scripts/369326-h5%E7%89%88%E9%A5%BF%E4%BA%86%E4%B9%88%E8%87%AA%E5%8A%A8%E5%A5%BD%E8%AF%84)
+🍔 饿了么全自动好评 | [介绍](#饿了么全自动好评) | [安装](https://greasyfork.org/zh-CN/scripts/369326)
 
-🛒 淘宝天猫一键好评 | [介绍](#淘宝天猫一键好评) | [安装](https://greasyfork.org/zh-CN/scripts/14744-%E6%B7%98%E5%AE%9D-%E5%A4%A9%E7%8C%AB%E4%B8%80%E9%94%AE%E5%A5%BD%E8%AF%84)
+🛒 淘宝天猫一键好评 | [介绍](#淘宝天猫一键好评) | [安装](https://greasyfork.org/zh-CN/scripts/14744)
 
-🎮 Steam库存一键出售 | [介绍](#Steam库存一键出售) | [安装](https://greasyfork.org/zh-CN/scripts/35770-steam%E5%BA%93%E5%AD%98%E4%B8%80%E9%94%AE%E5%87%BA%E5%94%AE%E5%8A%9F%E8%83%BD)
+🎮 Steam库存一键出售 | [介绍](#Steam库存一键出售) | [安装](https://greasyfork.org/zh-CN/scripts/35770)
 
-📺 Iwara增强 | [介绍](#Iwara增强) | [安装](https://greasyfork.org/zh-CN/scripts/382345-neko0-iwara%E5%A2%9E%E5%BC%BA)
+📺 Iwara增强 | [介绍](#Iwara增强) | [安装](https://greasyfork.org/zh-CN/scripts/382345)
 
 ----
 
 ### 饿了么全自动好评
 
-[安装地址](https://greasyfork.org/zh-CN/scripts/369326-h5%E7%89%88%E9%A5%BF%E4%BA%86%E4%B9%88%E8%87%AA%E5%8A%A8%E5%A5%BD%E8%AF%84)
+**[安装地址](https://greasyfork.org/zh-CN/scripts/36932684)**
 
 对于我这种天天点外卖的每次都要一个个去点星简直太麻烦了  
 自动化是好文明，懒是第一生产力
@@ -44,7 +44,7 @@
 
 ### 淘宝天猫一键好评
 
-**[安装地址](https://greasyfork.org/zh-CN/scripts/14744-%E6%B7%98%E5%AE%9D-%E5%A4%A9%E7%8C%AB%E4%B8%80%E9%94%AE%E5%A5%BD%E8%AF%84)**
+**[安装地址](https://greasyfork.org/zh-CN/scripts/14744)**
 
 在淘宝&天猫评价页面添加一键好评按钮
 
@@ -58,7 +58,7 @@
 
 ### Steam库存一键出售
 
-**[安装地址](https://greasyfork.org/zh-CN/scripts/35770-steam%E5%BA%93%E5%AD%98%E4%B8%80%E9%94%AE%E5%87%BA%E5%94%AE%E5%8A%9F%E8%83%BD)**
+**[安装地址](https://greasyfork.org/zh-CN/scripts/35770)**
 
 库存和重复的卡太多的时候很实用
 
@@ -74,7 +74,7 @@
 
 ### Iwara增强
 
-**[安装地址](https://greasyfork.org/zh-CN/scripts/382345-neko0-iwara%E5%A2%9E%E5%BC%BA)**
+**[安装地址](https://greasyfork.org/zh-CN/scripts/382345)**
 
 目前提供了以下功能
 1. 复制名字：复制出 “作者 - 作品名” 格式的名字
