@@ -20,7 +20,7 @@
 
 🎮 Steam库存一键出售 | [介绍](#Steam库存一键出售) | [安装](https://greasyfork.org/zh-CN/scripts/35770-steam%E5%BA%93%E5%AD%98%E4%B8%80%E9%94%AE%E5%87%BA%E5%94%AE%E5%8A%9F%E8%83%BD)
 
-📺 Iwara增强 | [介绍](#Iwara增强)
+📺 Iwara增强 | [介绍](#Iwara增强) | [安装](https://greasyfork.org/zh-CN/scripts/382345-neko0-iwara%E5%A2%9E%E5%BC%BA)
 
 ----
 
@@ -74,7 +74,7 @@
 
 ### Iwara增强
 
-**Iwara 被 Tampermonkey 屏蔽的缘故，只能[手动安装](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/iwara.js)**
+**[安装地址](https://greasyfork.org/zh-CN/scripts/382345-neko0-iwara%E5%A2%9E%E5%BC%BA)**
 
 目前提供了以下功能
 1. 复制名字：复制出 “作者 - 作品名” 格式的名字
