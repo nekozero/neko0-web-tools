@@ -11,38 +11,42 @@
 // @grant        none
 // @run-at       document-idle
 // @license      AGPLv3
+// @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @include      *://rate.taobao.com/*
+// @include      *://buyertrade.taobao.com/*
 // @include      *://ratewrite.tmall.com/*
 // ==/UserScript==
 
 // 初始化设定
 let settingValueList = {
-    // 是否主动翻页
-    autoScroll: false,
+	// 评价语列表
+	rateMsgList: ['质量非常好，与卖家描述的完全一致，非常满意，真的很喜欢，完全超出期望值，发货速度非常快，包装非常仔细、严实，物流公司服务态度很好，运送速度很快，很满意的一次购物。掌柜好人，一生平安。'],
 };
 for (let obj in settingValueList) {
-    if (sessionStorage.getItem(obj) === null) {
-        sessionStorage.setItem(obj, settingValueList[obj]);
-    }
+	if (sessionStorage.getItem(obj) === null) {
+		sessionStorage.setItem(obj, settingValueList[obj]);
+	}
 }
-
+// Math.floor(Math.random()*10);
 // 置入Style
 let style = `<style>
 /* 设置框 */
 .n-box {
     position: fixed;
-    right: 12px;
-    bottom: calc(12px + 13.333333vw);
-    width: 100px;
-    height: 100px;
+    right: 40px;
+    bottom: 80px;
+    width: 56px;
+    height: 56px;
     background: white;
-    border-radius: 50px;
+    border-radius: 3px;
     z-index: 99999;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    color: #888;
+    border: 2px solid #f5f5f5;
     transition: all 256ms;
+    z-index: 1000000;
 }
 .n-box.open {
     width: 296px;
@@ -53,8 +57,8 @@ let style = `<style>
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 100px;
-    height: 100px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,6 +77,10 @@ let dom = `<div class="n-box">
 </span>
 </div>`
 $('body').append(dom)
+
+$('.n-box .button.switch').click(()=>{
+    $('.n-box').toggleClass('open')
+})
 
 var host = window.location.host;
 var isTB = host === 'rate.taobao.com';
