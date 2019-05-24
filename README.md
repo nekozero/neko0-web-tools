@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/jojuniori/neko0-web-tools/raw/master/img/logo.png" width="400"">
+    <img src="https://github.com/nekozero/neko0-web-tools/raw/master/img/logo.png" width="400"">
     <br>
     <img src="https://img.shields.io/badge/not-a%20bug-brightgreen.svg"> 
     <img src="https://img.shields.io/badge/it's-a%20feature-brightgreen.svg"> 
@@ -38,7 +38,7 @@
 
 如果有人有改进意向欢迎Pull Requests
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/eleme.gif)
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/eleme.gif)
 
 ----
 
@@ -68,7 +68,7 @@
 
 可安装后在脚本代码中自由调整
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/steam.png)
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/steam.png)
 
 ----
 
@@ -86,7 +86,7 @@
 
 并不影响页面其他原有的按键功能
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/iwara.png)
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara.png)
 
 ----
 
