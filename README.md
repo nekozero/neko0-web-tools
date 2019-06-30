@@ -48,11 +48,31 @@
 
 在淘宝&天猫评价页面添加一键好评按钮
 
-![](https://greasyfork.org/system/screenshots/screenshots/000/002/776/original/1.png)
+列表页右下角有小齿轮用来设置：
 
-![](https://greasyfork.org/system/screenshots/screenshots/000/002/777/original/2.png)
+**天猫和淘宝的需要分开设置**
 
-![](https://greasyfork.org/system/screenshots/screenshots/000/002/778/original/3.png)
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-config1.png)
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-config2.png)
+
+淘宝一键好评：
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao2.png)
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao3.png)
+
+天猫一键好评：
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao4.png)
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao5.png)
+
+关于评价查看：
+
+https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-myRate.png)
 
 ----
 

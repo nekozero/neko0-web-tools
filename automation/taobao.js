@@ -23,11 +23,11 @@
 // 初始化设定
 let settingValueList = {
 	// 评价语列表
-	rateMsgList: ['质量非常好，与卖家描述的完全一致，非常满意，真的很喜欢，完全超出期望值，发货速度非常快，包装非常仔细、严实，物流公司服务态度很好，运送速度很快，很满意的一次购物。掌柜好人，一生平安。'],
+	rateMsgListText: ['质量非常好，与卖家描述的完全一致，非常满意，真的很喜欢，完全超出期望值，发货速度非常快，包装非常仔细、严实，物流公司服务态度很好，运送速度很快，很满意的一次购物。掌柜好人，一生平安。'],
 };
 for (let obj in settingValueList) {
-	if (sessionStorage.getItem(obj) === null) {
-		sessionStorage.setItem(obj, settingValueList[obj]);
+	if (localStorage.getItem(obj) === null) {
+		localStorage.setItem(obj, settingValueList[obj]);
 	}
 }
 // Math.floor(Math.random()*10);
@@ -40,17 +40,27 @@ let style = `<style>
     bottom: 80px;
     width: 56px;
     height: 56px;
+    padding: 12px;
     background: white;
     border-radius: 3px;
+    box-sizing: border-box;
     z-index: 99999;
     color: #888;
     border: 2px solid #f5f5f5;
     transition: all 256ms;
     z-index: 1000000;
+    overflow: hidden;
 }
 .n-box.open {
     width: 296px;
-    height: 296px;
+    height: 236px;
+}
+.n-box > *:not(.switch){
+    opacity: 0;
+    transition: all 256ms;
+}
+.n-box.open > *:not(.switch){
+    opacity: 1;
 }
 /* 开关按钮 */
 .n-box .button.switch {
@@ -63,9 +73,36 @@ let style = `<style>
     align-items: center;
     justify-content: center;
     transition: all 256ms;
+    z-index: 1;
 }
 .n-box.open .button.switch {
     transform: rotate(180deg);
+}
+/* 其他 */
+.n-box label {
+    display: block;
+    margin-bottom: 6px;
+}
+.n-box label .word-count {
+    float: right;
+}
+.n-box textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 6px;
+    box-sizing: border-box;
+}
+.n-box .button.update {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    box-sizing: border-box;
+    text-align: center;
+    background: #ff4401;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
 }
 </style>`
 $('head').append(style)
@@ -75,12 +112,29 @@ let dom = `<div class="n-box">
 <span class="button switch">
     <i class="fas fa-cog fa-lg"></i>
 </span>
+
+<label for="rateMsgListText">随机用评价语<span class="word-count"></span></label>
+<textarea rows="5" id="rateMsgListText"></textarea>
+<span class="button update rate-msg-list-text">
+    <i class="fas fa-edit fa-lg"></i>&nbsp;&nbsp;更新
+</span>
+
 </div>`
 $('body').append(dom)
-
-$('.n-box .button.switch').click(()=>{
-    $('.n-box').toggleClass('open')
+// 绑定点击事件
+$('.n-box .button.switch').click(() => {
+	$('.n-box').toggleClass('open')
 })
+$('.n-box .button.update.rate-msg-list-text').click(() => {
+	localStorage.setItem('rateMsgListText', $('#rateMsgListText').val())
+})
+// 写入已存储的评价语
+$('#rateMsgListText').val(localStorage.getItem('rateMsgListText'))
+// 监听字数
+$('.word-count').text($('#rateMsgListText').val().length)
+$('#rateMsgListText').bind('input propertychange', function() {
+	$('.word-count').text($(this).val().length)
+});
 
 var host = window.location.host;
 var isTB = host === 'rate.taobao.com';
@@ -97,7 +151,7 @@ function taobaoFun() {
 	tbNewDir.onclick = function() {
 		var tbRateMsg = document.querySelectorAll('.rate-msg');
 		for (var i = 0, a; a = tbRateMsg[i++];) {
-			a.value = "质量非常好，与卖家描述的完全一致，非常满意，真的很喜欢，完全超出期望值，发货速度非常快，包装非常仔细、严实，物流公司服务态度很好，运送速度很快，很满意的一次购物。掌柜好人，一生平安。"
+			a.value = localStorage.getItem('rateMsgListText')
 		}
 
 		var tbGoodRate = document.querySelectorAll('.good-rate');
@@ -110,7 +164,7 @@ function taobaoFun() {
 		tbStar[9].click();
 		tbStar[14].click();
 
-		tbSubmitBtn.click();
+		// tbSubmitBtn.click();
 	};
 
 	tbParentElem.appendChild(tbNewDir);
@@ -128,7 +182,7 @@ function tmallFun() {
 	tmNewDir.style.border = 'inset 1px #c40000';
 	tmNewDir.onclick = function() {
 
-		document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot.querySelector('#textEl').value = "质量非常好，与卖家描述的完全一致，非常满意，真的很喜欢，完全超出期望值，发货速度非常快，包装非常仔细、严实，物流公司服务态度很好，运送速度很快，很满意的一次购物。掌柜好人，一生平安。"
+		document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot.querySelector('#textEl').value = localStorage.getItem('rateMsgListText')
 
 		var tmStar = document.querySelectorAll('[data-star-value="5"]');
 		for (var i = 0, a; a = tmStar[i++];) {
