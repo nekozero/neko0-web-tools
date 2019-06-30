@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.6.6
+// @version      1.6.7
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
@@ -22,7 +22,7 @@
 // 初始化设定
 let settingValueList = {
 	// 评价语列表
-	rateMsgListText: ['很满意的一次购物。真的很喜欢。完全超出期望值。质量非常好。掌柜好人，一生平安。非常满意。与卖家描述的完全一致。发货速度非常快。包装非常仔细、严实。物流公司服务态度很好。运送速度很快。一眼就看上了，给好评。服务周到，态度热情。发货及时，物流很快。各方面都满意。给你全五星好评。'],
+	rateMsgListText: ['很满意的一次购物。真的很喜欢。完全超出期望值。质量非常好。掌柜好人，一生平安。非常满意。与卖家描述的完全一致。发货速度非常快。包装非常仔细、严实。物流公司服务态度很好。运送速度很快。一眼就看上了，给好评。下次有需求还来买。服务周到，态度热情。发货及时，物流很快。各方面都满意。给你全五星好评。'],
 	autoSort: true,
 	autoDel: 3,
 };
