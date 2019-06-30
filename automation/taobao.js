@@ -209,7 +209,9 @@ function taobaoFun() {
 	$('.tb-btn.haoping').click(() => {
 		taobaoMsg()
 		taobaoStar()
-		$('.J_submit_rate').click();
+		setTimeout(() => {
+			$('.J_submit_rate').click();
+		}, 500);
 	})
 }
 
