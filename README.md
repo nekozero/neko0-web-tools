@@ -48,9 +48,9 @@
 
 在淘宝&天猫评价页面添加一键好评按钮
 
-列表页右下角有小齿轮用来设置：
-
-**天猫和淘宝的需要分开设置**
+列表页右下角有小齿轮用来设置：  
+**输入框右上角的数字是字数统计**  
+**天猫和淘宝的需要分开设置**  
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-config1.png)
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.5.7
+// @version      1.5.8
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
@@ -164,7 +164,7 @@ function taobaoFun() {
 		tbStar[9].click();
 		tbStar[14].click();
 
-		// tbSubmitBtn.click();
+		tbSubmitBtn.click();
 	};
 
 	tbParentElem.appendChild(tbNewDir);
