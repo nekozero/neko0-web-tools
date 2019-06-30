@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.5.8
+// @version      1.5.9
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
@@ -16,7 +16,6 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @include      *://rate.taobao.com/*
-// @include      *://buyertrade.taobao.com/*
 // @include      *://ratewrite.tmall.com/*
 // ==/UserScript==
 
@@ -104,6 +103,39 @@ let style = `<style>
     border-radius: 3px;
     cursor: pointer;
 }
+
+.submitbox {
+    text-align: center;
+    padding: 20px 0 6px !important;
+}
+.submitboxplus {
+    text-align: center;
+}
+.tb-btn {
+    color: #fff;
+    background-color: #3498db;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,.15);
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.385;
+    padding: 9px 13px;
+    border-radius: 4px;
+    border: none;
+    font-weight: 400;
+    transition: color .25s linear,background-color .25s linear;
+    cursor: pointer;
+}
+.tb-btn:hover {
+    background-color: #5dade2;
+    border-color: #5dade2;
+}
+.tb-btn.haoping {
+    background-color: #f40;
+    border-color: #f40;
+}
+
 </style>`
 $('head').append(style)
 
@@ -141,33 +173,44 @@ var isTB = host === 'rate.taobao.com';
 var isTM = host === 'ratewrite.tmall.com';
 
 // 淘宝一键好评
+function taobaoStar() {
+	var tbGoodRate = document.querySelectorAll('.good-rate');
+	for (var i = 0, a; a = tbGoodRate[i++];) {
+		a.click();
+	}
+
+	var tbStar = document.querySelectorAll('.ks-simplestar img');
+	tbStar[4].click();
+	tbStar[9].click();
+	tbStar[14].click();
+}
+
+function taobaoMsg() {
+	var tbRateMsg = document.querySelectorAll('.rate-msg');
+	for (var i = 0, a; a = tbRateMsg[i++];) {
+		a.value = localStorage.getItem('rateMsgListText')
+	}
+}
+
 function taobaoFun() {
-	var tbParentElem = document.querySelector('.submitbox');
-	var tbSubmitBtn = document.querySelector('.J_submit_rate');
-	var tbNewDir = document.createElement('button');
-	tbNewDir.innerHTML = '一键好评';
-	tbNewDir.className = 'tb-rate-btn type-primary tb-rate-btn haoping';
-	tbNewDir.style.marginLeft = '50px';
-	tbNewDir.onclick = function() {
-		var tbRateMsg = document.querySelectorAll('.rate-msg');
-		for (var i = 0, a; a = tbRateMsg[i++];) {
-			a.value = localStorage.getItem('rateMsgListText')
-		}
-
-		var tbGoodRate = document.querySelectorAll('.good-rate');
-		for (var i = 0, a; a = tbGoodRate[i++];) {
-			a.click();
-		}
-
-		var tbStar = document.querySelectorAll('.ks-simplestar img');
-		tbStar[4].click();
-		tbStar[9].click();
-		tbStar[14].click();
-
-		tbSubmitBtn.click();
-	};
-
-	tbParentElem.appendChild(tbNewDir);
+	let elemStar = `<div class="submitboxplus">
+        <div class="tb-btn star">一键满星</div>
+        <div class="tb-btn msg">一键评语</div>
+        <div class="tb-btn starmsg">一键满星+评语</div>
+        <div class="tb-btn haoping">一键提交好评</div>
+    </div>`
+	$('.submitbox').after(elemStar)
+	$('.tb-btn.star').click(() => { taobaoStar() })
+	$('.tb-btn.msg').click(() => { taobaoMsg() })
+	$('.tb-btn.starmsg').click(() => {
+		taobaoMsg()
+		taobaoStar()
+	})
+	$('.tb-btn.haoping').click(() => {
+		taobaoMsg()
+		taobaoStar()
+		$('.J_submit_rate').click();
+	})
 }
 
 // 天猫一键好评
