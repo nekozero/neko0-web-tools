@@ -290,7 +290,7 @@ function processedText() {
 	if (JSON.parse(localStorage.getItem('autoSort'))) {
 		var arr = text.split('。')
 		var count = autoDel ? arr.length - autoDel : arr.length // 随机删除评语个数设定
-		text = getRandomArrayElements(arr, count).join("。")
+		text = getRandomArrayElements(arr, count).join(' ')
 	}
 	return text
 }
