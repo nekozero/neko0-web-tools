@@ -4,10 +4,10 @@
 // @version      1.0.5
 // @author       JoJunIori
 // @namespace    neko0-web-tools
-// @homepageURL  https://github.com/jojuniori/neko0-web-tools
-// @supportURL   https://github.com/jojuniori/neko0-web-tools/issues
-// @updateURL    https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/eleme.js
-// @downloadURL  https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/eleme.js
+// @homepageURL  https://github.com/nekozero/neko0-web-tools
+// @supportURL   https://github.com/nekozero/neko0-web-tools/issues
+// @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/eleme.js
+// @downloadURL  https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/eleme.js
 // @grant        none
 // @run-at       document-idle
 // @license      AGPLv3

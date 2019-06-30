@@ -4,10 +4,10 @@
 // @version      1.0.1
 // @author       JoJunIori
 // @namespace    neko0-web-tools
-// @homepageURL  https://github.com/jojuniori/neko0-web-tools
-// @supportURL   https://github.com/jojuniori/neko0-web-tools/issues
-// @updateURL    https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/iwara.js
-// @downloadURL  https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/automation/iwara.js
+// @homepageURL  https://github.com/nekozero/neko0-web-tools
+// @supportURL   https://github.com/nekozero/neko0-web-tools/issues
+// @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/iwara.js
+// @downloadURL  https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/iwara.js
 // @grant        none
 // @run-at       document-idle
 // @license      AGPLv3
