@@ -76,6 +76,14 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-myRate.png)
 
+已更新  
+写入评语时按全角句号(中文句号)分割已存储的评语并进行随机排序的功能选项  
+随机抽取3个内容进行删除处理  
+以此规避淘宝那套“滥用评价功能惩罚”的自动检测  
+默认开启此功能
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
+
 ----
 
 ### Steam库存一键出售
