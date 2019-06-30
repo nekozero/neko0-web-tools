@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.6.0
+// @version      1.6.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
@@ -136,6 +136,26 @@ let style = `<style>
     border-color: #f40;
 }
 
+.tm-btn {
+    display: inline-block;
+    padding: 0 10px;
+    border: 0;
+    line-height: 25px;
+    font-weight: 700;
+    background: 0 0;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 6px 12px;
+    border-radius: 2px;
+    color: #c40000;
+    background-color: #fff;
+    box-shadow: inset 0 0 0 1px;
+}
+.tm-btn.haoping {
+    color: #fff;
+    background-color: #c40000;
+    box-shadow: none;
+}
 </style>`
 $('head').append(style)
 
@@ -178,7 +198,6 @@ function taobaoStar() {
 	for (var i = 0, a; a = tbGoodRate[i++];) {
 		a.click();
 	}
-
 	var tbStar = document.querySelectorAll('.ks-simplestar img');
 	tbStar[4].click();
 	tbStar[9].click();
@@ -216,30 +235,38 @@ function taobaoFun() {
 }
 
 // 天猫一键好评
+function tmallStar() {
+    var tmStar = document.querySelectorAll('[data-star-value="5"]');
+    for (var i = 0, a; a = tmStar[i++];) {
+        a.click();
+    }
+}
+
+function tmallMsg() {
+    document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot.querySelector('#textEl').value = localStorage.getItem('rateMsgListText')
+}
+
 function tmallFun() {
-	var tmParentElem = document.querySelector('.compose-btn');
-	var tmSubmitBtn = document.querySelector('.compose-btn [type="submit"]');
-	var tmNewDir = document.createElement('button');
-	tmNewDir.innerHTML = '一键好评';
-	tmNewDir.className = 'tb-rate-btn type-primary tb-rate-btn haoping';
-	tmNewDir.style.background = 'white';
-	tmNewDir.style.color = '#c40000';
-	tmNewDir.style.border = 'inset 1px #c40000';
-	tmNewDir.onclick = function() {
-
-		document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot.querySelector('#textEl').value = localStorage.getItem('rateMsgListText')
-
-		var tmStar = document.querySelectorAll('[data-star-value="5"]');
-		for (var i = 0, a; a = tmStar[i++];) {
-			a.click();
-		}
-
-		tmSubmitBtn.click();
-	};
-
-	console.log(tmParentElem);
-	console.log(tmNewDir);
-	tmParentElem.appendChild(tmNewDir);
+	let elemStar = `<div class="submitboxplus">
+        <div class="tm-btn star">一键满星</div>
+        <div class="tm-btn msg">一键评语</div>
+        <div class="tm-btn starmsg">一键满星+评语</div>
+        <div class="tm-btn haoping">一键提交好评</div>
+    </div>`
+	$('.compose-submit').after(elemStar)
+	$('.tm-btn.star').click(() => { tmallStar() })
+	$('.tm-btn.msg').click(() => { tmallMsg() })
+	$('.tm-btn.starmsg').click(() => {
+		tmallMsg()
+		tmallStar()
+	})
+	$('.tm-btn.haoping').click(() => {
+		tmallMsg()
+		tmallStar()
+		setTimeout(() => {
+			$('.compose-btn [type="submit"]').click();
+		}, 500);
+	})
 }
 
 if (isTB) {
