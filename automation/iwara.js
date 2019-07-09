@@ -4,6 +4,7 @@
 // @version      1.0.1
 // @author       JoJunIori
 // @namespace    neko0-web-tools
+// @icon         https://www.iwara.tv/misc/favicon.ico
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
 // @supportURL   https://github.com/nekozero/neko0-web-tools/issues
 // @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/iwara.js

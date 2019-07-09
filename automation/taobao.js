@@ -4,6 +4,7 @@
 // @version      1.6.7
 // @author       JoJunIori
 // @namespace    neko0-web-tools
+// @icon         https://www.taobao.com/favicon.ico
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
 // @supportURL   https://github.com/nekozero/neko0-web-tools/issues
 // @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/taobao.js
@@ -22,7 +23,7 @@
 // 初始化设定
 let settingValueList = {
 	// 评价语列表
-	rateMsgListText: ['很满意的一次购物。真的很喜欢。完全超出期望值。质量非常好。掌柜好人，一生平安。非常满意。与卖家描述的完全一致。发货速度非常快。包装非常仔细、严实。物流公司服务态度很好。运送速度很快。一眼就看上了，给好评。下次有需求还来买。服务周到，态度热情。发货及时，物流很快。各方面都满意。给你全五星好评。'],
+	rateMsgListText: ['很满意的一次购物。真的很喜欢。完全超出期望值。质量非常好。掌柜好人，一生平安。非常满意。与卖家描述的完全一致。发货速度非常快。包装非常仔细、严实。物流公司服务态度很好。运送速度很快。下次有需求还来买。服务周到，态度热情。发货及时，物流很快。各方面都满意。给你全五星好评。'],
 	autoSort: true,
 	autoDel: 3,
 };
