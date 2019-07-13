@@ -61,6 +61,12 @@
 **天猫和淘宝的需要分开设置**  
 **天猫和淘宝的需要分开设置**  
 
+关于评价查看：
+
+https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-myRate.png)
+
 在淘宝&天猫评价页面添加一键好评按钮
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-config1.png)
@@ -80,12 +86,6 @@
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao5.png)
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao6.png)
-
-关于评价查看：
-
-https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
-
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-myRate.png)
 
 ----
 
