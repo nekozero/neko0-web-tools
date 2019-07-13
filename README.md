@@ -46,11 +46,22 @@
 
 **[安装地址](https://greasyfork.org/zh-CN/scripts/14744)**
 
-在淘宝&天猫评价页面添加一键好评按钮
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
 
-列表页右下角有小齿轮用来设置：  
+已更新写入评语时按全角句号(中文句号)分割已存储的评语并进行随机排序的功能选项  
+随机抽取3个内容进行删除处理  
+以此规避淘宝那套“滥用评价功能惩罚”的自动检测  
+默认开启此功能
+
+虽然有随机功能来规避，但是用的人多了后有些组合还是会被淘宝记录检测的  
+所以追求完美的建议使用自定义评语功能  
+**自定义功能在评价页右下角有小齿轮用来设置**  
 **输入框右上角的数字是字数统计**  
 **天猫和淘宝的需要分开设置**  
+**天猫和淘宝的需要分开设置**  
+**天猫和淘宝的需要分开设置**  
+
+在淘宝&天猫评价页面添加一键好评按钮
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-config1.png)
 
@@ -75,14 +86,6 @@
 https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-myRate.png)
-
-已更新  
-写入评语时按全角句号(中文句号)分割已存储的评语并进行随机排序的功能选项  
-随机抽取3个内容进行删除处理  
-以此规避淘宝那套“滥用评价功能惩罚”的自动检测  
-默认开启此功能
-
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
 
 ----
 
