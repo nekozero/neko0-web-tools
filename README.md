@@ -22,6 +22,8 @@
 
 📺 Iwara增强 | [介绍](#Iwara增强) | [安装](https://greasyfork.org/zh-CN/scripts/382345)
 
+🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [介绍](#图站增强Danbooru/Gelbooru/Konachan/Yande) | [安装](https://greasyfork.org/zh-CN/scripts/387907)
+
 ----
 
 ### 饿了么全自动好评
@@ -120,6 +122,29 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 并不影响页面其他原有的按键功能
 
 ![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara.png)
+
+----
+
+### 图站增强Danbooru/Gelbooru/Konachan/Yande
+
+**[安装地址](https://greasyfork.org/zh-CN/scripts/387907)**
+
+加入了快捷键操作
+
+* 按下 `←` 或 `A` 上一页
+* 按下 `→` 或 `D` 下一页
+* 按下 `S` 或 `O` 查看原图
+* 按下 `F` 查看来源页面
+
+Added shortcut key operation
+
+* Press `←` or `A` to the previous page
+
+* Press `→` or `D` to the next page
+
+* Press `S` or `O` to view the original image
+
+* Press `F` to view the source page
 
 ----
 
