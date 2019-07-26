@@ -22,7 +22,7 @@
 
 📺 Iwara增强 | [介绍](#Iwara增强) | [安装](https://greasyfork.org/zh-CN/scripts/382345)
 
-🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [介绍](#图站增强Danbooru/Gelbooru/Konachan/Yande) | [安装](https://greasyfork.org/zh-CN/scripts/387907)
+🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [介绍](#图站增强danboorugelboorukonachanyande) | [安装](https://greasyfork.org/zh-CN/scripts/387907)
 
 ----
 
