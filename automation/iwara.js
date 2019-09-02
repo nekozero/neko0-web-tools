@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能
-// @version      1.0.3
+// @version      1.0.4
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/misc/favicon.ico
@@ -35,7 +35,7 @@ let username = $('.node-info .username').text()
 let title = $('.node-info .title').text()
 let filename = username + ' - ' + title
 // 替换windows文件名禁用字符
-filename = filename.replace(/[/\\:*?<>|]/g,"")
+filename = filename.replace(/[/\\:*?<>|]/g," ")
 // 置入DOM
 let dom = `<div class="block block-plus">
 <span class="one-tap">
