@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.6.7
+// @version      1.6.8
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -306,10 +306,10 @@ function taobaoStar() {
 	for (var i = 0, a; a = tbGoodRate[i++];) {
 		a.click();
 	}
-	var tbStar = document.querySelectorAll('.ks-simplestar img');
-	tbStar[4].click();
-	tbStar[9].click();
-	tbStar[14].click();
+	var tbStar = document.querySelectorAll('.rate-stars label');
+	tbStar[4].childNodes[0].click();
+	tbStar[9].childNodes[0].click();
+	tbStar[14].childNodes[0].click();
 }
 
 function taobaoMsg() {
