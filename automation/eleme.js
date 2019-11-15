@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 饿了么自动好评
 // @description  HTML5版饿了么批量自动好评
-// @version      1.0.5
+// @version      1.0.6
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://h5.ele.me/favicon.ico
@@ -108,14 +108,8 @@ let autoPraise = {
 				}, 20)
 			}
 		} else if (location.pathname == "/aftercomment/") {
-			// 评价完毕页面
-			if (document.querySelector('.check-button')) {
-				// 还有未评价订单则返回列表
-				document.querySelector('.check-button').click()
-			} else {
-				// 否则即终止
-				autoPraise.done()
-			}
+            // 饿了么删除了返回按钮，手动返回order页
+            location.href = 'https://h5.ele.me/order/'
 		}
 	},
 	// 结束评价
