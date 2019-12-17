@@ -125,6 +125,8 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara.png)
 
+Rin真是太棒了我™舔爆
+
 ----
 
 ### 图站增强Danbooru/Gelbooru/Konachan/Yande
