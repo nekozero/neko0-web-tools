@@ -14,39 +14,13 @@
 3.部分脚本使用了ES6特性，请勿在过旧版本的浏览器上使用  
 [Tampermonkey安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)  
 
-🍔 饿了么全自动好评 | [介绍](#饿了么全自动好评) | [安装](https://greasyfork.org/zh-CN/scripts/369326)
+---
 
-🛒 淘宝天猫一键好评 | [介绍](#淘宝天猫一键好评) | [安装](https://greasyfork.org/zh-CN/scripts/14744)
-
-🎮 Steam库存一键出售 | [介绍](#Steam库存一键出售) | [安装](https://greasyfork.org/zh-CN/scripts/35770)
-
-📺 Iwara增强 | [介绍](#Iwara增强) | [安装](https://greasyfork.org/zh-CN/scripts/382345)
-
-🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [介绍](#图站增强danboorugelboorukonachanyande) | [安装](https://greasyfork.org/zh-CN/scripts/387907)
-
-----
-
-### 饿了么全自动好评
-
-**[安装地址](https://greasyfork.org/zh-CN/scripts/36932684)**
-
-对于我这种天天点外卖的每次都要一个个去点星简直太麻烦了  
-自动化是好文明，懒是第一生产力
-
-安装后进入 https://h5.ele.me/  
-点击右下角的自动好评就会开始执行  
-会自动给未评价的订单打上好评  
-如果有不想打好评的可以提前手动评价掉  
-
-如果有人有改进意向欢迎Pull Requests
-
-![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/eleme.gif)
-
-----
+🛒 淘宝天猫一键好评 | [安装](https://greasyfork.org/zh-CN/scripts/14744)
+<details>
+<summary>更多介绍</summary>
 
 ### 淘宝天猫一键好评
-
-**[安装地址](https://greasyfork.org/zh-CN/scripts/14744)**
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
 
@@ -91,11 +65,35 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao6.png)
 
+</details>
+
 ----
 
-### Steam库存一键出售
+🍔 饿了么全自动好评 | [安装](https://greasyfork.org/zh-CN/scripts/369326)
+<details>
+<summary>更多介绍</summary>
 
-**[安装地址](https://greasyfork.org/zh-CN/scripts/35770)**
+对于我这种天天点外卖的每次都要一个个去点星简直太麻烦了  
+自动化是好文明，懒是第一生产力
+
+安装后进入 https://h5.ele.me/  
+点击右下角的自动好评就会开始执行  
+会自动给未评价的订单打上好评  
+如果有不想打好评的可以提前手动评价掉  
+
+如果有人有改进意向欢迎Pull Requests
+
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/eleme.gif)
+
+</details>
+
+---
+
+🎮 Steam库存一键出售 | [安装](https://greasyfork.org/zh-CN/scripts/35770)
+<details>
+<summary>更多介绍</summary>
+
+### Steam库存一键出售
 
 库存和重复的卡太多的时候很实用
 
@@ -107,11 +105,15 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/steam.png)
 
+</details>
+
 ----
 
-### Iwara增强
+📺 Iwara增强 | [安装](https://greasyfork.org/zh-CN/scripts/382345)
+<details>
+<summary>更多介绍</summary>
 
-**[安装地址](https://greasyfork.org/zh-CN/scripts/382345)**
+### Iwara增强
 
 目前提供了以下功能
 1. 复制名字：复制出 “作者 - 作品名” 格式的名字
@@ -127,11 +129,15 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 Rin真是太棒了我™舔爆
 
+</details>
+
 ----
 
-### 图站增强Danbooru/Gelbooru/Konachan/Yande
+🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [安装](https://greasyfork.org/zh-CN/scripts/387907)
+<details>
+<summary>更多介绍</summary>
 
-**[安装地址](https://greasyfork.org/zh-CN/scripts/387907)**
+### 图站增强Danbooru/Gelbooru/Konachan/Yande
 
 加入了快捷键操作
 
@@ -149,6 +155,8 @@ Added shortcut key operation
 * Press `S` or `O` to view the original image
 
 * Press `F` to view the source page
+
+</details>
 
 ----
 
