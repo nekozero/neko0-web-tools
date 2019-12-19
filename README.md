@@ -145,8 +145,8 @@ Rin真是太棒了我™舔爆
 
 * 按下 `←` 或 `A` 上一页
 * 按下 `→` 或 `D` 下一页
-* 按下 `S` 或 `O` 查看原图
-* 按下 `F` 查看来源页面
+* 按下 `S` 或 `O` 查看原图 (source/original)
+* 按下 `F` 查看来源页面 (from)
 
 Added shortcut key operation
 
@@ -154,9 +154,9 @@ Added shortcut key operation
 
 * Press `→` or `D` to the next page
 
-* Press `S` or `O` to view the original image
+* Press `S` or `O` to view the original image (source/original)
 
-* Press `F` to view the source page
+* Press `F` to view the source page (from)
 
 </details>
 
