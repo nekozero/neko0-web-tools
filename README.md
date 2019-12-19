@@ -18,9 +18,9 @@
 
 🛒 淘宝天猫一键好评 | [安装](https://greasyfork.org/zh-CN/scripts/14744)
 <details>
-<summary>更多介绍</summary>
+<summary>介绍</summary>
 
-### 淘宝天猫一键好评
+### 
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
 
@@ -71,7 +71,9 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 🍔 饿了么全自动好评 | [安装](https://greasyfork.org/zh-CN/scripts/369326)
 <details>
-<summary>更多介绍</summary>
+<summary>介绍</summary>
+
+### 
 
 对于我这种天天点外卖的每次都要一个个去点星简直太麻烦了  
 自动化是好文明，懒是第一生产力
@@ -91,9 +93,9 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 🎮 Steam库存一键出售 | [安装](https://greasyfork.org/zh-CN/scripts/35770)
 <details>
-<summary>更多介绍</summary>
+<summary>介绍</summary>
 
-### Steam库存一键出售
+### 
 
 库存和重复的卡太多的时候很实用
 
@@ -111,9 +113,9 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 📺 Iwara增强 | [安装](https://greasyfork.org/zh-CN/scripts/382345)
 <details>
-<summary>更多介绍</summary>
+<summary>介绍</summary>
 
-### Iwara增强
+### 
 
 目前提供了以下功能
 1. 复制名字：复制出 “作者 - 作品名” 格式的名字
@@ -135,9 +137,9 @@ Rin真是太棒了我™舔爆
 
 🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [安装](https://greasyfork.org/zh-CN/scripts/387907)
 <details>
-<summary>更多介绍</summary>
+<summary>介绍</summary>
 
-### 图站增强Danbooru/Gelbooru/Konachan/Yande
+### 
 
 加入了快捷键操作
 
