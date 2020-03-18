@@ -135,6 +135,24 @@ Rin真是太棒了我™舔爆
 
 ----
 
+📺 BiliBili优化 | [安装](https://greasyfork.org/zh-CN/scripts/387907)
+<details>
+<summary>介绍</summary>
+
+### 
+
+收藏视频弹窗优化
+
+使用前：
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/bilibili1.png)
+
+使用后：
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/bilibili2.png)
+
+</details>
+
+----
+
 🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [安装](https://greasyfork.org/zh-CN/scripts/387907)
 <details>
 <summary>介绍</summary>
