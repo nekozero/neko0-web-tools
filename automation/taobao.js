@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.6.8
+// @version      1.6.9
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -353,8 +353,20 @@ function tmallStar() {
 
 function tmallMsg() {
 	// 写入评价
-	document.querySelector('.J_textEditorContent').value = processedText()
-	document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot.querySelector('#textEl').value = processedText()
+	let textInputer
+	if (document.querySelector('.J_textInput')) textInputer = document.querySelectorAll('.J_textInput')
+	if (document.querySelector('.J_textEditorContent')) textInputer = document.querySelectorAll('.J_textEditorContent')
+	if (document.querySelector('.J_textInput').shadowRoot) {
+		if (document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot) {
+			textInputer = document
+				.querySelector('.J_textInput')
+				.shadowRoot.querySelector('#textEditor')
+				.shadowRoot.querySelectorAll('#textEl')
+		}
+    }
+    for (var i = 0, a; a = textInputer[i++];) {
+		a.value = processedText()
+	}
 }
 
 function tmallFun() {
