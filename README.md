@@ -135,6 +135,22 @@ Rin真是太棒了我™舔爆
 
 ----
 
+----
+
+🎮 DIM增强 | [安装](https://greasyfork.org/zh-CN/scripts/411843)
+<details>
+<summary>介绍</summary>
+
+### 
+
+添加快捷键操作，详细见预览图
+
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/dim.png)
+
+</details>
+
+----
+
 📺 BiliBili优化 | [安装](https://greasyfork.org/zh-CN/scripts/387907)
 <details>
 <summary>介绍</summary>
