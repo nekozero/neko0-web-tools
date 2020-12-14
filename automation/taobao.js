@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.7.0
+// @version      1.7.1
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
