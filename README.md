@@ -29,15 +29,13 @@
 以此规避淘宝那套“滥用评价功能惩罚”的自动检测  
 默认开启此功能
 
-### 虽然有随机功能来规避
-### 但是用的人多了后有些组合还是会被淘宝记录检测的  
-### 所以追求完美的请务必使用自定义评语功能  
+### ⚠️虽然有随机功能来规避
+### ⚠️但是用的人多了后有些组合还是会被淘宝记录检测的  
+### ⚠️所以追求完美的请务必使用自定义评语功能  
+### ⚠️评价完一条后等几秒钟再评价下一条，不然被检测几率很高  
 
 **自定义功能在评价页右下角有小齿轮用来设置**  
 **输入框右上角的数字是字数统计**  
-**天猫和淘宝的需要分开设置**  
-**天猫和淘宝的需要分开设置**  
-**天猫和淘宝的需要分开设置**  
 
 关于评价查看：
 
@@ -64,6 +62,10 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao5.png)
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao6.png)
+
+已更新在列表页直接一键好评：
+
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-update1.png)
 
 </details>
 
@@ -132,8 +134,6 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 Rin真是太棒了我™舔爆
 
 </details>
-
-----
 
 ----
 
