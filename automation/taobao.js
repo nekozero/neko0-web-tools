@@ -436,7 +436,7 @@ let autorate = () => {
 	if (GM_getValue('taobaorate').autorate) {
 		setTimeout(function () {
 			$('.submitboxplus .haoping')[0].click()
-			关闭自动执行开关
+			// 关闭自动执行开关
 			let store = GM_getValue('taobaorate')
 			store.autorate = false
 			GM_setValue('taobaorate', store)
