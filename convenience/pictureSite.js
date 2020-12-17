@@ -4,6 +4,7 @@
 // @version      1.0.1
 // @author       JoJunIori
 // @namespace    neko0-web-tools
+// @icon         https://konachan.com/favicon.ico
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
 // @supportURL   https://github.com/nekozero/neko0-web-tools/issues

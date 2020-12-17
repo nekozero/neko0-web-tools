@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Steam库存一键出售功能
 // @description  Steam库存页面添加一键出售按钮
-// @version      1.0.2
+// @version      1.0.3
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://steamcommunity.com/favicon.ico
