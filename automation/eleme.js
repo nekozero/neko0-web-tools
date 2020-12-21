@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 饿了么自动好评
 // @description  HTML5版饿了么批量自动好评
-// @version      1.0.6
+// @version      1.0.7
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://h5.ele.me/favicon.ico
@@ -57,7 +57,12 @@ let dom = `<div class="n-box">
     <span> 自动好评</span>
 </span>
 </div>`
-if (location.pathname == "/" || location.pathname == "/discover/" || location.pathname == "/order/" || location.pathname == "/profile/") {
+if (
+	location.pathname == '/' ||
+	location.pathname == '/discover/' ||
+	location.pathname == '/order/' ||
+	location.pathname == '/profile/'
+) {
 	if (sessionStorage.getItem('autoPraise') !== 'true') {
 		// 判断已开启未开关才置入DOM
 		$('body').append(dom)
@@ -75,26 +80,29 @@ let autoPraise = {
 	// 开始评价
 	start: () => {
 		// 页面判断开始
-		if (location.pathname == "/order/") {
+		if (location.pathname == '/order/') {
 			// 订单列表页面
-			if (document.querySelector('.cardbutton.alert')) {
-				// 存在未评价订单时直接模拟点击来跳转
-				document.querySelector('.cardbutton.alert').click()
-			} else {
-				let scrollDown = () => { $('html').scrollTop(9999999) }
-				let autoScroll = setInterval(() => {
-					// 判断是否到底
-					if (!document.querySelector('.limited')) {
-						// 尚未到底则继续拉
-						return scrollDown()
-					} else {
-						// 到底了则终止
-						clearInterval(autoScroll);
-						return autoPraise.done()
-					}
-				}, 1000)
+			let scrollDown = () => {
+                // 判断下拉还是跳转
+				if (document.querySelector('.cardbutton.alert')) {
+					// 存在未评价订单时直接模拟点击来跳转
+					document.querySelector('.cardbutton.alert').click()
+				} else {
+					$('html').scrollTop(9999999)
+				}
 			}
-		} else if (location.pathname == "/order/detail/") {
+			let autoScroll = setInterval(() => {
+				// 判断是否到底
+				if (!document.querySelector('.limited')) {
+					// 尚未到底则继续拉
+					return scrollDown()
+				} else {
+					// 到底了则终止
+					clearInterval(autoScroll)
+					return autoPraise.done()
+				}
+			}, 1000)
+		} else if (location.pathname == '/order/detail/') {
 			// 订单评价页面
 			if (document.querySelector('div[class*="order-star-"] > label:nth-child(5)')) {
 				document.querySelector('div[class*="face-"] > div:nth-child(3)').click()
@@ -107,17 +115,17 @@ let autoPraise = {
 					}, 20)
 				}, 20)
 			}
-		} else if (location.pathname == "/aftercomment/") {
-            // 饿了么删除了返回按钮，手动返回order页
-            location.href = 'https://h5.ele.me/order/'
+		} else if (location.pathname == '/aftercomment/') {
+			// 饿了么删除了返回按钮，手动返回order页
+			location.href = 'https://h5.ele.me/order/'
 		}
 	},
 	// 结束评价
 	done: () => {
-		sessionStorage.setItem('autoPraise', 'false');
+		sessionStorage.setItem('autoPraise', 'false')
 		alert('已全部好评完毕')
 		location.href = 'https://h5.ele.me/order/'
-	}
+	},
 }
 
 setTimeout(() => {
