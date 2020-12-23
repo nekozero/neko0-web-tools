@@ -22,7 +22,7 @@
 
 ### 
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao-Anti-detection.gif)
 
 已更新写入评语时按全角句号(中文句号)分割已存储的评语并进行随机排序的功能选项  
 随机抽取3个内容进行删除处理  
@@ -41,31 +41,36 @@
 
 https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-myRate.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao-myRate.png)
 
 在淘宝&天猫评价页面添加一键好评按钮
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-config1.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao-config1.png)
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-config2.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao-config2.png)
 
 淘宝一键好评：
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao2.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao2.png)
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao3.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao3.png)
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao4.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao4.png)
 
 天猫一键好评：
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao5.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao5.png)
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao6.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao6.png)
 
-已更新在列表页直接一键好评：
+[2020-12-14] 已更新在列表页直接一键好评：
 
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-update1.png)
+![](https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/taobao-update1.png)
+
+
+[2020-12-24] 加入一键自动全部好评功能，会根据已设定的内容自动挨个好评列表中的待评价商品：
+
+![](<https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/img/>taobao-update2.png)
 
 </details>
 
