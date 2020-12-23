@@ -12,15 +12,15 @@
 1.这是个Tampermonkey脚本项目  
 2.以下脚本均依赖于Tampermonkey  
 3.部分脚本使用了ES6特性，请勿在过旧版本的浏览器上使用  
-[Tampermonkey安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)  
+👉[Tampermonkey浏览器扩展程序安装地址](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)  
 
 ---
 
-🛒 淘宝天猫一键好评 | [安装](https://greasyfork.org/zh-CN/scripts/14744)
+🛒 淘宝天猫一键好评 | [安装](https://greasyfork.org/zh-CN/scripts/14744)  
+`用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱`
 <details>
-<summary>介绍</summary>
 
-### 
+<summary>介绍</summary>
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
 
@@ -76,11 +76,11 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ----
 
-🍔 饿了么全自动好评 | [安装](https://greasyfork.org/zh-CN/scripts/369326)
+🍔 饿了么全自动好评 | [安装](https://greasyfork.org/zh-CN/scripts/369326)  
+`用于方便地积攒饿了么金币，来兑换一些没啥卵用的鬼东西`
 <details>
-<summary>介绍</summary>
 
-### 
+<summary>介绍</summary>
 
 对于我这种天天点外卖的每次都要一个个去点星简直太麻烦了  
 自动化是好文明，懒是第一生产力
@@ -118,11 +118,10 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ----
 
-📺 Iwara增强 | [安装](https://greasyfork.org/zh-CN/scripts/382345)
+📺 Iwara增强 | [安装](https://greasyfork.org/zh-CN/scripts/382345)  
+`增加了两个一键执行的操作`
 <details>
 <summary>介绍</summary>
-
-### 
 
 目前提供了以下功能
 1. 复制名字：复制出 “作者 - 作品名” 格式的名字
@@ -142,7 +141,8 @@ Rin真是太棒了我™舔爆
 
 ----
 
-📺 BiliBili优化 | [安装](https://greasyfork.org/zh-CN/scripts/387907)
+📺 BiliBili优化 | [安装](https://greasyfork.org/zh-CN/scripts/387907)  
+`视频收藏功能的优化`
 <details>
 <summary>介绍</summary>
 
@@ -160,7 +160,8 @@ Rin真是太棒了我™舔爆
 
 ----
 
-🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [安装](https://greasyfork.org/zh-CN/scripts/387907)
+🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [安装](https://greasyfork.org/zh-CN/scripts/387907)  
+`快捷键操作与样式修改`
 <details>
 <summary>介绍</summary>
 
