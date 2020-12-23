@@ -1,0 +1,214 @@
+/* 设置框 */
+.n-box {
+	user-select: none;
+	position: fixed;
+	right: 40px;
+	bottom: 80px;
+	width: 56px;
+	height: 56px;
+	padding: 12px;
+	background: white;
+	border-radius: 3px;
+	box-sizing: border-box;
+	z-index: 99999;
+	color: #888;
+	border: 2px solid #f5f5f5;
+	transition: all 256ms;
+	z-index: 1000000;
+	overflow: hidden;
+}
+.n-box.open {
+	width: 296px;
+	height: 266px;
+}
+.n-box > *:not(.switch) {
+	opacity: 0;
+	transition: all 256ms;
+}
+.n-box.open > *:not(.switch) {
+	opacity: 1;
+}
+/* 开关按钮 */
+.n-box .button.switch {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 56px;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 256ms;
+	z-index: 1;
+}
+.n-box.open .button.switch {
+	transform: rotate(180deg);
+}
+/* 其他 */
+.n-box label {
+	display: block;
+}
+.n-box label .word-count {
+	float: right;
+}
+/* 输入框 */
+.n-box textarea {
+	display: block;
+	width: 100%;
+	padding: 6px;
+	box-sizing: border-box;
+	margin-top: 6px;
+}
+/* 更新按钮 */
+.n-box .button.update {
+	display: block;
+	width: 100%;
+	padding: 6px 12px;
+	margin-top: 6px;
+	box-sizing: border-box;
+	text-align: center;
+	background: #ff4401;
+	color: white;
+	border-radius: 3px;
+	cursor: pointer;
+}
+/* 开关 */
+.n-box .toggle {
+	float: left;
+	padding: 6px;
+	box-sizing: border-box;
+	margin-top: 6px;
+}
+.n-box .toggle.auto-sort > span {
+	display: none;
+}
+/* 输入框 */
+.n-box .input.auto-del {
+	float: left;
+	margin-top: 6px;
+}
+.n-box .input.auto-del input {
+	border: none;
+	box-sizing: border-box;
+	padding: 6px;
+	width: 30px;
+	text-align: center;
+	float: left;
+	box-shadow: inset 0 0 0 1px #888888;
+	border-radius: 6px;
+}
+.n-box .input.auto-del label {
+	float: left;
+	padding: 6px;
+}
+
+/* 一键评价 */
+.submitbox {
+	text-align: center;
+	padding: 20px 0 6px !important;
+}
+.submitboxplus {
+	user-select: none;
+	text-align: center;
+}
+.tb-btn {
+	color: #fff;
+	background-color: #3498db;
+	box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.15);
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	font-size: 13px;
+	line-height: 1.385;
+	padding: 9px 13px;
+	border-radius: 4px;
+	border: none;
+	font-weight: 400;
+	transition: color 0.25s linear, background-color 0.25s linear;
+	cursor: pointer;
+}
+.tb-btn:hover {
+	background-color: #5dade2;
+	border-color: #5dade2;
+}
+.tb-btn.haoping {
+	background-color: #f40;
+	border-color: #f40;
+}
+
+.tm-btn {
+	user-select: none;
+	display: inline-block;
+	padding: 0 10px;
+	border: 0;
+	line-height: 25px;
+	font-weight: 700;
+	background: 0 0;
+	cursor: pointer;
+	text-align: center;
+	margin: 0 6px 12px;
+	border-radius: 2px;
+	color: #c40000;
+	background-color: #fff;
+	box-shadow: inset 0 0 0 1px;
+}
+.tm-btn.haoping {
+	user-select: none;
+	color: #fff;
+	background-color: #c40000;
+	box-shadow: none;
+}
+.list-auto-btn {
+	margin: 10px 10px 0;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	color: #3c3c3c;
+	height: 28px;
+	line-height: 26px;
+	padding: 0 12px;
+	border-radius: 3px;
+	font-size: 12px;
+	cursor: pointer;
+	display: inline-block;
+}
+.list-auto-btn:hover {
+	border-color: #ff1d00;
+	color: #ff1d00;
+}
+.button-auto-praise-all {
+	background-color: #fff;
+	border: 1px solid #ff6000;
+	height: 24px;
+	line-height: 22px;
+	padding: 0 12px;
+	margin-right: 6px;
+	border-radius: 3px;
+	font-size: 12px;
+	cursor: pointer;
+	display: inline-block;
+	color: #ff6000;
+}
+.fully-automatic-praise {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999999999;
+}
+.fully-automatic-praise .cancel {
+	background-color: #66b6ff;
+	color: #fff;
+	width: 150px;
+	height: 42px;
+	line-height: 42px;
+	padding: 0 12px;
+	border-radius: 3px;
+	font-size: 16px;
+	text-align: center;
+	cursor: pointer;
+}

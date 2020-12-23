@@ -1,245 +1,60 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.7.1
+// @version      1.7.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
 // @supportURL   https://github.com/nekozero/neko0-web-tools/issues
-// @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/taobao.js
-// @downloadURL  https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/taobao.js
+// @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/taobao/main.js
+// @downloadURL  https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/taobao/main.js
 // @grant        GM_addStyle
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @grant        GM_getResourceText
 // @run-at       document-idle
 // @license      AGPLv3
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
+// @resource     style https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.1/automation/taobao/style.css
+// @resource     html-n-box https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.1/automation/taobao/n-box.html
 // @include      *://rate.taobao.com/*
 // @include      *://ratewrite.tmall.com/*
 // @include        *://buyertrade.taobao.com/trade*
 // ==/UserScript==
 
-// 初始化设定
+/** 初始化设定 开始 */
+// 默认值
 var taobaorate = {
 	autorate: false,
 	rateMsgListText:
 		'很满意的一次购物。真的很喜欢。完全超出期望值。质量非常好。掌柜好人，一生平安。非常满意。与卖家描述的完全一致。发货速度非常快。包装非常仔细、严实。物流公司服务态度很好。运送速度很快。下次有需求还来买。服务周到，态度热情。发货及时，物流很快。各方面都满意。给你全五星好评。',
 	autoSort: true,
 	autoDel: 3,
+	autoPraiseAll: false,
 }
-
+// 判断是否存在设定
 if (GM_getValue('taobaorate') === undefined) {
 	GM_setValue('taobaorate', taobaorate)
+} else {
+	let store = GM_getValue('taobaorate')
+	$.each(taobaorate, function (i) {
+		if (store[i] === undefined) {
+			store[i] = taobaorate[i]
+		}
+	})
+	GM_setValue('taobaorate', store)
 }
+/** 初始化设定 结束 */
 
-// Math.floor(Math.random()*10);
 // 置入Style
-GM_addStyle(`
-/* 设置框 */
-.n-box {
-    user-select: none;
-    position: fixed;
-    right: 40px;
-    bottom: 80px;
-    width: 56px;
-    height: 56px;
-    padding: 12px;
-    background: white;
-    border-radius: 3px;
-    box-sizing: border-box;
-    z-index: 99999;
-    color: #888;
-    border: 2px solid #f5f5f5;
-    transition: all 256ms;
-    z-index: 1000000;
-    overflow: hidden;
-}
-.n-box.open {
-    width: 296px;
-    height: 266px;
-}
-.n-box > *:not(.switch){
-    opacity: 0;
-    transition: all 256ms;
-}
-.n-box.open > *:not(.switch){
-    opacity: 1;
-}
-/* 开关按钮 */
-.n-box .button.switch {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 256ms;
-    z-index: 1;
-}
-.n-box.open .button.switch {
-    transform: rotate(180deg);
-}
-/* 其他 */
-.n-box label {
-    display: block;
-}
-.n-box label .word-count {
-    float: right;
-}
-/* 输入框 */
-.n-box textarea {
-    display: block;
-    width: 100%;
-    padding: 6px;
-    box-sizing: border-box;
-    margin-top: 6px;
-}
-/* 更新按钮 */
-.n-box .button.update {
-    display: block;
-    width: 100%;
-    padding: 6px 12px;
-    margin-top: 6px;
-    box-sizing: border-box;
-    text-align: center;
-    background: #ff4401;
-    color: white;
-    border-radius: 3px;
-    cursor: pointer;
-}
-/* 开关 */
-.n-box .toggle {
-    float: left;
-    padding: 6px;
-    box-sizing: border-box;
-    margin-top: 6px;
-}
-.n-box .toggle.auto-sort > span{
-    display: none;
-}
-/* 输入框 */
-.n-box .input.auto-del {
-    float: left;
-    margin-top: 6px;
-}
-.n-box .input.auto-del input {
-    border: none;
-    box-sizing: border-box;
-    padding: 6px;
-    width: 30px;
-    text-align: center;
-    float: left;
-    box-shadow: inset 0 0 0 1px #888888;
-    border-radius: 6px;
-}
-.n-box .input.auto-del label {
-    float: left;
-    padding: 6px;
-}
-
-/* 一键评价 */
-.submitbox {
-    text-align: center;
-    padding: 20px 0 6px !important;
-}
-.submitboxplus {
-    user-select: none;
-    text-align: center;
-}
-.tb-btn {
-    color: #fff;
-    background-color: #3498db;
-    box-shadow: inset 0 -2px 0 rgba(0,0,0,.15);
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-    font-size: 13px;
-    line-height: 1.385;
-    padding: 9px 13px;
-    border-radius: 4px;
-    border: none;
-    font-weight: 400;
-    transition: color .25s linear,background-color .25s linear;
-    cursor: pointer;
-}
-.tb-btn:hover {
-    background-color: #5dade2;
-    border-color: #5dade2;
-}
-.tb-btn.haoping {
-    background-color: #f40;
-    border-color: #f40;
-}
-
-.tm-btn {
-    user-select: none;
-    display: inline-block;
-    padding: 0 10px;
-    border: 0;
-    line-height: 25px;
-    font-weight: 700;
-    background: 0 0;
-    cursor: pointer;
-    text-align: center;
-    margin: 0 6px 12px;
-    border-radius: 2px;
-    color: #c40000;
-    background-color: #fff;
-    box-shadow: inset 0 0 0 1px;
-}
-.tm-btn.haoping {
-    user-select: none;
-    color: #fff;
-    background-color: #c40000;
-    box-shadow: none;
-}
-.list-auto-btn {
-    margin-top: 10px;
-    background-color: #fff;
-    border: 1px solid #dcdcdc;
-    color: #3c3c3c;
-    height: 28px;
-    line-height: 26px;
-    padding: 0 12px;
-    border-radius: 3px;
-    font-size: 12px;
-    cursor: pointer;
-    display: inline-block;
-}
-.list-auto-btn:hover {
-    border-color: #ff1d00;
-    color: #ff1d00;
-}
-`)
+GM_addStyle(GM_getResourceText('style'))
 
 // 置入DOM
-let dom = `<div class="n-box">
-<span class="button switch">
-    <i class="fas fa-cog fa-lg"></i>
-</span>
-
-<label for="rateMsgListText">随机用评价语<span class="word-count"></span></label>
-<textarea rows="5" id="rateMsgListText"></textarea>
-<span class="button update rate-msg-list-text">
-    <i class="fas fa-edit fa-lg"></i>&nbsp;&nbsp;更新
-</span>
-
-<div class="toggle auto-sort">
-    <span class="on"><i class="fas fa-toggle-on fa-lg"></i> 自动打乱排序开启</span>
-    <span class="off"><i class="fas fa-toggle-off fa-lg"></i> 自动打乱排序关闭</span>
-</div>
-<div class="input auto-del">
-    <input id="autoDel" /> <label for="autoDel">个内容随机删除</label>
-</div>
-
-</div>`
-$('body').append(dom)
+$('body').append(GM_getResourceText('html-n-box'))
 
 // 绑定点击事件
 // 打开设置窗口
@@ -451,6 +266,7 @@ function test(i) {}
 
 // 判断页面后添加对应页面元素
 if (isList) {
+	// 单个好评按钮
 	$("a[class^='button-']:contains('评价')").each(function () {
 		let dom = `<a href="javascript:;" class="list-auto-btn">一键好评</a>`
 		$(this).parent().append(dom)
@@ -468,6 +284,74 @@ if (isList) {
 			}, 300)
 		})
 	})
+	/** 全体好评按钮 开始 */
+	function getQueryVariable(variable) {
+		var query = window.location.search.substring(1)
+		var vars = query.split('&')
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=')
+			if (pair[0] == variable) {
+				return pair[1]
+			}
+		}
+		return false
+	}
+	let autoPraiseAllOn = function () {
+		let store = GM_getValue('taobaorate')
+		store.autoPraiseAll = true
+		GM_setValue('taobaorate', store)
+	}
+	let autoPraiseAllOff = function () {
+		let store = GM_getValue('taobaorate')
+		store.autoPraiseAll = false
+		GM_setValue('taobaorate', store)
+	}
+	// 判断是否在待评价列表
+	if (getQueryVariable('tabCode') === 'waitRate') {
+		// 判断是否有待评价商品
+		if ($('.list-auto-btn').length < 1) {
+			autoPraiseAllOff()
+			return false
+		}
+		// 判断是否已开启开关
+		if (!GM_getValue('taobaorate').autoPraiseAll) {
+			/** 未开启 */
+			// 置入DOM
+			$(`div[class^='simple-pagination-mod__container']`).prepend(
+				'<button class="button-auto-praise-all">一键自动全部好评</button>'
+			)
+			// 绑定Event
+			$('.button-auto-praise-all').click(() => {
+				// 开启全自动执行
+				autoPraiseAllOn()
+				// 刷新页面
+				$("span:contains('待评价')")[0].click()
+			})
+		} else {
+			/** 已开启 */
+			// 置入取消按钮
+			let dom = `<div class="fully-automatic-praise"><span class="cancel">停止自动执行</span></div>`
+			$('body').append(dom)
+			// 绑定Event
+			$('.fully-automatic-praise .cancel').click(() => {
+				// 关闭全自动执行
+				autoPraiseAllOff()
+				// 刷新页面
+				$("span:contains('待评价')")[0].click()
+			})
+			// 执行好评
+			$.each($('.list-auto-btn'), function (i, el) {
+				setTimeout(function () {
+					$(el).click()
+				}, i * 10000)
+			})
+			setTimeout(function () {
+				// 刷新页面
+				$("span:contains('待评价')")[0].click()
+			}, ($('.list-auto-btn').length + 1) * 10000)
+		}
+	}
+	/** 全体好评按钮 结束 */
 } else if (isTB) {
 	taobaoFun()
 	autorate()
