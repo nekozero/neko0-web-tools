@@ -141,7 +141,7 @@ Rin真是太棒了我™舔爆
 
 ----
 
-📺 BiliBili优化 | [安装](https://greasyfork.org/zh-CN/scripts/387907)  
+📺 BiliBili优化 | [安装](https://greasyfork.org/zh-CN/scripts/398155)  
 `视频收藏功能的优化`
 <details>
 <summary>介绍</summary>
