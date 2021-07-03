@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name         [Neko0] 图站增强Danbooru/Gelbooru/Konachan/Yande
 // @description  加入快捷键操作，按下 ← 或 A 上一页，按下 → 或 D 下一页，按下 S 或 O 查看原图，按下 F 查看来源页面
-// @version      1.0.1
+// @version      1.0.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://konachan.com/favicon.ico
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
 // @supportURL   https://github.com/nekozero/neko0-web-tools/issues
-// @grant        none
+// @grant        GM_addStyle
+// @grant        GM_setValue
+// @grant        GM_getValue
 // @run-at       document-idle
 // @license      AGPLv3
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
@@ -40,48 +42,72 @@ if (location.host === 'yande.re') {
 // 判断页面
 let page
 if (site.match(/g|s/)) {
-	if (location.href.split('s=')[1].split('&')[0] === "list") { page = 'list' }
-	if (location.href.split('s=')[1].split('&')[0] === "view") { page = 'view' }
+	GM_addStyle(`
+    img#image {
+        max-width: calc(100vh - 14px);
+        max-height: calc(100vh - 304px);
+        width: auto !important;
+        height: auto !important;
+    }
+    `)
+	if (location.href.split('s=')[1].split('&')[0] === 'list') {
+		page = 'list'
+	}
+	if (location.href.split('s=')[1].split('&')[0] === 'view') {
+		page = 'view'
+	}
 }
 if (site.match(/d/)) {
-	if ($('body').hasClass('a-index')) { page = 'list' }
-	if ($('body').hasClass('a-show')) { page = 'view' }
+	if ($('body').hasClass('a-index')) {
+		page = 'list'
+	}
+	if ($('body').hasClass('a-show')) {
+		page = 'view'
+	}
 }
 if (site.match(/k|y/)) {
-	if ($('html').hasClass('action-post-index')) { page = 'list' }
-	if ($('html').hasClass('action-post-show')) { page = 'view' }
+	if ($('html').hasClass('action-post-index')) {
+		page = 'list'
+	}
+	if ($('html').hasClass('action-post-show')) {
+		page = 'view'
+	}
 }
 
 // 站点结构分类别
-let structure = [{
-	'searchInputId': 'tags-search',
-	'prevPage': $('.pagination b').prev('a')[0],
-	'nextPage': $('.pagination b').next('a')[0],
-	'originalSize': $('a:contains("Original image")')[0],
-	'sourceFrom': $('li:contains("Source:") a')[0],
-}, {
-	'searchInputId': 'tags',
-	'prevPage': $('#paginator-prev')[0],
-	'nextPage': $('#paginator-next')[0],
-	'originalSize': $('li:contains("Size:") a')[0],
-	'sourceFrom': $('li:contains("Source:") a')[0],
-}, {
-	'searchInputId': 'tags',
-	'prevPage': $('.previous_page')[0],
-	'nextPage': $('.next_page')[0],
-	'originalSize': $('#png')[0] ? $('#png')[0] : $('#highres')[0],
-	'sourceFrom': $('li:contains("Source:") a')[0],
-}]
+let structure = [
+	{
+		searchInputId: 'tags-search',
+		prevPage: $('.pagination b').prev('a')[0],
+		nextPage: $('.pagination b').next('a')[0],
+		originalSize: $('a:contains("Original image")')[0],
+		sourceFrom: $('li:contains("Source:") a')[0],
+	},
+	{
+		searchInputId: 'tags',
+		prevPage: $('#paginator-prev')[0],
+		nextPage: $('#paginator-next')[0],
+		originalSize: $('li:contains("Size:") a')[0],
+		sourceFrom: $('li:contains("Source:") a')[0],
+	},
+	{
+		searchInputId: 'tags',
+		prevPage: $('.previous_page')[0],
+		nextPage: $('.next_page')[0],
+		originalSize: $('#png')[0] ? $('#png')[0] : $('#highres')[0],
+		sourceFrom: $('li:contains("Source:") a')[0],
+	},
+]
 let arg4site = {
-	'g': structure[0],
-	's': structure[0],
-	'd': structure[1],
-	'k': structure[2],
-	'y': structure[2],
+	g: structure[0],
+	s: structure[0],
+	d: structure[1],
+	k: structure[2],
+	y: structure[2],
 }
 
 // 快捷键加强
-$(document).keydown(function(event) {
+$(document).keydown(function (event) {
 	// 判断在输入框内则不触发快捷操作
 	if (document.activeElement.id === arg4site[site].searchInputId) {
 		return

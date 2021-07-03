@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
-// @description  淘宝&天猫评价页面添加一键好评按钮
-// @version      1.7.2
+// @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱
+// @version      1.7.3
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
