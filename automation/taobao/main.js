@@ -152,9 +152,11 @@ function taobaoStar() {
 		a.click()
 	}
 	var tbStar = document.querySelectorAll('.rate-stars label')
-	tbStar[4].childNodes[0].click()
-	tbStar[9].childNodes[0].click()
-	tbStar[14].childNodes[0].click()
+	var tbStarGroup = tbStar.length / 5
+	for (let i = 1; i < tbStarGroup + 1; i++) {
+		let num = i * 5 - 1
+		document.querySelectorAll('.rate-stars label')[num].childNodes[0].click()
+	}
 }
 
 function taobaoMsg() {
@@ -187,7 +189,7 @@ function taobaoFun() {
 		taobaoMsg()
 		taobaoStar()
 		setTimeout(() => {
-			$('.J_submit_rate').click()
+			$('.submitbox [type="submit"]').click()
 		}, 500)
 	})
 }
