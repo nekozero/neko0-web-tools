@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能
-// @version      1.0.8
+// @version      1.0.9
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/misc/favicon.ico
@@ -96,10 +96,19 @@ function detection() {
 	console.log('ƒ detection')
 	let video = document.getElementById('video-player_html5_api')
 	if (video) {
+		console.log(this.videoWidth, this.videoHeight)
 		clearInterval(timer)
 		video.oncanplay = function () {
-			console.log(this.videoWidth, this.videoHeight)
-			$('.one-tap').append(`<div class="detection">${this.videoWidth} x ${this.videoHeight}</div>`)
+			if (
+				(this.videoWidth < 1920 && this.videoHeight < 1080) ||
+				(this.videoWidth < 1080 && this.videoHeight < 1920)
+			) {
+				$('.one-tap').append(
+					`<div class="detection" style="color: #ff6868;">${this.videoWidth} x ${this.videoHeight}</div>`
+				)
+			} else {
+				$('.one-tap').append(`<div class="detection">${this.videoWidth} x ${this.videoHeight}</div>`)
+			}
 		}
 	}
 }
