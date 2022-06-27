@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能
-// @version      1.1.0
+// @version      1.1.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/misc/favicon.ico
@@ -18,7 +18,7 @@
 // ==/UserScript==
 
 // 自动点击R18警告的继续按钮
-if ($('#r18-warning').css('display') !== 'none') {
+if ($('#r18-warning')[0] && $('#r18-warning').css('display') !== 'none') {
 	$('.r18-continue')[0].click()
 }
 
@@ -48,7 +48,7 @@ let style = `<style>
     margin-left: 10px;
 }
 .flag-like .flag.unflag-action.flag-link-toggle.btn.btn-primary {
-    background-color: #ff6868;
+    background-color: #3498db;
 }
 .flag-like {
     position: relative;
@@ -60,7 +60,8 @@ let style = `<style>
     top: -30px;
     width: 100%;
     text-align: center;
-    color: #34495e;
+    color: #3498db;
+    white-space: nowrap;
 }
 </style>`
 $('head').append(style)
