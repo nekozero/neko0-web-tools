@@ -47,6 +47,9 @@ let style = `<style>
     float: right;
     margin-left: 10px;
 }
+.flag-like .flag.unflag-action.flag-link-toggle.btn.btn-primary {
+    background-color: #ff6868;
+}
 </style>`
 $('head').append(style)
 
