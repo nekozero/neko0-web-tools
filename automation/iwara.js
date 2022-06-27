@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能
-// @version      1.0.9
+// @version      1.1.0
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/misc/favicon.ico
@@ -43,9 +43,6 @@ let style = `<style>
     z-index: 10;
     left: 30rem;
 }
-.one-tap {
-    position: relative;
-}
 .one-tap, .copy-name {
     float: right;
     margin-left: 10px;
@@ -53,14 +50,17 @@ let style = `<style>
 .flag-like .flag.unflag-action.flag-link-toggle.btn.btn-primary {
     background-color: #ff6868;
 }
+.flag-like {
+    position: relative;
+}
 .detection {
     position: absolute;
     line-height: 20px;
     height: 20px;
-    top: -20px;
+    top: -30px;
     width: 100%;
     text-align: center;
-    color: #1abc9c;
+    color: #34495e;
 }
 </style>`
 $('head').append(style)
@@ -103,11 +103,11 @@ function detection() {
 				(this.videoWidth < 1920 && this.videoHeight < 1080) ||
 				(this.videoWidth < 1080 && this.videoHeight < 1920)
 			) {
-				$('.one-tap').append(
-					`<div class="detection" style="color: #ff6868;">${this.videoWidth} x ${this.videoHeight}</div>`
+				$('.flag-like').append(
+					`<div class="detection" style="color: red;">${this.videoWidth} x ${this.videoHeight}</div>`
 				)
 			} else {
-				$('.one-tap').append(`<div class="detection">${this.videoWidth} x ${this.videoHeight}</div>`)
+				$('.flag-like').append(`<div class="detection">${this.videoWidth} x ${this.videoHeight}</div>`)
 			}
 		}
 	}
