@@ -132,11 +132,10 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 用于收藏视频作品再方便不过了
 
-按钮添加于右侧赞助按钮上方
-
-并不影响页面其他原有的按键功能
+并不影响页面其他原有功能
 
 ![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara1.png)
+
 ![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara2.png)
 
 Rin真是太棒了我™舔爆
