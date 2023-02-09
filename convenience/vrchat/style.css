@@ -1,0 +1,9 @@
+.btn-s {
+	background: rgb(7, 36, 43);
+	border: 2px solid rgb(5, 60, 72);
+	color: rgb(106, 227, 249);
+}
+.tippy-content {
+	white-space: pre-line;
+	text-align: center;
+}
