@@ -22,6 +22,7 @@
 
 <summary>介绍</summary>
 
+###  
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
 
 已更新写入评语时按全角句号(中文句号)分割已存储的评语并进行随机排序的功能选项  
@@ -82,6 +83,7 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 <summary>介绍</summary>
 
+###  
 对于我这种天天点外卖的每次都要一个个去点星简直太麻烦了  
 自动化是好文明，懒是第一生产力
 
@@ -96,26 +98,6 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 </details>
 
----
-
-🎮 Steam库存一键出售 | [安装](https://greasyfork.org/zh-CN/scripts/35770)
-<details>
-<summary>介绍</summary>
-
-### 
-
-库存和重复的卡太多的时候很实用
-
-毕竟一个个写价格确认好几次太麻烦了
-
-会自动获取起价，默认发售价格为起价+0.02
-
-可安装后在脚本代码中自由调整
-
-![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/steam.png)
-
-</details>
-
 ----
 
 📺 Iwara增强 | [安装](https://greasyfork.org/zh-CN/scripts/382345)  
@@ -123,6 +105,7 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 <details>
 <summary>介绍</summary>
 
+###  
 目前提供了以下功能
 1. 复制名字：复制出 “作者 - 作品名” 格式的名字
 2. 一键复制名字 并 喜欢+关注+下载：按下即可复制名字，Like，Follow，并Download Source画质 的文件
@@ -145,12 +128,11 @@ Rin真是太棒了我™舔爆
 ----
 
 📺 BiliBili优化 | [安装](https://greasyfork.org/zh-CN/scripts/398155)  
-`视频收藏功能的优化`
+`视频收藏分类功能的优化`
 <details>
 <summary>介绍</summary>
 
-### 
-
+###  
 收藏视频弹窗优化
 
 使用前：
@@ -168,8 +150,7 @@ Rin真是太棒了我™舔爆
 <details>
 <summary>介绍</summary>
 
-### 
-
+###  
 加入了快捷键操作
 
 * 按下 `←` 或 `A` 上一页
@@ -186,6 +167,57 @@ Added shortcut key operation
 * Press `S` or `O` to view the original image (source/original)
 
 * Press `F` to view the source page (from)
+
+</details>
+
+---
+
+🎮 VRChat 无限 Avatar 收藏夹 | [安装](https://greasyfork.org/zh-CN/scripts/461702)
+<details>
+<summary>介绍</summary>
+###  
+
+官方免费的 **50** 个栏位不够用怎么办？
+
+充了 **VRC+** 有 **300** 个栏位后还是不够用怎么办？
+
+使用这个浏览器插件来填补 VRC 官网本该拥有的功能吧！
+
+此开源脚本技巧性地使用了官方的 API 来**合法地**管理您的 Avatars 并**增加到**<a href="#2">**无上限**<sup>1</sup></a>的收藏数量
+
+视频教程: [📺 Youtube](https://greasyfork.org/zh-CN/scripts/398155)　[📺 BiliBili](https://greasyfork.org/zh-CN/scripts/398155)  
+
+[示意图]
+
+**<span id="1">※</span>注1：不出意外的话可以收藏50万个Avatar以上  
+但尚未能进行实际测试过  
+可能游戏中加起来也没那么多Avatar**
+
+**※注2：虽然这是用官方的API在工作  
+但个人觉得这毕竟还是有触碰到VRC+的利益  
+鉴于官方推出VRC+之前那波封MOD加EAC的操作而言     
+以后连自家的网站API都封掉的可能性也不是没有  
+所以还是建议把有世界获取渠道的Avatar在`"来源世界"`中填入world_id当一份保险**
+
+本插件只适用于有公开链接的公开模型(Public)，例如[这样的](https://vrchat.com/home/avatar/avtr_bc6c06ec-fda2-4490-8db2-946f618dba2d)
+</details>
+
+---
+
+~~🎮 Steam库存一键出售 | [安装](https://greasyfork.org/zh-CN/scripts/35770)~~
+<details>
+<summary>已废弃</summary>
+
+###  
+库存和重复的卡太多的时候很实用
+
+毕竟一个个写价格确认好几次太麻烦了
+
+会自动获取起价，默认发售价格为起价+0.02
+
+可安装后在脚本代码中自由调整
+
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/steam.png)
 
 </details>
 

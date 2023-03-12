@@ -63,6 +63,18 @@ let style = `<style>
     color: #3498db;
     white-space: nowrap;
 }
+
+/* 让广告不阻碍内容 */
+.node-type-video .col-sm-3.sidebar .block-extra-content {
+    position: absolute;
+    left: calc(100% + 20px);
+    top: 28px;
+}
+#block-system-main .node.node-video.node-full .col-sm-12:nth-child(2) {
+    position: absolute;
+    left: calc(-100% - 20px);
+    top: 28px;
+}
 </style>`
 $('head').append(style)
 

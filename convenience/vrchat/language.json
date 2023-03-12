@@ -1,0 +1,40 @@
+{
+    "en": {
+        "mounted": "VRChat limitless avatar favorites \n plugin loaded",
+        "btn_transmit": "Transmit",
+        "tippy_transmit": "Transfer to native Favorites first order \nThen click in the game to switch now",
+        "btn_use": "Switch",
+        "tippy_use": "Switch now! \n but you need to switch the world to display correctly in the game",
+        "btn_collect": "∞Favorites+",
+        "btn_collect_r": "∞Favorites-",
+        "tippy_collect": "Add/delete in limitless favorites",
+        "avatars_full": "You already have 50 favorite avatars in native Favorites. <br> Please leave some space first.",
+        "avatars_added": "You already have that avatar favorited",
+        "operation_succeeded": "Operation succeeded",
+        "operation_failed": "Operation failed. <br> You can try to refresh the page and try again",
+        "addTime": "added time",
+        "updated_at": "Updated",
+        "version": "Version",
+        "authorName": "Author",
+        "description": "Description"
+    },
+    "zh_cn": {
+        "mounted": "VRChat无限模型收藏夹 \n 插件已加载",
+        "btn_transmit": "传送",
+        "tippy_transmit": "传送到游戏内收藏夹第一顺位 \n 然后在游戏中点击以立刻切换",
+        "btn_use": "切换",
+        "tippy_use": "马上切换！ \n 但你需要切换世界才能在游戏中正确显示",
+        "btn_collect": "∞收藏夹+",
+        "btn_collect_r": "∞收藏夹-",
+        "tippy_collect": "在无限收藏夹内添加/删除",
+        "avatars_full": "系统收藏夹已满 <br> 请先留出一些空位",
+        "avatars_added": "您已添加过这个模型",
+        "operation_succeeded": "操作成功",
+        "operation_failed": "操作失败. <br> 请尝试刷新页面后重试",
+        "addTime": "添加时间",
+        "updated_at": "更新",
+        "version": "版本",
+        "authorName": "作者",
+        "description": "介绍"
+    }
+}

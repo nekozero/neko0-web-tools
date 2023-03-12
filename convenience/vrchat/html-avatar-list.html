@@ -1,0 +1,36 @@
+<ul id="neko0" class="neko0 avatar-ul">
+	<li class="avatar-li" v-for="item in items" :key="item.message">
+		<div class="head">
+			<div class="image">
+				<image :src="item.thumbnailImageUrl"></image>
+				<span class="name">{{item.name}}</span>
+				<div class="btn_list flex-column btn-group-vertical">
+					<div class="neko0 btn btn-s text-center transmit mb-2" :dat-a="item.id" @click="favorites(item.id)">
+						{{text.btn_transmit}}
+					</div>
+					<div class="neko0 btn btn-s text-center use mb-2" @click="select(item.id)">{{text.btn_use}}</div>
+					<div
+						class="neko0 btn btn-s text-center collect text-danger border-danger"
+						@click="limitless(item.id)"
+					>
+						{{text.btn_collect_r}}
+					</div>
+				</div>
+			</div>
+			<span v-if="item.addTime" class="addTime" v-text="text.addTime+' '+formattedDate(item.addTime)"></span>
+			<!-- <span class="version">{{text.version}} {{item.version}}</span> -->
+		</div>
+		<a class="body" :href="'/home/avatar/'+item.id" target="_blank">
+			<div class="authorName">
+				<span class="label">{{text.authorName}}</span> <span class="value">{{item.authorName}}</span>
+			</div>
+			<div class="description">
+				<span class="label">{{text.description}}</span> <span class="value">{{item.description}}</span>
+			</div>
+		</a>
+		<div class="platform">
+			<div class="pc" v-if="hasWindows(item)">PC</div>
+			<div class="quest" v-if="hasAndroid(item)">Quest</div>
+		</div>
+	</li>
+</ul>
