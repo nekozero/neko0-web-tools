@@ -223,214 +223,217 @@ let limitless = avtr_id => {
 let page_is_avtr_own = document.location.pathname === '/home/avatars'
 let page_is_avtr_details = document.location.pathname.indexOf('/home/avatar/avtr_') !== -1
 let page_is_limitless = document.location.pathname === '/home/limitless'
+let pluginInject = () => {
+	if (page_is_avtr_own) {
+		console.log('page_is_avtr_own')
+		// 当前使用Avatar
+		// let current_avtr_id = document.querySelector('[data-scrollkey]').getAttribute('data-scrollkey')
+		// console.log(current_avtr_id)
+		// let current_avtr_info = null
+		// ;(function () {
+		// 	url =
+		// 		'https://vrchat.com/api/1/users/' +
+		// 		document.querySelector('[aria-label="User Status"]').getAttribute('href').substring(11) +
+		// 		'/avatar'
+		// 	axios
+		// 		.get(url)
+		// 		.then(function (response) {
+		// 			console.log(response)
+		// 			current_avtr_info = response.data
+		// 		})
+		// 		.catch(function (error) {
+		// 			console.log(error)
+		// 		})
+		// 		.finally(function () {
 
-if (page_is_avtr_own) {
-	console.log('page_is_avtr_own')
-	// 当前使用Avatar
-	// let current_avtr_id = document.querySelector('[data-scrollkey]').getAttribute('data-scrollkey')
-	// console.log(current_avtr_id)
-	// let current_avtr_info = null
-	// ;(function () {
-	// 	url =
-	// 		'https://vrchat.com/api/1/users/' +
-	// 		document.querySelector('[aria-label="User Status"]').getAttribute('href').substring(11) +
-	// 		'/avatar'
-	// 	axios
-	// 		.get(url)
-	// 		.then(function (response) {
-	// 			console.log(response)
-	// 			current_avtr_info = response.data
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.log(error)
-	// 		})
-	// 		.finally(function () {
+		// 		})
+		// })()
+		// 算了暂时先不改这个
+	} else if (page_is_avtr_details) {
+		// 当前浏览Avatar
+		let current_avtr_id = window.location.pathname.substring(13)
 
-	// 		})
-	// })()
-	// 算了暂时先不改这个
-} else if (page_is_avtr_details) {
-	// 当前浏览Avatar
-	let current_avtr_id = window.location.pathname.substring(13)
+		console.log('page_is_avtr_details', isInVLAF(current_avtr_id), getAvtrs())
 
-	console.log('page_is_avtr_details', isInVLAF(current_avtr_id), getAvtrs())
+		// 置入DOM
+		function domAvatar() {
+			let html = GM_getResourceText('html-avatar-btn')
+			let output = html.format(text)
+			$('.col-xs-12.content-scroll  .home-content .row:nth-child(2) .col-4 .btn-group-vertical')
+				.attr('id', 'neko0')
+				.append(output)
+			if (isInVLAF(current_avtr_id)) {
+				$('#collect').text(text.btn_collect_r).addClass('text-danger border-danger')
+			}
 
-	// 置入DOM
-	function domAvatar() {
-		let html = GM_getResourceText('html-avatar-btn')
-		let output = html.format(text)
-		$('.col-xs-12.content-scroll  .home-content .row:nth-child(2) .col-4 .btn-group-vertical')
-			.attr('id', 'neko0')
-			.append(output)
-		if (isInVLAF(current_avtr_id)) {
-			$('#collect').text(text.btn_collect_r).addClass('text-danger border-danger')
+			tippy('#transmit', {
+				content: text.tippy_transmit,
+			})
+			tippy('#use', {
+				content: text.tippy_use,
+			})
+			tippy('#collect', {
+				content: text.tippy_collect,
+			})
+
+			$('#transmit').click(() => {
+				favorites(current_avtr_id)
+			})
+			$('#use').click(() => {
+				select(current_avtr_id)
+			})
+			$('#collect').click(() => {
+				limitless(current_avtr_id)
+			})
 		}
 
-		tippy('#transmit', {
-			content: text.tippy_transmit,
-		})
-		tippy('#use', {
-			content: text.tippy_use,
-		})
-		tippy('#collect', {
-			content: text.tippy_collect,
-		})
+		// 绑定点击事件
+		// 打开设置窗口
+		// $('.n-box .button.switch').click(() => {
+		// 	$('.n-box').toggleClass('open')
+		// })
 
-		$('#transmit').click(() => {
-			favorites(current_avtr_id)
-		})
-		$('#use').click(() => {
-			select(current_avtr_id)
-		})
-		$('#collect').click(() => {
-			limitless(current_avtr_id)
-		})
-	}
+		// setTimeout(() => {
+		// alertify.success("You've clicked OK")
+		// window.alertify = alertify
+		// console.log('alertify')
+		// }, 1000)
 
-	// 监测页面变换
-	const _historyWrap = function (type) {
-		const orig = history[type]
-		const e = new Event(type)
-		return function () {
-			const rv = orig.apply(this, arguments)
-			e.arguments = arguments
-			window.dispatchEvent(e)
-			return rv
-		}
-	}
-	history.pushState = _historyWrap('pushState')
-	history.replaceState = _historyWrap('replaceState')
-	window.addEventListener('pushState', function (e) {
-		console.log('change pushState')
-	})
-	window.addEventListener('replaceState', function (e) {
-		console.log('change replaceState')
+		// 检测页面内容置入插件DOM
+		var timer = setInterval(detection, 300)
 		detection()
-	})
-
-	// 绑定点击事件
-	// 打开设置窗口
-	// $('.n-box .button.switch').click(() => {
-	// 	$('.n-box').toggleClass('open')
-	// })
-
-	// setTimeout(() => {
-	// alertify.success("You've clicked OK")
-	// window.alertify = alertify
-	// console.log('alertify')
-	// }, 1000)
-
-	// 检测页面内容置入插件DOM
-	var timer = setInterval(detection, 300)
-	detection()
-	function detection() {
-		var neko0 = document.querySelector('.neko0')
-		if (!neko0) {
-			domAvatar()
-		} else {
-			clearInterval(timer)
+		function detection() {
+			var neko0 = document.querySelector('.neko0')
+			if (!neko0) {
+				domAvatar()
+			} else {
+				clearInterval(timer)
+			}
 		}
-	}
-	console.log(text.mounted)
-} else if (page_is_limitless) {
-	console.log('page_is_limitless', getAvtrs())
-	// 置入DOM
-	function domLimitless() {
-		let html = GM_getResourceText('html-avatar-list')
-		let output = html
-		$('.home-content').append(output)
+		console.log(text.mounted)
+	} else if (page_is_limitless) {
+		console.log('page_is_limitless', getAvtrs())
+		// 置入DOM
+		function domLimitless() {
+			let html = GM_getResourceText('html-avatar-list')
+			let output = html
+			$('.home-content').append(output)
 
-		new Vue({
-			el: '#neko0',
-			data: {
-				text: text,
-				items: getAvtrs(),
-			},
-			methods: {
-				formattedDate: function (str) {
-					const dateStr = str
-					const date = new Date(dateStr)
-					const year = date.getFullYear()
-					const month = date.getMonth() + 1
-					const day = date.getDate()
-					const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day
-						.toString()
-						.padStart(2, '0')}`
-					console.log(formattedDate)
-					return formattedDate
+			new Vue({
+				el: '#neko0',
+				data: {
+					text: text,
+					items: getAvtrs(),
 				},
-				hasWindows: function (obj) {
-					// 定义一个变量来存储检查结果
-					let hasWindows = false
+				methods: {
+					formattedDate: function (str) {
+						const dateStr = str
+						const date = new Date(dateStr)
+						const year = date.getFullYear()
+						const month = date.getMonth() + 1
+						const day = date.getDate()
+						const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day
+							.toString()
+							.padStart(2, '0')}`
+						console.log(formattedDate)
+						return formattedDate
+					},
+					hasWindows: function (obj) {
+						// 定义一个变量来存储检查结果
+						let hasWindows = false
 
-					// 遍历对象中的 unityPackages 数组
-					for (let package of obj.unityPackages) {
-						// 如果某个元素的 platform 属性等于 standalonewindows，就将结果设为 true，并跳出循环
-						if (package.platform === 'standalonewindows') {
-							hasWindows = true
-							break
+						// 遍历对象中的 unityPackages 数组
+						for (let package of obj.unityPackages) {
+							// 如果某个元素的 platform 属性等于 standalonewindows，就将结果设为 true，并跳出循环
+							if (package.platform === 'standalonewindows') {
+								hasWindows = true
+								break
+							}
 						}
-					}
 
-					return hasWindows
-				},
-				hasAndroid: function (obj) {
-					// 定义一个变量来存储检查结果
-					let hasAndroid = false
+						return hasWindows
+					},
+					hasAndroid: function (obj) {
+						// 定义一个变量来存储检查结果
+						let hasAndroid = false
 
-					// 遍历对象中的 unityPackages 数组
-					for (let package of obj.unityPackages) {
-						// 如果某个元素的 platform 属性等于 android，就将结果设为 true，并跳出循环
-						if (package.platform === 'android') {
-							hasAndroid = true
-							break
+						// 遍历对象中的 unityPackages 数组
+						for (let package of obj.unityPackages) {
+							// 如果某个元素的 platform 属性等于 android，就将结果设为 true，并跳出循环
+							if (package.platform === 'android') {
+								hasAndroid = true
+								break
+							}
 						}
-					}
 
-					return hasAndroid
+						return hasAndroid
+					},
+					favorites: function (avtr_id) {
+						favorites(avtr_id)
+					},
+					select: function (avtr_id) {
+						select(avtr_id)
+					},
+					limitless: function (avtr_id) {
+						limitless(avtr_id)
+						$('[dat-a="' + avtr_id + '"]')
+							.parents('.avatar-li')
+							.remove()
+					},
 				},
-				favorites: function (avtr_id) {
-					favorites(avtr_id)
+				created: function () {
+					let _this = this
+					window.add_data = _this.add_data
 				},
-				select: function (avtr_id) {
-					select(avtr_id)
-				},
-				limitless: function (avtr_id) {
-					limitless(avtr_id)
-					$('[dat-a="' + avtr_id + '"]')
-						.parents('.avatar-li')
-						.remove()
-				},
-			},
-			created: function () {
-				let _this = this
-				window.add_data = _this.add_data
-			},
 
-			mounted() {
-				tippy('.transmit', {
-					content: text.tippy_transmit,
-				})
-				tippy('.use', {
-					content: text.tippy_use,
-				})
-				tippy('.collect', {
-					content: text.tippy_collect,
-				})
-			},
-		})
-	}
-
-	// 检测页面内容置入插件DOM
-	var timer = setInterval(detection, 300)
-	detection()
-	function detection() {
-		var neko0 = document.querySelector('.neko0')
-		if (!neko0) {
-			domLimitless()
-		} else {
-			clearInterval(timer)
+				mounted() {
+					tippy('.transmit', {
+						content: text.tippy_transmit,
+					})
+					tippy('.use', {
+						content: text.tippy_use,
+					})
+					tippy('.collect', {
+						content: text.tippy_collect,
+					})
+				},
+			})
 		}
+
+		// 检测页面内容置入插件DOM
+		var timer = setInterval(detection, 300)
+		detection()
+		function detection() {
+			var neko0 = document.querySelector('.neko0')
+			if (!neko0) {
+				domLimitless()
+			} else {
+				clearInterval(timer)
+			}
+		}
+		console.log(text.mounted)
 	}
-	console.log(text.mounted)
 }
+
+pluginInject()
+
+// 监测页面变换
+const _historyWrap = function (type) {
+	const orig = history[type]
+	const e = new Event(type)
+	return function () {
+		const rv = orig.apply(this, arguments)
+		e.arguments = arguments
+		window.dispatchEvent(e)
+		return rv
+	}
+}
+history.pushState = _historyWrap('pushState')
+history.replaceState = _historyWrap('replaceState')
+window.addEventListener('pushState', function (e) {
+	console.log('change pushState')
+    pluginInject()
+})
+window.addEventListener('replaceState', function (e) {
+	console.log('change replaceState')
+})
