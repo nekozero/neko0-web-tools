@@ -231,12 +231,23 @@ let limitless = avtr_id => {
 		.finally(function () {})
 }
 
+console.log('document.location.pathname', document.location.pathname)
 // 不同页面
-let page_is_avtr_own = document.location.pathname === '/home/avatars'
-let page_is_avtr_details = document.location.pathname.indexOf('/home/avatar/avtr_') !== -1
-let page_is_limitless = document.location.pathname === '/home/limitless'
+let page_is_avtr_own = () => {
+	return document.location.pathname === '/home/avatars'
+}
+let page_is_avtr_details = () => {
+	return document.location.pathname.indexOf('/home/avatar/avtr_') !== -1
+}
+let page_is_limitless = () => {
+	return document.location.pathname === '/home/limitless'
+}
+
 let pluginInject = () => {
-	if (page_is_avtr_own) {
+	if (!page_is_limitless()) {
+		$('.neko0.avatar-ul')[0].remove()
+	}
+	if (page_is_avtr_own()) {
 		console.log('page_is_avtr_own')
 		// 当前使用Avatar
 		// let current_avtr_id = document.querySelector('[data-scrollkey]').getAttribute('data-scrollkey')
@@ -261,7 +272,7 @@ let pluginInject = () => {
 		// 		})
 		// })()
 		// 算了暂时先不改这个
-	} else if (page_is_avtr_details) {
+	} else if (page_is_avtr_details()) {
 		// 当前浏览Avatar
 		let current_avtr_id = window.location.pathname.substring(13)
 
@@ -311,7 +322,7 @@ let pluginInject = () => {
 			}
 		}
 		console.log(text.mounted)
-	} else if (page_is_limitless) {
+	} else if (page_is_limitless()) {
 		console.log('page_is_limitless', getAvtrs())
 		// 置入DOM
 		function domLimitless() {
