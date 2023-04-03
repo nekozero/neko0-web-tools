@@ -66,7 +66,7 @@
 	background-color: rgb(24, 27, 31);
 	transition: border-color 0.2s ease-in-out 0s;
 	position: relative;
-	width: fit-content;
+	width: min-content;
 }
 .avatar-li:hover {
 	box-shadow: inset 0 0 0 3px rgb(5 77 94);
@@ -96,14 +96,40 @@
 	left: 0;
 	border-radius: 12px;
 }
-.avatar-li .head .image img {
+.avatar-li .head .image .img {
 	width: 100%;
-	/* 原图宽高 */
-	/* width: 256px; */
-	/* height: 192px; */
-	min-width: 200px;
+	/* min-width: 200px; */
 	min-height: 150px;
+	/* 原图宽高 */
+	/* max-width: 256px; */
+	/* max-height: 168px; */
+	height: 9vw;
+	width: 60vw;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
+@media (min-width: 576px) {
+	.avatar-li .head .image .img {
+		width: 29vw;
+	}
+}
+@media (min-width: 992px) {
+	.avatar-li .head .image .img {
+		width: 18vw;
+	}
+}
+@media (min-width: 1200px) {
+	.avatar-li .head .image .img {
+		width: 12vw;
+	}
+}
+/* @media (min-width: 1920px) {
+	.avatar-li .head .image .img  {
+		
+		width: 12vw;
+	}
+} */
 .avatar-li .head .name,
 .avatar-li .head .addTime,
 .avatar-li .head .version {

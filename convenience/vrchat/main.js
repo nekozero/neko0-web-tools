@@ -31,7 +31,7 @@
 // @resource     html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.3/convenience/vrchat/html-btn-group.html
 // @resource     language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.3/convenience/vrchat/language.json
 // ==/UserScript==
-
+console.log('VLAF Start')
 /** 初始化设定 开始 */
 // 设置项默认值
 let setting = {
@@ -109,6 +109,18 @@ if (!String.prototype.format) {
 			alertify.success(text.mounted)
 		}
 	}
+
+	// 绑定点击事件
+	// 打开设置窗口
+	// $('.n-box .button.switch').click(() => {
+	// 	$('.n-box').toggleClass('open')
+	// })
+
+	// setTimeout(() => {
+	// alertify.success("You've clicked OK")
+	// window.alertify = alertify
+	// console.log('alertify')
+	// }, 1000)
 })()
 
 // 判断已收藏
@@ -287,18 +299,6 @@ let pluginInject = () => {
 			})
 		}
 
-		// 绑定点击事件
-		// 打开设置窗口
-		// $('.n-box .button.switch').click(() => {
-		// 	$('.n-box').toggleClass('open')
-		// })
-
-		// setTimeout(() => {
-		// alertify.success("You've clicked OK")
-		// window.alertify = alertify
-		// console.log('alertify')
-		// }, 1000)
-
 		// 检测页面内容置入插件DOM
 		var timer = setInterval(detection, 300)
 		detection()
@@ -432,7 +432,7 @@ history.pushState = _historyWrap('pushState')
 history.replaceState = _historyWrap('replaceState')
 window.addEventListener('pushState', function (e) {
 	console.log('change pushState')
-    pluginInject()
+	pluginInject()
 })
 window.addEventListener('replaceState', function (e) {
 	console.log('change replaceState')

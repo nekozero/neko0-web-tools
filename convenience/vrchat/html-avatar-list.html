@@ -2,7 +2,7 @@
 	<li class="avatar-li" v-for="item in items" :key="item.message">
 		<div class="head">
 			<div class="image">
-				<image :src="item.thumbnailImageUrl"></image>
+				<div class="img" :style="'background-image:url('+item.thumbnailImageUrl+')'"></div>
 				<span class="name">{{item.name}}</span>
 				<div class="btn_list flex-column btn-group-vertical">
 					<div class="neko0 btn btn-s text-center transmit mb-2" :dat-a="item.id" @click="favorites(item.id)">
