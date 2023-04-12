@@ -26,11 +26,11 @@
 // @require      https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource     IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match        *://vrchat.com/*
-// @resource     IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@latest/convenience/vrchat/style.css
-// @resource     html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@latest/convenience/vrchat/html-avatar-btn.html
-// @resource     html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@latest/convenience/vrchat/html-avatar-list.html
-// @resource     html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@latest/convenience/vrchat/html-btn-group.html
-// @resource     language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@latest/convenience/vrchat/language.json
+// @resource     IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/convenience/vrchat/style.css
+// @resource     html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/convenience/vrchat/html-avatar-btn.html
+// @resource     html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/convenience/vrchat/html-avatar-list.html
+// @resource     html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/convenience/vrchat/html-btn-group.html
+// @resource     language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools/convenience/vrchat/language.json
 // ==/UserScript==
 console.log('VLAF Start')
 /** 初始化设定 开始 */
