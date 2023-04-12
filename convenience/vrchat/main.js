@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] VRChat Avatar 无限收藏夹
 // @description  无限收藏虚拟形象 Limitless Favorite Avatar
-// @version      1.0.1
+// @version      1.0.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://assets.vrchat.com/www/favicons/favicon.ico
