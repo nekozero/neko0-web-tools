@@ -17,6 +17,7 @@
 // @license      AGPLv3
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
 // @require      https://cdn.jsdelivr.net/npm/axios@1.1.3/dist/axios.min.js
 // @require      https://cdn.jsdelivr.net/npm/vue@2.7.14
@@ -35,7 +36,7 @@ console.log('VLAF Start')
 /** 初始化设定 开始 */
 // 设置项默认值
 let setting = {
-	lang: 'zh_cn',
+	lang: 'en',
 }
 
 // 判断是否存在设定
@@ -66,13 +67,21 @@ alertify.set('notifier', 'position', 'top-center')
 let getSet = () => {
 	return GM_getValue('VLAF_setting')
 }
+// 更改设置
+let setSet = (key, value) => {
+	let store = GM_getValue('VLAF_setting')
+	store[key] = value
+	GM_setValue('VLAF_setting', store)
+}
 // 实时获取最新模型列表
 let getAvtrs = () => {
 	return GM_getValue('VLAF_avatars')
 }
 
 // 文本内容多语言替换
-const text = JSON.parse(GM_getResourceText('language'))[getSet().lang]
+let text = JSON.parse(GM_getResourceText('language'))[getSet().lang]
+console.log('getSet()', getSet())
+console.log('lang', getSet().lang)
 console.log('text', text)
 
 // 置入Style
@@ -231,7 +240,6 @@ let limitless = avtr_id => {
 		.finally(function () {})
 }
 
-console.log('document.location.pathname', document.location.pathname)
 // 不同页面
 let page_is_avtr_own = () => {
 	return document.location.pathname === '/home/avatars'
@@ -244,8 +252,8 @@ let page_is_limitless = () => {
 }
 
 let pluginInject = () => {
-	if (!page_is_limitless()) {
-		$('.neko0.avatar-ul')[0].remove()
+	if (!page_is_limitless() && $('.neko0.limitless-list.row')[0]) {
+		$('.neko0.limitless-list.row')[0].remove()
 	}
 	if (page_is_avtr_own()) {
 		console.log('page_is_avtr_own')
@@ -337,6 +345,33 @@ let pluginInject = () => {
 					items: getAvtrs(),
 				},
 				methods: {
+					// 语言切换
+					languageSwitch: function () {
+						getSet().lang === 'en' ? setSet('lang', 'zh_cn') : setSet('lang', 'en')
+						text = JSON.parse(GM_getResourceText('language'))[getSet().lang]
+						location.reload ()
+					},
+
+					// 导出导入
+					exportList: function () {
+						// 将 JSON 数据转换为字符串
+						const jsonString = JSON.stringify(getAvtrs())
+						// 创建一个 Blob 对象
+						const blob = new Blob([jsonString], { type: 'application/json' })
+						// 创建一个下载链接
+						const link = document.createElement('a')
+						link.href = URL.createObjectURL(blob)
+						link.download = 'LimitlessAvatars.json'
+						// 模拟点击链接下载文件
+						document.body.appendChild(link)
+						link.click()
+					},
+					importList: function () {
+						const fileInput = document.getElementById('file-input')
+						fileInput.click()
+					},
+
+					// 格式化时间
 					formattedDate: function (str) {
 						const dateStr = str
 						const date = new Date(dateStr)
@@ -406,6 +441,37 @@ let pluginInject = () => {
 					})
 					tippy('.collect', {
 						content: text.tippy_collect,
+					})
+					tippy('.export', {
+						content: text.tippy_export,
+					})
+					tippy('.import', {
+						content: text.tippy_import,
+					})
+
+					// 上传导入文件
+					const fileInput = document.getElementById('file-input')
+					fileInput.addEventListener('change', () => {
+						const file = fileInput.files[0]
+						const reader = new FileReader()
+
+						reader.onload = event => {
+							const fileContent = event.target.result
+							const jsonData = JSON.parse(fileContent)
+							console.log('import:', jsonData)
+
+							const A = getAvtrs()
+							const B = jsonData
+
+							const diff = _.differenceBy(B, A, 'id')
+							const merge = _.concat(A, diff)
+
+							console.log('merge:', merge)
+							GM_setValue('VLAF_avatars', merge)
+							this.items = merge
+						}
+
+						reader.readAsText(file)
 					})
 				},
 			})
