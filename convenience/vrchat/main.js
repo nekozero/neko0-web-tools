@@ -376,8 +376,33 @@ let pluginInject = () => {
 						link.click()
 					},
 					importList: function () {
+						console.log('ƒ importList');
 						const fileInput = document.getElementById('file-input')
 						fileInput.click()
+					},
+					fileUpload: function () {
+						console.log('ƒ fileUpload');
+						const fileInput = document.getElementById('file-input')
+						const file = fileInput.files[0]
+						const reader = new FileReader()
+
+						reader.onload = event => {
+							const fileContent = event.target.result
+							const jsonData = JSON.parse(fileContent)
+							console.log('import:', jsonData)
+
+							const A = getAvtrs()
+							const B = jsonData
+
+							const diff = _.differenceBy(B, A, 'id')
+							const merge = _.concat(A, diff)
+
+							console.log('merge:', merge)
+							GM_setValue('VLAF_avatars', merge)
+							this.items = merge
+						}
+
+						reader.readAsText(file)
 					},
 
 					// 格式化时间
@@ -456,31 +481,6 @@ let pluginInject = () => {
 					})
 					tippy('.import', {
 						content: text.tippy_import,
-					})
-
-					// 上传导入文件
-					const fileInput = document.getElementById('file-input')
-					fileInput.addEventListener('change', () => {
-						const file = fileInput.files[0]
-						const reader = new FileReader()
-
-						reader.onload = event => {
-							const fileContent = event.target.result
-							const jsonData = JSON.parse(fileContent)
-							console.log('import:', jsonData)
-
-							const A = getAvtrs()
-							const B = jsonData
-
-							const diff = _.differenceBy(B, A, 'id')
-							const merge = _.concat(A, diff)
-
-							console.log('merge:', merge)
-							GM_setValue('VLAF_avatars', merge)
-							this.items = merge
-						}
-
-						reader.readAsText(file)
 					})
 				},
 			})

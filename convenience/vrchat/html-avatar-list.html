@@ -4,7 +4,7 @@
 			<div class="select slot"></div>
 			<div class="btn export" @click="exportList()">{{text.export}}</div>
 			<div class="btn import" @click="importList()">{{text.import}}</div>
-			<input type="file" id="file-input" style="display: none;" />
+			<input type="file" id="file-input" @change="fileUpload()" style="display: none;" />
 		</div>
 		<div class="right">
 			<!-- prettier-ignore -->
