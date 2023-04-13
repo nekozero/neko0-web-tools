@@ -8,6 +8,8 @@
 
 ----
 
+[![Star on GitHub](https://img.shields.io/github/stars/nekozero/neko0-web-tools.svg?style=social)](https://github.com/nekozero/neko0-web-tools/stargazers)
+
 **注意事项**  
 1.这是个Tampermonkey脚本项目  
 2.以下脚本均依赖于Tampermonkey  
@@ -207,7 +209,21 @@ Added shortcut key operation
 以后连自家的网站API都封掉的可能性也不是没有  
 所以还是建议把有世界获取渠道的Avatar在`"来源世界"`中填入world_id当一份保险**
 
-本插件只适用于有公开链接的公开模型(Public)，例如[这样的](https://vrchat.com/home/avatar/avtr_bc6c06ec-fda2-4490-8db2-946f618dba2d)
+本插件只适用于有公开链接的公开模型(Public)  
+例如[这样的](https://vrchat.com/home/avatar/avtr_bc6c06ec-fda2-4490-8db2-946f618dba2d)  
+并无任何盗模功能
+
+> 计划更新：  
+> 1.增加更多不同的排序方式  
+> 2.添加可供自定义填写的“注释”“来源世界”   
+> 3.添加标签系统，用于筛选分类模型  
+> 4.追加新的更密集的宫格排列样式，与竖向传统详情列表的排列样式  
+> 5.在Avatar列表单个的方框上添加一键复制URL的按钮（方便分享给好友）
+
+👉 [» Join TG Discussion](https://t.me/+FANQrUGRV7A0YmM9) ✨
+
+[![follow on twitter](https://img.shields.io/twitter/follow/jojuniori?label=Follow&style=social)](https://twitter.com/jojuniori)  [![Star on GitHub](https://img.shields.io/github/stars/nekozero/neko0-web-tools.svg?style=social)](https://github.com/nekozero/neko0-web-tools/stargazers)  
+
 </details>
 
 ---

@@ -5,12 +5,12 @@
 // @description     无限收藏虚拟形象 Limitless Favorite Avatar
 // @description:zh  无限收藏虚拟形象
 // @description:en  Limitless Favorite Avatar
-// @version         1.0.5
+// @version         1.0.6
 // @author          Mitsuki Joe
 // @namespace       neko0-web-tools
 // @icon            https://assets.vrchat.com/www/favicons/favicon.ico
 // @homepageURL     https://github.com/nekozero/neko0-web-tools
-// @supportURL     https://t.me/+FANQrUGRV7A0YmM9
+// @supportURL      https://t.me/+FANQrUGRV7A0YmM9
 // @updateURL       https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
 // @downloadURL     https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
 // @grant           GM_addStyle
@@ -30,11 +30,11 @@
 // @require         https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource        IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match           *://vrchat.com/*
-// @resource        IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/style.css
-// @resource        html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/html-avatar-btn.html
-// @resource        html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/html-avatar-list.html
-// @resource        html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/html-btn-group.html
-// @resource        language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/language.json
+// @resource        IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.5/convenience/vrchat/style.css
+// @resource        html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.5/convenience/vrchat/html-avatar-btn.html
+// @resource        html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.5/convenience/vrchat/html-avatar-list.html
+// @resource        html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.5/convenience/vrchat/html-btn-group.html
+// @resource        language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.5/convenience/vrchat/language.json
 // ==/UserScript==
 console.log('VLAF Start')
 /** 初始化设定 开始 */
@@ -167,6 +167,8 @@ let getNowDate = () => {
 	return formatted
 }
 
+// Detect error types
+
 // 马上切换
 let select = avtr_id => {
 	url = window.location.origin + '/api/1/avatars/' + avtr_id + '/select'
@@ -213,35 +215,38 @@ let favorites = avtr_id => {
 }
 // 收藏到无限收藏夹
 let limitless = avtr_id => {
+	console.log('ƒ limitless')
 	url = window.location.origin + '/api/1/avatars/' + avtr_id
-	axios
-		.get(url)
-		.then(function (response) {
-			console.log('limitless', response)
-			alertify.success(text.operation_succeeded)
-			let data = response.data
 
-			let store = getAvtrs()
-			const result = isInVLAF(avtr_id)
+	let store = getAvtrs()
+	const result = isInVLAF(avtr_id)
 
-			if (result) {
-				console.log('存在')
-				store = store.filter(function (obj) {
-					return obj.id !== avtr_id
-				})
-				$('#collect').text(text.btn_collect).removeClass('text-danger border-danger')
-			} else {
-				console.log('不存在')
+	if (result) {
+		console.log('存在')
+		store = store.filter(function (obj) {
+			return obj.id !== avtr_id
+		})
+		$('#collect').text(text.btn_collect).removeClass('text-danger border-danger')
+		GM_setValue('VLAF_avatars', store)
+	} else {
+		console.log('不存在')
+		let data = null
+		axios
+			.get(url)
+			.then(function (response) {
+				console.log('limitless', response)
+				alertify.success(text.operation_succeeded)
+				data = response.data
 				data.addTime = getNowDate()
 				store.push(data)
 				$('#collect').text(text.btn_collect_r).addClass('text-danger border-danger')
-			}
-			GM_setValue('VLAF_avatars', store)
-		})
-		.catch(function (error) {
-			console.log(error)
-		})
-		.finally(function () {})
+				GM_setValue('VLAF_avatars', store)
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
+			.finally(function () {})
+	}
 }
 
 // 不同页面
