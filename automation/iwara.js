@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能, 便捷地收藏自己喜欢的视频到本地, 以免作者销号后就看不到了
-// @version      1.2.3
+// @version      1.2.4
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/logo.png
@@ -12,6 +12,7 @@
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_setClipboard
+// @grant        window.onurlchange
 // @run-at       document-idle
 // @license      AGPLv3
 // @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
@@ -270,24 +271,11 @@ if (window.location.pathname.indexOf('/video/') !== -1) {
 }
 
 // 监测页面变换
-const _historyWrap = function (type) {
-	const orig = history[type]
-	const e = new Event(type)
-	return function () {
-		const rv = orig.apply(this, arguments)
-		e.arguments = arguments
-		window.dispatchEvent(e)
-		return rv
-	}
+if (window.onurlchange === null) {
+	window.addEventListener('urlchange', info => {
+		console.log('urlchange', info)
+		if (window.location.pathname.indexOf('/video/') !== -1 && !$('.one-tap')[0]) {
+			timer = setInterval(detection, 1000)
+		}
+	})
 }
-history.pushState = _historyWrap('pushState')
-history.replaceState = _historyWrap('replaceState')
-window.addEventListener('pushState', function (e) {
-	console.log('change pushState')
-	if (window.location.pathname.indexOf('/video/') !== -1 && !$('.one-tap')[0]) {
-		timer = setInterval(detection, 1000)
-	}
-})
-window.addEventListener('replaceState', function (e) {
-	console.log('change replaceState')
-})
