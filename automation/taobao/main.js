@@ -174,6 +174,7 @@ async function taobaoMsg_AI() {
     if (!openai_key) {
       alert('OpenAI key is missing');
     }
+    var title = (document.querySelector('.item-title a') || document.querySelector('.item-info h3 a')).textContent.trim();
     var headers = {
       "Content-Type": "application/json",
       "Authorization": "Bearer " + openai_key,
@@ -184,7 +185,7 @@ async function taobaoMsg_AI() {
       max_tokens: 200,
       messages: [{
         role: "user",
-        content: document.querySelector('.item-title a').textContent + "\n\n写出商品评价。简短、口语化",
+        content: title + "\n\n写出商品评价。简短、口语化",
       }]
     }, {
       headers: headers,
@@ -267,14 +268,18 @@ async function tmallMsg_AI() {
         max_tokens: 200,
         messages: [{
             role: "user",
-            content: document.querySelector('.ui-form-label h3').textContent + "\n\n分别写出商品评价和服务评价，用|间隔。简短、口语化",
+            content: document.querySelector('.ui-form-label h3').textContent.trim() + "\n\n分别写出商品评价和服务评价，用|间隔。简短、口语化",
         }]
     }, {
         headers: headers,
     }).then((response) => {
         var rate_content = response.data.choices[0].message.content.split('|')
-        document.querySelector('.J_rateItem').value = rate_content[0].replace('商品评价：', '')
-        document.querySelector('.J_rateService').value = rate_content[1].replace('服务评价：', '')
+        if (document.querySelector('.J_rateItem')) {
+          document.querySelector('.J_rateItem').value = rate_content[0].replace('商品评价：', '').trim()
+          document.querySelector('.J_rateService').value = rate_content[1].replace('服务评价：', '').trim()
+        } else if (document.querySelector('.ap-ct-textinput textarea')) {
+          document.querySelector('.ap-ct-textinput textarea').value = rate_content[0].replace('商品评价：', '').trim()
+        }
     });
 }
 
