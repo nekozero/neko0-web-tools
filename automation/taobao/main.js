@@ -171,30 +171,37 @@ function taobaoMsg() {
 }
 
 async function taobaoMsg_AI() {
-    if (!openai_key) {
-      alert('OpenAI key is missing');
-    }
-    var title = (document.querySelector('.item-title a') || document.querySelector('.item-info h3 a')).textContent.trim();
-    var headers = {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + openai_key,
-    }
+  if (!openai_key) {
+    alert('OpenAI key is missing')
+    return
+  }
+  var headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + openai_key,
+  }
+  var tbRateMsg = document.querySelectorAll('.rate-msg')
+  if (document.querySelector('.item-title a')) {
+    //首评
+    var tbTitle = document.querySelectorAll('.item-title a')
+  }else if(document.querySelector('.item-info h3 a')){
+    //追评
+    var tbTitle = document.querySelectorAll('.item-info h3 a')
+  }
+  for (var i = 0; i < tbRateMsg.length; i++) {
     // 评价商品
     var response = await axios.post("https://api.openai.com/v1/chat/completions", {
       model: "gpt-3.5-turbo",
       max_tokens: 200,
       messages: [{
         role: "user",
-        content: title + "\n\n写出商品评价。简短、口语化",
+        content: tbTitle[i].textContent.trim() + "\n\n写出商品评价。简短、口语化",
       }]
     }, {
       headers: headers,
     }).then((response) => {
-      var tbRateMsg = document.querySelectorAll('.rate-msg')
-      for (var i = 0, a; (a = tbRateMsg[i++]); ) {
-        a.value = response.data.choices[0].message.content
-      }
+        tbRateMsg[i].value = response.data.choices[0].message.content.trim()
     });
+  }
 }
 
 function taobaoFun() {
@@ -256,7 +263,8 @@ function tmallMsg() {
 
 async function tmallMsg_AI() {
     if (!openai_key) {
-      alert('OpenAI key is missing');
+      alert('OpenAI key is missing')
+      return
     }
     var headers = {
         "Content-Type": "application/json",
@@ -275,9 +283,11 @@ async function tmallMsg_AI() {
     }).then((response) => {
         var rate_content = response.data.choices[0].message.content.split('|')
         if (document.querySelector('.J_rateItem')) {
+          //首评
           document.querySelector('.J_rateItem').value = rate_content[0].replace('商品评价：', '').trim()
           document.querySelector('.J_rateService').value = rate_content[1].replace('服务评价：', '').trim()
         } else if (document.querySelector('.ap-ct-textinput textarea')) {
+          //追评
           document.querySelector('.ap-ct-textinput textarea').value = rate_content[0].replace('商品评价：', '').trim()
         }
     });
