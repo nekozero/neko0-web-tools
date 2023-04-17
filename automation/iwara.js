@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能, 便捷地收藏自己喜欢的视频到本地, 以免作者销号后就看不到了
-// @version      1.2.1
+// @version      1.2.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/logo.png
@@ -16,9 +16,6 @@
 // @require      https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js
 // @match        *://*.iwara.tv/*
 // ==/UserScript==
-
-// 视频页
-if (window.location.pathname.indexOf('/video/') == -1) return false
 
 // 置入Style
 let style = `<style>
@@ -45,9 +42,18 @@ let style = `<style>
 </style>`
 $('head').append(style)
 
+var timer = null
+
 // 分辨率检测
 function detection() {
 	console.log('ƒ detection')
+
+	if ($('.one-tap')[0]) {
+		clearInterval(timer)
+	}
+	console.log('has one-tap?', $('.one-tap')[0])
+	console.log('about timer:', timer)
+
 	let video = document.querySelector('.vjs-tech')
 	if (video) {
 		clearInterval(timer)
@@ -114,13 +120,15 @@ function detection() {
 					(this.videoWidth < 1920 && this.videoHeight < 1080) ||
 					(this.videoWidth < 1080 && this.videoHeight < 1920)
 				) {
-					$('.container-fluid > .row > .col-12').eq(0).prepend(
-						`<div class="detection" style="color: red;">${this.videoWidth} x ${this.videoHeight}</div>`
-					)
+					$('.container-fluid > .row > .col-12')
+						.eq(0)
+						.prepend(
+							`<div class="detection" style="color: red;">${this.videoWidth} x ${this.videoHeight}</div>`
+						)
 				} else {
-					$('.container-fluid > .row > .col-12').eq(0).prepend(
-						`<div class="detection">${this.videoWidth} x ${this.videoHeight}</div>`
-					)
+					$('.container-fluid > .row > .col-12')
+						.eq(0)
+						.prepend(`<div class="detection">${this.videoWidth} x ${this.videoHeight}</div>`)
 				}
 			}
 		}
@@ -128,7 +136,9 @@ function detection() {
 		checkSource().then(checkResolution)
 	}
 }
-var timer = setInterval(detection, 1000)
+if (window.location.pathname.indexOf('/video/') !== -1) {
+	timer = setInterval(detection, 1000)
+}
 
 // 剪切板初始化
 let clipboard = new ClipboardJS('.copy-name')
@@ -158,7 +168,9 @@ history.pushState = _historyWrap('pushState')
 history.replaceState = _historyWrap('replaceState')
 window.addEventListener('pushState', function (e) {
 	console.log('change pushState')
-	timer = setInterval(detection, 1000)
+	if (window.location.pathname.indexOf('/video/') !== -1 && !$('.one-tap')[0]) {
+		timer = setInterval(detection, 1000)
+	}
 })
 window.addEventListener('replaceState', function (e) {
 	console.log('change replaceState')
