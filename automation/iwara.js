@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能, 便捷地收藏自己喜欢的视频到本地, 以免作者销号后就看不到了
-// @version      1.2.0
+// @version      1.2.1
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/logo.png
@@ -48,7 +48,7 @@ $('head').append(style)
 // 分辨率检测
 function detection() {
 	console.log('ƒ detection')
-	let video = document.getElementById('vjs_video_3_html5_api')
+	let video = document.querySelector('.vjs-tech')
 	if (video) {
 		clearInterval(timer)
 		// 自动点击R18警告的继续按钮
@@ -141,4 +141,25 @@ clipboard.on('success', function (e) {
 clipboard.on('error', function (e) {
 	console.error('Action:', e.action)
 	console.error('Trigger:', e.trigger)
+})
+
+// 监测页面变换
+const _historyWrap = function (type) {
+	const orig = history[type]
+	const e = new Event(type)
+	return function () {
+		const rv = orig.apply(this, arguments)
+		e.arguments = arguments
+		window.dispatchEvent(e)
+		return rv
+	}
+}
+history.pushState = _historyWrap('pushState')
+history.replaceState = _historyWrap('replaceState')
+window.addEventListener('pushState', function (e) {
+	console.log('change pushState')
+	timer = setInterval(detection, 1000)
+})
+window.addEventListener('replaceState', function (e) {
+	console.log('change replaceState')
 })
