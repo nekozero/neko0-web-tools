@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱
-// @version      1.7.4
+// @version      1.7.5
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -19,6 +19,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js
 // @resource     style https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.1/automation/taobao/style.css
 // @resource     html-n-box https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.1/automation/taobao/n-box.html
 // @include      *://rate.taobao.com/*
@@ -48,6 +49,8 @@ if (GM_getValue('taobaorate') === undefined) {
 	})
 	GM_setValue('taobaorate', store)
 }
+// OpenAI Key
+var openai_key = ""
 /** 初始化设定 结束 */
 
 // 置入Style
@@ -167,10 +170,37 @@ function taobaoMsg() {
 	}
 }
 
+async function taobaoMsg_AI() {
+    if (!openai_key) {
+      alert('OpenAI key is missing');
+    }
+    var headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + openai_key,
+    }
+    // 评价商品
+    var response = await axios.post("https://api.openai.com/v1/chat/completions", {
+      model: "gpt-3.5-turbo",
+      max_tokens: 200,
+      messages: [{
+        role: "user",
+        content: document.querySelector('.item-title a').textContent + "\n\n写出商品评价。简短、口语化",
+      }]
+    }, {
+      headers: headers,
+    }).then((response) => {
+      var tbRateMsg = document.querySelectorAll('.rate-msg')
+      for (var i = 0, a; (a = tbRateMsg[i++]); ) {
+        a.value = response.data.choices[0].message.content
+      }
+    });
+}
+
 function taobaoFun() {
 	let elemStar = `<div class="submitboxplus">
         <div class="tb-btn star">一键满星</div>
         <div class="tb-btn msg">一键评语</div>
+        <div class="tb-btn msg-ai">AI评语</div>
         <div class="tb-btn starmsg">一键满星+评语</div>
         <div class="tb-btn haoping">一键提交好评</div>
     </div>`
@@ -180,6 +210,9 @@ function taobaoFun() {
 	})
 	$('.tb-btn.msg').click(() => {
 		taobaoMsg()
+	})
+	$('.tb-btn.msg-ai').click(() => {
+		taobaoMsg_AI()
 	})
 	$('.tb-btn.starmsg').click(() => {
 		taobaoMsg()
@@ -220,10 +253,36 @@ function tmallMsg() {
 	}
 }
 
+async function tmallMsg_AI() {
+    if (!openai_key) {
+      alert('OpenAI key is missing');
+    }
+    var headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + openai_key,
+    }
+    // 评价商品
+    var response = await axios.post("https://api.openai.com/v1/chat/completions", {
+        model: "gpt-3.5-turbo",
+        max_tokens: 200,
+        messages: [{
+            role: "user",
+            content: document.querySelector('.ui-form-label h3').textContent + "\n\n分别写出商品评价和服务评价，用|间隔。简短、口语化",
+        }]
+    }, {
+        headers: headers,
+    }).then((response) => {
+        var rate_content = response.data.choices[0].message.content.split('|')
+        document.querySelector('.J_rateItem').value = rate_content[0].replace('商品评价：', '')
+        document.querySelector('.J_rateService').value = rate_content[1].replace('服务评价：', '')
+    });
+}
+
 function tmallFun() {
 	let elemStar = `<div class="submitboxplus">
         <div class="tm-btn star">一键满星</div>
         <div class="tm-btn msg">一键评语</div>
+        <div class="tm-btn msg-ai">AI评语</div>
         <div class="tm-btn starmsg">一键满星+评语</div>
         <div class="tm-btn haoping">一键提交好评</div>
     </div>`
@@ -233,6 +292,9 @@ function tmallFun() {
 	})
 	$('.tm-btn.msg').click(() => {
 		tmallMsg()
+	})
+	$('.tm-btn.msg-ai').click(() => {
+		tmallMsg_AI()
 	})
 	$('.tm-btn.starmsg').click(() => {
 		tmallMsg()
