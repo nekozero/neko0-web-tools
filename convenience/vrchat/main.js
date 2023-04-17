@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] VRChat Avatar 无限收藏夹
 // @description  无限收藏虚拟形象 Limitless Favorite Avatar
-// @version      1.0.0
+// @version      1.0.4
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://assets.vrchat.com/www/favicons/favicon.ico
@@ -17,6 +17,7 @@
 // @license      AGPLv3
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
 // @require      https://cdn.jsdelivr.net/npm/axios@1.1.3/dist/axios.min.js
 // @require      https://cdn.jsdelivr.net/npm/vue@2.7.14
@@ -25,17 +26,17 @@
 // @require      https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource     IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match        *://vrchat.com/*
-// @resource     IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.3/convenience/vrchat/style.css
-// @resource     html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.3/convenience/vrchat/html-avatar-btn.html
-// @resource     html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.3/convenience/vrchat/html-avatar-list.html
-// @resource     html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.3/convenience/vrchat/html-btn-group.html
-// @resource     language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.3/convenience/vrchat/language.json
+// @resource     IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/style.css
+// @resource     html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/html-avatar-btn.html
+// @resource     html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/html-avatar-list.html
+// @resource     html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/html-btn-group.html
+// @resource     language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/convenience/vrchat/language.json
 // ==/UserScript==
-
+console.log('VLAF Start')
 /** 初始化设定 开始 */
 // 设置项默认值
 let setting = {
-	lang: 'zh_cn',
+	lang: 'en',
 }
 
 // 判断是否存在设定
@@ -66,13 +67,21 @@ alertify.set('notifier', 'position', 'top-center')
 let getSet = () => {
 	return GM_getValue('VLAF_setting')
 }
+// 更改设置
+let setSet = (key, value) => {
+	let store = GM_getValue('VLAF_setting')
+	store[key] = value
+	GM_setValue('VLAF_setting', store)
+}
 // 实时获取最新模型列表
 let getAvtrs = () => {
 	return GM_getValue('VLAF_avatars')
 }
 
 // 文本内容多语言替换
-const text = JSON.parse(GM_getResourceText('language'))[getSet().lang]
+let text = JSON.parse(GM_getResourceText('language'))[getSet().lang]
+console.log('getSet()', getSet())
+console.log('lang', getSet().lang)
 console.log('text', text)
 
 // 置入Style
@@ -109,6 +118,18 @@ if (!String.prototype.format) {
 			alertify.success(text.mounted)
 		}
 	}
+
+	// 绑定点击事件
+	// 打开设置窗口
+	// $('.n-box .button.switch').click(() => {
+	// 	$('.n-box').toggleClass('open')
+	// })
+
+	// setTimeout(() => {
+	// alertify.success("You've clicked OK")
+	// window.alertify = alertify
+	// console.log('alertify')
+	// }, 1000)
 })()
 
 // 判断已收藏
@@ -220,11 +241,21 @@ let limitless = avtr_id => {
 }
 
 // 不同页面
-let page_is_avtr_own = document.location.pathname === '/home/avatars'
-let page_is_avtr_details = document.location.pathname.indexOf('/home/avatar/avtr_') !== -1
-let page_is_limitless = document.location.pathname === '/home/limitless'
+let page_is_avtr_own = () => {
+	return document.location.pathname === '/home/avatars'
+}
+let page_is_avtr_details = () => {
+	return document.location.pathname.indexOf('/home/avatar/avtr_') !== -1
+}
+let page_is_limitless = () => {
+	return document.location.pathname === '/home/limitless'
+}
+
 let pluginInject = () => {
-	if (page_is_avtr_own) {
+	if (!page_is_limitless() && $('.neko0.limitless-list.row')[0]) {
+		$('.neko0.limitless-list.row')[0].remove()
+	}
+	if (page_is_avtr_own()) {
 		console.log('page_is_avtr_own')
 		// 当前使用Avatar
 		// let current_avtr_id = document.querySelector('[data-scrollkey]').getAttribute('data-scrollkey')
@@ -249,7 +280,7 @@ let pluginInject = () => {
 		// 		})
 		// })()
 		// 算了暂时先不改这个
-	} else if (page_is_avtr_details) {
+	} else if (page_is_avtr_details()) {
 		// 当前浏览Avatar
 		let current_avtr_id = window.location.pathname.substring(13)
 
@@ -287,18 +318,6 @@ let pluginInject = () => {
 			})
 		}
 
-		// 绑定点击事件
-		// 打开设置窗口
-		// $('.n-box .button.switch').click(() => {
-		// 	$('.n-box').toggleClass('open')
-		// })
-
-		// setTimeout(() => {
-		// alertify.success("You've clicked OK")
-		// window.alertify = alertify
-		// console.log('alertify')
-		// }, 1000)
-
 		// 检测页面内容置入插件DOM
 		var timer = setInterval(detection, 300)
 		detection()
@@ -311,7 +330,7 @@ let pluginInject = () => {
 			}
 		}
 		console.log(text.mounted)
-	} else if (page_is_limitless) {
+	} else if (page_is_limitless()) {
 		console.log('page_is_limitless', getAvtrs())
 		// 置入DOM
 		function domLimitless() {
@@ -326,6 +345,33 @@ let pluginInject = () => {
 					items: getAvtrs(),
 				},
 				methods: {
+					// 语言切换
+					languageSwitch: function () {
+						getSet().lang === 'en' ? setSet('lang', 'zh_cn') : setSet('lang', 'en')
+						text = JSON.parse(GM_getResourceText('language'))[getSet().lang]
+						location.reload ()
+					},
+
+					// 导出导入
+					exportList: function () {
+						// 将 JSON 数据转换为字符串
+						const jsonString = JSON.stringify(getAvtrs())
+						// 创建一个 Blob 对象
+						const blob = new Blob([jsonString], { type: 'application/json' })
+						// 创建一个下载链接
+						const link = document.createElement('a')
+						link.href = URL.createObjectURL(blob)
+						link.download = 'LimitlessAvatars.json'
+						// 模拟点击链接下载文件
+						document.body.appendChild(link)
+						link.click()
+					},
+					importList: function () {
+						const fileInput = document.getElementById('file-input')
+						fileInput.click()
+					},
+
+					// 格式化时间
 					formattedDate: function (str) {
 						const dateStr = str
 						const date = new Date(dateStr)
@@ -396,6 +442,37 @@ let pluginInject = () => {
 					tippy('.collect', {
 						content: text.tippy_collect,
 					})
+					tippy('.export', {
+						content: text.tippy_export,
+					})
+					tippy('.import', {
+						content: text.tippy_import,
+					})
+
+					// 上传导入文件
+					const fileInput = document.getElementById('file-input')
+					fileInput.addEventListener('change', () => {
+						const file = fileInput.files[0]
+						const reader = new FileReader()
+
+						reader.onload = event => {
+							const fileContent = event.target.result
+							const jsonData = JSON.parse(fileContent)
+							console.log('import:', jsonData)
+
+							const A = getAvtrs()
+							const B = jsonData
+
+							const diff = _.differenceBy(B, A, 'id')
+							const merge = _.concat(A, diff)
+
+							console.log('merge:', merge)
+							GM_setValue('VLAF_avatars', merge)
+							this.items = merge
+						}
+
+						reader.readAsText(file)
+					})
 				},
 			})
 		}
@@ -432,7 +509,7 @@ history.pushState = _historyWrap('pushState')
 history.replaceState = _historyWrap('replaceState')
 window.addEventListener('pushState', function (e) {
 	console.log('change pushState')
-    pluginInject()
+	pluginInject()
 })
 window.addEventListener('replaceState', function (e) {
 	console.log('change replaceState')

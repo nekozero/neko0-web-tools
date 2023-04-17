@@ -175,7 +175,6 @@ Added shortcut key operation
 🎮 VRChat 无限 Avatar 收藏夹 | [安装](https://greasyfork.org/zh-CN/scripts/461702)
 <details>
 <summary>介绍</summary>
-###  
 
 官方免费的 **50** 个栏位不够用怎么办？
 
@@ -185,11 +184,12 @@ Added shortcut key operation
 
 此开源脚本技巧性地使用了官方的 API 来**合法地**管理您的 Avatars 并**增加到**<a href="#2">**无上限**<sup>1</sup></a>的收藏数量
 
-视频教程: [📺 Youtube](https://greasyfork.org/zh-CN/scripts/398155)　[📺 BiliBili](https://greasyfork.org/zh-CN/scripts/398155)  
+~~视频教程: [📺 Youtube]()　[📺 BiliBili]()~~  
 
 [示意图]
 
-**<span id="1">※</span>注1：不出意外的话可以收藏50万个Avatar以上  
+**<span id="1">※</span>注1：不出意外的话 (指硬盘没满的情况下)  
+可以收藏50万个Avatar以上  
 但尚未能进行实际测试过  
 可能游戏中加起来也没那么多Avatar**
 
