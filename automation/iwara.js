@@ -102,6 +102,9 @@ let style = `<style>
     background-color: var(--primary);
     color: var(--primary-text);
 }
+.page-video__actions .likeButton:has(svg.svg-inline--fa.fa-heart-crack) {
+    background-color: var(--red);
+}
 // 根除R18警告
 .adultWarning {
     display: none !important;
