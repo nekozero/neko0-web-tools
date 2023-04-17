@@ -117,9 +117,7 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 并不影响页面其他原有功能
 
-![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara1.png)
-
-![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara2.png)
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara3.png)
 
 Rin真是太棒了我™舔爆
 
