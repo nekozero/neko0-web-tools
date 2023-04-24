@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能, 便捷地收藏自己喜欢的视频到本地, 以免作者销号后就看不到了
-// @version      1.2.5
+// @version      1.2.7
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/logo.png
@@ -137,9 +137,9 @@ async function getCreateDate(callback) {
 		})
 }
 
-// 分辨率检测
-async function detection() {
-	console.log('ƒ detection')
+// 视频播放页
+async function videoPage() {
+	console.log('ƒ videoPage')
 
 	if ($('.one-tap')[0]) {
 		clearInterval(timer)
@@ -242,13 +242,15 @@ async function detection() {
 			})
 		}
 
-		// video可播放后将分辨率标注出来
 		function checkResolution() {
-			console.log('ƒ checkResolution')
-			// do something
+			console.log('ƒ checkResolution start')
+
+			// video可播放后将分辨率标注出来
 			video.oncanplay = function () {
+				if (document.querySelector('.detection') !== null) return false
 				console.log(this)
 				console.log(this.videoWidth, this.videoHeight)
+
 				if (
 					(this.videoWidth < 1920 && this.videoHeight < 1080) ||
 					(this.videoWidth < 1080 && this.videoHeight < 1920)
@@ -256,12 +258,59 @@ async function detection() {
 					$('.container-fluid > .row > .col-12')
 						.eq(0)
 						.prepend(
-							`<div class="detection" style="color: red;">${this.videoWidth} x ${this.videoHeight}</div>`
+							`<div class="detection"><span class="resolution" style="color: red;">${this.videoWidth} x ${this.videoHeight}</span>　<span class="fps"></span></div>`
 						)
 				} else {
 					$('.container-fluid > .row > .col-12')
 						.eq(0)
-						.prepend(`<div class="detection">${this.videoWidth} x ${this.videoHeight}</div>`)
+						.prepend(
+							`<div class="detection"><span class="resolution">${this.videoWidth} x ${this.videoHeight}</span>　<span class="fps"></span></div>`
+						)
+				}
+
+				// 获取帧率 from https://stackoverflow.com/a/73098112
+				// Part 1:
+				var vid = this
+				var last_media_time, last_frame_num, fps
+				var fps_rounder = []
+				var frame_not_seeked = true
+				// Part 2 (with some modifications):
+				function ticker(useless, metadata) {
+					var media_time_diff = Math.abs(metadata.mediaTime - last_media_time)
+					var frame_num_diff = Math.abs(metadata.presentedFrames - last_frame_num)
+					var diff = media_time_diff / frame_num_diff
+					if (
+						diff &&
+						diff < 1 &&
+						frame_not_seeked &&
+						fps_rounder.length < 50 &&
+						vid.playbackRate === 1 &&
+						document.hasFocus()
+					) {
+						fps_rounder.push(diff)
+						fps = Math.round(1 / get_fps_average())
+						document.querySelector('.fps').textContent =
+							'fps:' + fps + ', certainty:' + fps_rounder.length * 2 + '%'
+						if (fps < 60) {
+							$('.fps').attr('style', 'color: red')
+						} else {
+							$('.fps').attr('style', 'color: #3498db')
+						}
+					}
+					frame_not_seeked = true
+					last_media_time = metadata.mediaTime
+					last_frame_num = metadata.presentedFrames
+					vid.requestVideoFrameCallback(ticker)
+				}
+				vid.requestVideoFrameCallback(ticker)
+				// Part 3:
+				vid.addEventListener('seeked', function () {
+					fps_rounder.pop()
+					frame_not_seeked = false
+				})
+				// Part 4:
+				function get_fps_average() {
+					return fps_rounder.reduce((a, b) => a + b) / fps_rounder.length
 				}
 			}
 		}
@@ -269,8 +318,9 @@ async function detection() {
 		checkSource().then(checkResolution)
 	}
 }
+
 if (window.location.pathname.indexOf('/video/') !== -1) {
-	timer = setInterval(detection, 1000)
+	timer = setInterval(videoPage, 1000)
 }
 
 // 监测页面变换
@@ -278,7 +328,7 @@ if (window.onurlchange === null) {
 	window.addEventListener('urlchange', info => {
 		console.log('urlchange', info)
 		if (window.location.pathname.indexOf('/video/') !== -1 && !$('.one-tap')[0]) {
-			timer = setInterval(detection, 1000)
+			timer = setInterval(videoPage, 1000)
 		}
 	})
 }

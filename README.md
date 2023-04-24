@@ -111,15 +111,19 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 2. 一键复制名字 并 喜欢+关注+下载：按下即可复制名字，Like，Follow，并Download Source画质 的文件
 3. 功能按钮移动到顶部，点赞过的按钮更醒目，进入视频后不用往下滚动就能一目了然看到自己有没有点赞(下载)过这个视频
 4. 进入Ecchi版面自动点击R18警告的继续按钮
-5. 分辨率检测功能，视频播放选项里分辨率选为Source的话每次进去就能看见作者上传的最高分辨率是多少了
+5. 针对新版“默认不以Source分辨率播放并无法记忆用户设置的问题”进行了优化，进入后自动加载最高分辨率源
+6. 分辨率检测功能，每次进去就能看见作者上传的最高分辨率是多少了
+7. 增加帧率侦测功能，低于60fps则以醒目颜色警示
 
 用于收藏视频作品再方便不过了
 
 并不影响页面其他原有功能
 
+#### 正面教材 <sub>Rin真是太棒了我™舔爆</sub>
 ![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara3.png)
 
-Rin真是太棒了我™舔爆
+#### 反面教材 
+![](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/img/iwara4.png)
 
 </details>
 
