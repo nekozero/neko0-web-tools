@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
-// @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱
+// @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall
 // @version      1.7.5
 // @author       JoJunIori
 // @namespace    neko0-web-tools
