@@ -6,7 +6,7 @@
 // @namespace    neko0-web-tools
 // @run-at       document-idle
 // @grant        none
-// @license      AGPLv3
+// @license      AGPL-3.0-or-later
 // @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
 // @match        *://weibo.com/*/profile?*
 // ==/UserScript==

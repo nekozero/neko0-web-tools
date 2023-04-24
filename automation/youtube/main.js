@@ -6,13 +6,13 @@
 // @namespace    neko0-web-tools
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
-// @supportURL   https://github.com/nekozero/neko0-web-tools/issues
+// @supportURL   https://t.me/+URovzRdPTyHlWtQd
 // @grant        GM_addStyle
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_getResourceText
 // @run-at       document-idle
-// @license      AGPLv3
+// @license      AGPL-3.0-or-later
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require      https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.min.js
 // @resource     font https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css

@@ -1,18 +1,18 @@
 // ==UserScript==
 // @name         [Neko0] 图站增强Danbooru/Gelbooru/Konachan/Yande
-// @description  加入快捷键操作，按下 ← 或 A 上一页，按下 → 或 D 下一页，按下 S 或 O 查看原图，按下 F 查看来源页面
+// @description  加入快捷键操作，按下 ← 或 A 上一页，按下 → 或 D 下一页，按下 S 或 O 查看原图，按下 F 查看来源页面，没错，单手操作
 // @version      1.0.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://konachan.com/favicon.ico
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
-// @supportURL   https://github.com/nekozero/neko0-web-tools/issues
+// @supportURL   https://t.me/+URovzRdPTyHlWtQd
 // @grant        GM_addStyle
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @run-at       document-idle
-// @license      AGPLv3
+// @license      AGPL-3.0-or-later
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @include      *://gelbooru.com/*

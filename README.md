@@ -73,6 +73,9 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-update2.png)
 
+[2023-04-17] 加入使用 ChatGPT 进行 AI评语 功能 by [@Cp0204](https://github.com/Cp0204)：
+
+![](https://user-images.githubusercontent.com/5239753/232384165-9d4135c4-68d7-408b-bf38-d9a690931181.gif)
 </details>
 
 ----

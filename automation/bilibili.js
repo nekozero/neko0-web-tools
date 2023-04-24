@@ -6,10 +6,10 @@
 // @namespace    neko0-web-tools
 // @icon         https://www.google.com/s2/favicons?domain=bilibili.com
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
-// @supportURL   https://github.com/nekozero/neko0-web-tools/issues
+// @supportURL   https://t.me/+URovzRdPTyHlWtQd
 // @grant        none
 // @run-at       document-idle
-// @license      AGPLv3
+// @license      AGPL-3.0-or-later
 // @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
 // @include      *://*.bilibili.com/*
 // @include      *://bilibili.com/*

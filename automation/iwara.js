@@ -14,7 +14,7 @@
 // @grant        GM_setClipboard
 // @grant        window.onurlchange
 // @run-at       document-idle
-// @license      AGPLv3
+// @license      AGPL-3.0-or-later
 // @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
 // @match        *://*.iwara.tv/*
 // ==/UserScript==

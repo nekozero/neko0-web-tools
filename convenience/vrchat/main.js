@@ -10,7 +10,7 @@
 // @namespace       neko0-web-tools
 // @icon            https://assets.vrchat.com/www/favicons/favicon.ico
 // @homepageURL     https://github.com/nekozero/neko0-web-tools
-// @supportURL      https://github.com/nekozero/neko0-web-tools/issues
+// @supportURL     https://t.me/+FANQrUGRV7A0YmM9
 // @updateURL       https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
 // @downloadURL     https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
 // @grant           GM_addStyle
@@ -18,7 +18,7 @@
 // @grant           GM_getValue
 // @grant           GM_getResourceText
 // @run-at          document-idle
-// @license         AGPLv3
+// @license         AGPL-3.0-or-later
 // @require         https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
 // @require         https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @require         https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js

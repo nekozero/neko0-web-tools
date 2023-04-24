@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
-// @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall
-// @version      1.7.5
+// @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall AI AI评价 AI评语
+// @version      1.7.6
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
 // @homepageURL  https://github.com/nekozero/neko0-web-tools
-// @supportURL   https://github.com/nekozero/neko0-web-tools/issues
+// @supportURL   https://t.me/+URovzRdPTyHlWtQd
 // @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/taobao/main.js
 // @downloadURL  https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/taobao/main.js
 // @grant        GM_addStyle
@@ -14,14 +14,14 @@
 // @grant        GM_getValue
 // @grant        GM_getResourceText
 // @run-at       document-idle
-// @license      AGPLv3
+// @license      AGPL-3.0-or-later
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js
-// @resource     style https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.1/automation/taobao/style.css
-// @resource     html-n-box https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.1/automation/taobao/n-box.html
+// @resource     style https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/automation/taobao/style.css
+// @resource     html-n-box https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.4/automation/taobao/n-box.html
 // @include      *://rate.taobao.com/*
 // @include      *://ratewrite.tmall.com/*
 // @include        *://buyertrade.taobao.com/trade*
