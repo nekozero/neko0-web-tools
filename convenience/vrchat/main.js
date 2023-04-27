@@ -1,4 +1,5 @@
 // ==UserScript==
+<<<<<<< HEAD
 // @name            [Neko0] VRChat Avatar 无限收藏夹
 // @name:zh         [Neko0] VRChat 无限虚拟形象收藏夹
 // @name:en         [Neko0] VRChat Limitless Favorite Avatar
@@ -35,6 +36,40 @@
 // @resource        html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.5/convenience/vrchat/html-avatar-list.html
 // @resource        html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.5/convenience/vrchat/html-btn-group.html
 // @resource        language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.5/convenience/vrchat/language.json
+=======
+// @name         [Neko0] VRChat Avatar 无限收藏夹
+// @description  无限收藏虚拟形象 Limitless Favorite Avatar
+// @version      1.0.6
+// @author       JoJunIori
+// @namespace    neko0-web-tools
+// @icon         https://assets.vrchat.com/www/favicons/favicon.ico
+// @homepageURL  https://github.com/nekozero/neko0-web-tools
+// @supportURL   https://t.me/+FANQrUGRV7A0YmM9
+// @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
+// @downloadURL  https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
+// @grant        GM_addStyle
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @grant        GM_getResourceText
+// @run-at       document-idle
+// @license      AGPLv3
+// @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
+// @require      https://cdn.jsdelivr.net/npm/axios@1.1.3/dist/axios.min.js
+// @require      https://cdn.jsdelivr.net/npm/vue@2.7.14
+// @require      https://unpkg.com/@popperjs/core@2
+// @require      https://unpkg.com/tippy.js@6
+// @require      https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
+// @resource     IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
+// @match        *://vrchat.com/*
+// @resource     IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/style.css
+// @resource     html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-avatar-btn.html
+// @resource     html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-avatar-list.html
+// @resource     html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-btn-group.html
+// @resource     language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/language.json
+>>>>>>> 25b8666 (update version)
 // ==/UserScript==
 console.log('VLAF Start')
 /** 初始化设定 开始 */
@@ -376,12 +411,12 @@ let pluginInject = () => {
 						link.click()
 					},
 					importList: function () {
-						console.log('ƒ importList');
+						console.log('ƒ importList')
 						const fileInput = document.getElementById('file-input')
 						fileInput.click()
 					},
 					fileUpload: function () {
-						console.log('ƒ fileUpload');
+						console.log('ƒ fileUpload')
 						const fileInput = document.getElementById('file-input')
 						const file = fileInput.files[0]
 						const reader = new FileReader()
