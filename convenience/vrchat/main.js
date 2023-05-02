@@ -5,7 +5,7 @@
 // @description     无限收藏虚拟形象 Limitless Favorite Avatar
 // @description:zh  无限收藏虚拟形象
 // @description:en  Limitless Favorite Avatar
-// @version         1.0.7
+// @version         1.0.8
 // @author          Mitsuki Joe
 // @namespace       neko0-web-tools
 // @icon            https://assets.vrchat.com/www/favicons/favicon.ico
@@ -169,6 +169,15 @@ let getNowDate = () => {
 }
 
 // Detect error types
+let detectError = msg => {
+	console.log('detectError', msg)
+	if (msg == "You already have 50 favorite avatars in group 'avatars1'") return alertify.error(text.avatars_full)
+	if (msg == 'You already have that avatar favorited') return alertify.error(text.avatars_added)
+	if (msg == 'This avatar is unavailableǃ') return alertify.error(text.error_unavailable)
+	if (msg == "avatar isn't public and avatar is also not owned by you") return alertify.error(text.error_private)
+	if (msg == "Can't find avatarǃ") return alertify.error(text.error_deleted)
+	return alertify.error(text.operation_failed)
+}
 
 // 马上切换
 let select = avtr_id => {
@@ -181,7 +190,7 @@ let select = avtr_id => {
 		})
 		.catch(function (error) {
 			console.log(error)
-			alertify.error(text.operation_failed)
+			detectError(error.response.data.error.message)
 		})
 		.finally(function () {})
 }
@@ -201,16 +210,7 @@ let favorites = avtr_id => {
 		})
 		.catch(function (error) {
 			console.log(error)
-			let msg = error.response.data.error.message
-			let avatars_full = msg === "You already have 50 favorite avatars in group 'avatars1'"
-			let avatars_added = msg === 'You already have that avatar favorited'
-			if (avatars_full) {
-				alertify.error(text.avatars_full)
-			} else if (avatars_added) {
-				alertify.warning(text.avatars_added)
-			} else {
-				alertify.error(text.operation_failed)
-			}
+			detectError(error.response.data.error.message)
 		})
 		.finally(function () {})
 }
