@@ -32,7 +32,7 @@
 
 <!-- ~~视频教程: [📺 Youtube]()　[📺 BiliBili]()~~   -->
 
-<video src='https://github.com/nekozero/neko0-web-tools/raw/cce0fe6484c1447bdd1757f42589c1b8f6a10ec1/img/vrchat.mp4' width=180></video>
+<video src='https://github.com/nekozero/neko0-web-tools/raw/cce0fe6484c1447bdd1757f42589c1b8f6a10ec1/img/vrchat.mp4' width=180/>
 
 **<span id="1">※</span>注1：不出意外的话 (指硬盘没满的情况下)  
 可以收藏50万个Avatar以上  
