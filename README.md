@@ -28,18 +28,18 @@
 
 使用这个浏览器插件来填补 VRC 官网本该拥有的功能吧！
 
-此开源脚本技巧性地使用了官方的 API 来**合法地**管理您的 Avatars 并**增加到**<a href="#2">**无上限**<sup>1</sup></a>的收藏数量
+此开源脚本技巧性地使用了官方的 API 来**合法地**管理您的 Avatars 并**增加到**<a href="#vrc1">**无上限**<sup>1</sup></a>的收藏数量
 
 <!-- ~~视频教程: [📺 Youtube]()　[📺 BiliBili]()~~   -->
 
-<video src='https://github.com/nekozero/neko0-web-tools/raw/cce0fe6484c1447bdd1757f42589c1b8f6a10ec1/img/vrchat.mp4' width=180/>
+<video src='https://user-images.githubusercontent.com/3481868/235583564-ddd31658-d206-45d1-a56e-bb1ac5b5483b.mp4' width=180></video>
 
-**<span id="1">※</span>注1：不出意外的话 (指硬盘没满的情况下)  
+**<span id="vrc1">※</span>注1：不出意外的话 (指硬盘没满的情况下)  
 可以收藏50万个Avatar以上  
 但尚未能进行实际测试过  
 可能游戏中加起来也没那么多Avatar**
 
-**※注2：虽然这是用官方的API在工作  
+**<span id="vrc2">※</span>2：虽然这是用官方的API在工作  
 但个人觉得这毕竟还是有触碰到VRC+的利益  
 鉴于官方推出VRC+之前那波封MOD加EAC的操作而言     
 以后连自家的网站API都封掉的可能性也不是没有  
