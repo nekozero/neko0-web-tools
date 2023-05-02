@@ -50,7 +50,7 @@
 但尚未能进行实际测试过  
 可能游戏中加起来也没那么多Avatar**
 
-本插件只适用于有公开链接的公开模型(Public)  
+本插件只适用于有**公开链接**的**公开模型(Public)**  
 例如[👉这样的](https://vrchat.com/home/avatar/avtr_bc6c06ec-fda2-4490-8db2-946f618dba2d)  
 并无任何盗模功能
 
