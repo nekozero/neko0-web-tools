@@ -1,14 +1,18 @@
 <div align="center">
     <img src="https://github.com/nekozero/neko0-web-tools/raw/master/img/logo.png" width="400"">
     <br>
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/nekozero/neko0-web-tools?style=social">
+    <br>
     <img src="https://img.shields.io/badge/not-a%20bug-brightgreen.svg"> 
     <img src="https://img.shields.io/badge/it's-a%20feature-brightgreen.svg"> 
     <img src="https://img.shields.io/badge/%F0%9F%90%BE-Neko-ff69b4.svg">
+    <br>
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/nekozero/neko0-web-tools">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/nekozero/neko0-web-tools">
+    <img alt="GitHub" src="https://img.shields.io/github/license/nekozero/neko0-web-tools">
 </div>
 
 ----
-
-[![Star on GitHub](https://img.shields.io/github/stars/nekozero/neko0-web-tools.svg?style=social)](https://github.com/nekozero/neko0-web-tools/stargazers)
 
 **注意事项**  
 1.这是个Tampermonkey脚本项目  
