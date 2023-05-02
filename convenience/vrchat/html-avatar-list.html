@@ -4,7 +4,7 @@
 			<div class="select slot"></div>
 			<div class="btn export" @click="exportList()">{{text.export}}</div>
 			<div class="btn import" @click="importList()">{{text.import}}</div>
-			<input type="file" id="file-input" @change="fileUpload()" style="display: none;" />
+			<input type="file" id="file-input" @change="fileUpload()" style="display: none" />
 		</div>
 		<div class="right">
 			<!-- prettier-ignore -->
@@ -41,14 +41,16 @@
 				<span v-if="item.addTime" class="addTime" v-text="text.addTime+' '+formattedDate(item.addTime)"></span>
 				<!-- <span class="version">{{text.version}} {{item.version}}</span> -->
 			</div>
-			<a class="body" :href="'/home/avatar/'+item.id" target="_blank">
+			<div class="body">
 				<div class="authorName">
-					<span class="label">{{text.authorName}}</span> <span class="value">{{item.authorName}}</span>
+					<span class="label">{{text.authorName}}</span>
+					<a class="value" :href="'/home/user/'+item.authorId" target="_blank">{{item.authorName}}</a>
 				</div>
 				<div class="description">
-					<span class="label">{{text.description}}</span> <span class="value">{{item.description}}</span>
+					<span class="label">{{text.description}}</span>
+					<a class="value" :href="'/home/avatar/'+item.id" target="_blank">{{item.description}}</a>
 				</div>
-			</a>
+			</div>
 			<div class="platform">
 				<div class="pc" v-if="hasWindows(item)">PC</div>
 				<div class="quest" v-if="hasAndroid(item)">Quest</div>

@@ -28,33 +28,38 @@
 
 使用这个浏览器插件来填补 VRC 官网本该拥有的功能吧！
 
-此开源脚本技巧性地使用了官方的 API 来**合法地**管理您的 Avatars 并**增加到**<a href="#vrc1">**无上限**<sup>1</sup></a>的收藏数量
+此开源脚本技巧性地使用了官方的 API 来<a href="#vrc1">**合法地**<sup>1</sup></a>管理您的 Avatars 并**增加到**<a href="#vrc2">**无上限**<sup>2</sup></a>的收藏数量
 
 <!-- ~~视频教程: [📺 Youtube]()　[📺 BiliBili]()~~   -->
 
 <video src='https://user-images.githubusercontent.com/3481868/235583564-ddd31658-d206-45d1-a56e-bb1ac5b5483b.mp4' width='100%'></video>
 
-**<span id="vrc1">※</span>注1：不出意外的话 (指硬盘没满的情况下)  
-可以收藏50万个Avatar以上  
-但尚未能进行实际测试过  
-可能游戏中加起来也没那么多Avatar**
+追加Avatar被封禁检测: 原版收藏夹里Avatar被封后就无法进行任何操作了，甚至无法联系作者，这里会留下收藏时Avatar的信息，并且可以通过作者的url去联系作者获取新的公开模型(如果有的话？) be like:
 
-**<span id="vrc2">※</span>2：虽然这是用官方的API在工作  
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrc-broke-demo.png)
+
+**<span id="vrc1">※</span>注1：虽然这是用官方的API在工作  
 但个人觉得这毕竟还是有触碰到VRC+的利益  
 鉴于官方推出VRC+之前那波封MOD加EAC的操作而言     
 以后连自家的网站API都封掉的可能性也不是没有  
 所以还是建议把有世界获取渠道的Avatar在`"来源世界"`中填入world_id当一份保险**
 
+**<span id="vrc2">※</span>注2：不出意外的话 (指硬盘没满的情况下)  
+可以收藏50万个Avatar以上  
+但尚未能进行实际测试过  
+可能游戏中加起来也没那么多Avatar**
+
 本插件只适用于有公开链接的公开模型(Public)  
-例如[这样的](https://vrchat.com/home/avatar/avtr_bc6c06ec-fda2-4490-8db2-946f618dba2d)  
+例如[👉这样的](https://vrchat.com/home/avatar/avtr_bc6c06ec-fda2-4490-8db2-946f618dba2d)  
 并无任何盗模功能
 
-> 计划更新：  
-> 1.增加更多不同的排序方式  
-> 2.添加可供自定义填写的“注释”“来源世界”   
-> 3.添加标签系统，用于筛选分类模型  
-> 4.追加新的更密集的宫格排列样式，与竖向传统详情列表的排列样式  
-> 5.在Avatar列表单个的方框上添加一键复制URL的按钮（方便分享给好友）
+#### 计划更新：  
+- [ ] 增加更多不同的排序方式  
+- [ ] 添加可供自定义填写的“注释”“来源世界”   
+- [ ] 添加标签系统，用于筛选分类模型  
+- [ ] 追加新的更密集的宫格排列样式，与竖向传统详情列表的排列样式  
+- [ ] 在Avatar列表单个的方框上添加一键复制URL的按钮（方便分享给好友）
+- [x] 检测Avatar失效功能 [2023-05-02]
 
 👉 [» Join TG Discussion](https://t.me/+FANQrUGRV7A0YmM9) ✨
 
