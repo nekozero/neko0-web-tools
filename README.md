@@ -18,7 +18,8 @@
 
 ---
 
-🎮 VRChat 无限 Avatar 收藏夹 | [安装](https://greasyfork.org/zh-CN/scripts/461702)
+🎮 VRChat 无限 Avatar 收藏夹 | [安装](https://greasyfork.org/zh-CN/scripts/461702)  
+`不止300个！将收藏夹扩展到无限！`
 <details>
 <summary>介绍</summary>
 
