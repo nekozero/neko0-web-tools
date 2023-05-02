@@ -19,12 +19,15 @@
 
 /* alertify修正 */
 .alertify-notifier {
+	text-align: center;
+	.ajs-message {
+		width: 300px;
+	}
 	/* 居中 */
 	&.ajs-center .ajs-message {
 		-webkit-transform: translateX(-50%);
 		transform: translateX(-50%);
 	}
-
 	/* 颜色 */
 	.ajs-message.ajs-warning {
 		background: rgba(255, 163, 77, 0.95);
