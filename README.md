@@ -32,7 +32,7 @@
 
 <!-- ~~视频教程: [📺 Youtube]()　[📺 BiliBili]()~~   -->
 
-<video src='https://user-images.githubusercontent.com/3481868/235583564-ddd31658-d206-45d1-a56e-bb1ac5b5483b.mp4' width=180></video>
+<video src='https://user-images.githubusercontent.com/3481868/235583564-ddd31658-d206-45d1-a56e-bb1ac5b5483b.mp4' width='100%'></video>
 
 **<span id="vrc1">※</span>注1：不出意外的话 (指硬盘没满的情况下)  
 可以收藏50万个Avatar以上  
