@@ -27,6 +27,12 @@
 <details>
 <summary>介绍</summary>
 
+###
+[![github](https://shields.io/badge/open-source-24292f?logo=github&style=flat)](https://github.com/nekozero/neko0-web-tools/)
+[![telegram](https://shields.io/badge/chat-support-informational?logo=telegram&style=flat)](https://t.me/vrc_limitless)
+[![twitter](https://shields.io/badge/profile-photos-ff69b4?logo=twitter&style=flat)](https://twitter.com/jojuniori/media)
+[![qq](https://shields.io/badge/qq-group-ffffff?logo=tencentqq&style=flat)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=13j9jOL8twIZH3-R356UIa2xZwsW8gYG&authKey=o62UFhFWmDPOSN3ghW8xnDzu4TrBQCBk02rKFO2ndJFZHtrB8coYD25y9vNNMBKy&noverify=0&group_code=137750622)
+
 官方免费的 **50** 个栏位不够用怎么办？
 
 充了 **VRC+** 有 **300** 个栏位后还是不够用怎么办？
@@ -68,7 +74,7 @@
 
 👉 [» Join TG Discussion](https://t.me/+FANQrUGRV7A0YmM9) ✨
 
-[![follow on twitter](https://img.shields.io/twitter/follow/jojuniori?label=Follow&style=social)](https://twitter.com/jojuniori)  [![Star on GitHub](https://img.shields.io/github/stars/nekozero/neko0-web-tools.svg?style=social)](https://github.com/nekozero/neko0-web-tools/stargazers)  
+[![follow on twitter](https://img.shields.io/twitter/follow/jojuniori?label=Follow&style=social)](https://twitter.com/jojuniori/media)  [![Star on GitHub](https://img.shields.io/github/stars/nekozero/neko0-web-tools.svg?style=social)](https://github.com/nekozero/neko0-web-tools/stargazers)  
 
 </details>
 
@@ -80,7 +86,13 @@
 
 <summary>介绍</summary>
 
-###  
+###
+[![github](https://shields.io/badge/open-source-24292f?logo=github&style=flat)](https://github.com/nekozero/neko0-web-tools/)
+[![telegram](https://shields.io/badge/chat-support-informational?logo=telegram&style=flat)](https://t.me/+URovzRdPTyHlWtQd)
+[![twitter](https://shields.io/badge/profile-photos-ff69b4?logo=twitter&style=flat)](https://twitter.com/jojuniori/media)
+[![wechat](https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7-%E9%9B%AA%E4%B9%8B%E6%A2%A6%E6%8A%80%E6%9C%AF%E9%A9%BF%E7%AB%99-brightgreen.svg)](http://weixin.qq.com/r/cy5CWvvE5Kabrb8593th)
+
+
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
 
 已更新写入评语时按全角句号(中文句号)分割已存储的评语并进行随机排序的功能选项  
@@ -144,7 +156,11 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 <summary>介绍</summary>
 
-###  
+###
+[![github](https://shields.io/badge/open-source-24292f?logo=github&style=flat)](https://github.com/nekozero/neko0-web-tools/)
+[![telegram](https://shields.io/badge/chat-support-informational?logo=telegram&style=flat)](https://t.me/+URovzRdPTyHlWtQd)
+[![twitter](https://shields.io/badge/profile-photos-ff69b4?logo=twitter&style=flat)](https://twitter.com/jojuniori/media)
+
 对于我这种天天点外卖的每次都要一个个去点星简直太麻烦了  
 自动化是好文明，懒是第一生产力
 
@@ -167,6 +183,10 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 <summary>介绍</summary>
 
 ###  
+[![github](https://shields.io/badge/open-source-24292f?logo=github&style=flat)](https://github.com/nekozero/neko0-web-tools/)
+[![telegram](https://shields.io/badge/chat-support-informational?logo=telegram&style=flat)](https://t.me/+URovzRdPTyHlWtQd)
+[![twitter](https://shields.io/badge/profile-photos-ff69b4?logo=twitter&style=flat)](https://twitter.com/jojuniori/media)
+
 目前提供了以下功能
 1. 复制名字：复制出 “作者 - 作品名” 格式的名字
 2. 一键复制名字 并 喜欢+关注+下载：按下即可复制名字，Like，Follow，并Download Source画质 的文件
@@ -199,6 +219,10 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 <summary>介绍</summary>
 
 ###  
+[![github](https://shields.io/badge/open-source-24292f?logo=github&style=flat)](https://github.com/nekozero/neko0-web-tools/)
+[![telegram](https://shields.io/badge/chat-support-informational?logo=telegram&style=flat)](https://t.me/+URovzRdPTyHlWtQd)
+[![twitter](https://shields.io/badge/profile-photos-ff69b4?logo=twitter&style=flat)](https://twitter.com/jojuniori/media)
+
 收藏视频弹窗优化
 
 使用前：
@@ -217,6 +241,10 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 <summary>介绍</summary>
 
 ###  
+[![github](https://shields.io/badge/open-source-24292f?logo=github&style=flat)](https://github.com/nekozero/neko0-web-tools/)
+[![telegram](https://shields.io/badge/chat-support-informational?logo=telegram&style=flat)](https://t.me/+URovzRdPTyHlWtQd)
+[![twitter](https://shields.io/badge/profile-photos-ff69b4?logo=twitter&style=flat)](https://twitter.com/jojuniori/media)
+
 加入了快捷键操作
 
 * 按下 `←` 或 `A` 上一页
