@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] Iwara增强
 // @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能, 便捷地收藏自己喜欢的视频到本地, 以免作者销号后就看不到了
-// @version      1.2.7
+// @version      1.2.8
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.iwara.tv/logo.png
@@ -163,10 +163,14 @@ async function videoPage() {
 		let type_name = username + ' - ' + title
 		let type_date1 = null
 		let type_date2 = null
+		let type_date3 = null
+		let type_date4 = null
 		await getCreateDate(function (formattedDate) {
 			console.log(formattedDate)
 			type_date1 = formattedDate[0] + ' - ' + title
 			type_date2 = formattedDate[1] + ' - ' + title
+			type_date3 = formattedDate[0] + ' - ' + username + ' - ' + title
+			type_date4 = formattedDate[1] + ' - ' + username + ' - ' + title
 		})
 
 		// 置入DOM
@@ -179,6 +183,8 @@ async function videoPage() {
         <li class="${getSet().type == 'name' ? 's' : ''} type_name">${type_name}</li>
         <li class="${getSet().type == 'date1' ? 's' : ''} type_date1">${type_date1}</li>
         <li class="${getSet().type == 'date2' ? 's' : ''} type_date2">${type_date2}</li>
+        <li class="${getSet().type == 'date3' ? 's' : ''} type_date3">${type_date3}</li>
+        <li class="${getSet().type == 'date4' ? 's' : ''} type_date4">${type_date4}</li>
     </ul>
 </button>
 <button class="button one-tap button--primary button--solid" type="button"><div class="text text--small"><div class="icon mr-1">
@@ -207,11 +213,25 @@ async function videoPage() {
 			setSet('type', 'date2')
 			$(this).addClass('s').siblings().removeClass('s')
 		})
+		$('li.type_date3').click(function () {
+			console.log('type', 'date3')
+			setSet('type', 'date3')
+			$(this).addClass('s').siblings().removeClass('s')
+		})
+		$('li.type_date4').click(function () {
+			console.log('type', 'date4')
+			setSet('type', 'date4')
+			$(this).addClass('s').siblings().removeClass('s')
+		})
 		$('.copy-name').click(() => {
 			if (getSet().type == 'date1') {
 				filename = type_date1
 			} else if (getSet().type == 'date2') {
 				filename = type_date2
+			} else if (getSet().type == 'date3') {
+				filename = type_date3
+			} else if (getSet().type == 'date4') {
+				filename = type_date4
 			} else {
 				filename = type_name
 			}
