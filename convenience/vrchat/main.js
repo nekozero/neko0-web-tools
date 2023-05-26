@@ -1,41 +1,42 @@
 // ==UserScript==
-// @name            [Neko0] VRChat Avatar 无限收藏夹
-// @name:zh         [Neko0] VRChat 无限虚拟形象收藏夹
-// @name:en         [Neko0] VRChat Limitless Favorite Avatar
-// @description     无限收藏虚拟形象 Limitless Favorite Avatar
-// @description:zh  无限收藏虚拟形象
-// @description:en  Limitless Favorite Avatar
-// @version         1.0.8
-// @author          Mitsuki Joe
-// @namespace       neko0-web-tools
-// @icon            https://assets.vrchat.com/www/favicons/favicon.ico
-// @homepageURL     https://github.com/nekozero/neko0-web-tools
-// @supportURL      https://t.me/+FANQrUGRV7A0YmM9
-// @updateURL       https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
-// @downloadURL     https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
-// @grant           GM_addStyle
-// @grant           GM_setValue
-// @grant           GM_getValue
-// @grant           GM_getResourceText
-// @run-at          document-idle
-// @license         AGPL-3.0-or-later
-// @require         https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
-// @require         https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
-// @require         https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
-// @require         https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
-// @require         https://cdn.jsdelivr.net/npm/axios@1.1.3/dist/axios.min.js
-// @require         https://cdn.jsdelivr.net/npm/vue@2.7.14
-// @require         https://unpkg.com/@popperjs/core@2
-// @require         https://unpkg.com/tippy.js@6
-// @require         https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
-// @resource        IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
-// @match           *://vrchat.com/*
-// @resource        IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/style.css
-// @resource        html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-avatar-btn.html
-// @resource        html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-avatar-list.html
-// @resource        html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-btn-group.html
-// @resource        language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/language.json
+// @name               [Neko0] VRChat Limitless Favorite Avatar
+// @name:zh            [Neko0] VRChat 无限虚拟形象收藏夹
+// @name:ja            [Neko0] VRChat 無制限の「Avatar」ブックマークフォルダ
+// @description        More than 300! Expand your VRChat avatar collection to infinity!
+// @description:zh     不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
+// @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
+// @version            1.0.9
+// @author             Mitsuki Joe
+// @namespace          neko0-web-tools
+// @icon               https://assets.vrchat.com/www/favicons/favicon.ico
+// @homepageURL        https://github.com/nekozero/neko0-web-tools
+// @supportURL         https://t.me/+FANQrUGRV7A0YmM9
+// @updateURL          https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
+// @downloadURL        https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
+// @grant              GM_addStyle
+// @grant              GM_setValue
+// @grant              GM_getValue
+// @grant              GM_getResourceText
+// @run-at             document-idle
+// @license            AGPL-3.0-or-later
+// @require            https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/solid.min.js
+// @require            https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/js/fontawesome.min.js
+// @require            https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
+// @require            https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
+// @require            https://cdn.jsdelivr.net/npm/axios@1.1.3/dist/axios.min.js
+// @require            https://cdn.jsdelivr.net/npm/vue@2.7.14
+// @require            https://unpkg.com/@popperjs/core@2
+// @require            https://unpkg.com/tippy.js@6
+// @require            https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
+// @resource           IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
+// @match              *://vrchat.com/*
+// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/style.css
+// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-avatar-btn.html
+// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-avatar-list.html
+// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-btn-group.html
+// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/language.json
 // ==/UserScript==
+/* jshint expr: true */
 console.log('VLAF Start')
 /** 初始化设定 开始 */
 // 设置项默认值
@@ -112,14 +113,14 @@ if (!String.prototype.format) {
 		$('.leftbar .btn-group-vertical').prepend(output)
 	}
 	// 检测页面内容置入插件DOM
-	var timer = setInterval(detection, 300)
+	let timer_left = setInterval(detection, 300)
 	detection()
 	function detection() {
 		var neko0 = document.querySelector('.limitless')
 		if (!neko0) {
 			domBtnGroup()
 		} else {
-			clearInterval(timer)
+			clearInterval(timer_left)
 			alertify.success(text.mounted)
 		}
 	}
@@ -297,7 +298,7 @@ let pluginInject = () => {
 		console.log('page_is_avtr_details', isInVLAF(current_avtr_id), getAvtrs())
 
 		// 置入DOM
-		function domAvatar() {
+		let domAvatar = function () {
 			let html = GM_getResourceText('html-avatar-btn')
 			let output = html.format(text)
 			$('.col-xs-12.content-scroll  .home-content .row:nth-child(2) .col-4 .btn-group-vertical')
@@ -329,9 +330,7 @@ let pluginInject = () => {
 		}
 
 		// 检测页面内容置入插件DOM
-		var timer = setInterval(detection, 300)
-		detection()
-		function detection() {
+		let detection = function () {
 			var neko0 = document.querySelector('.neko0')
 			if (!neko0) {
 				domAvatar()
@@ -339,11 +338,13 @@ let pluginInject = () => {
 				clearInterval(timer)
 			}
 		}
+		let timer = setInterval(detection, 300)
+		detection()
 		console.log(text.mounted)
 	} else if (page_is_limitless()) {
 		console.log('page_is_limitless', getAvtrs())
 		// 置入DOM
-		function domLimitless() {
+		let domLimitless = function () {
 			let html = GM_getResourceText('html-avatar-list')
 			let output = html
 			$('.home-content').append(output)
@@ -512,9 +513,7 @@ let pluginInject = () => {
 		}
 
 		// 检测页面内容置入插件DOM
-		var timer = setInterval(detection, 300)
-		detection()
-		function detection() {
+		let detection = function () {
 			var neko0 = document.querySelector('.neko0')
 			if (!neko0) {
 				domLimitless()
@@ -522,6 +521,8 @@ let pluginInject = () => {
 				clearInterval(timer)
 			}
 		}
+		let timer = setInterval(detection, 300)
+		detection()
 		console.log(text.mounted)
 	}
 }

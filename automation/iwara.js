@@ -1,24 +1,29 @@
 // ==UserScript==
-// @name         [Neko0] Iwara增强
-// @description  提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能, 便捷地收藏自己喜欢的视频到本地, 以免作者销号后就看不到了
-// @version      1.2.8
-// @author       JoJunIori
-// @namespace    neko0-web-tools
-// @icon         https://www.iwara.tv/logo.png
-// @homepageURL  https://github.com/nekozero/neko0-web-tools
-// @supportURL   https://t.me/+URovzRdPTyHlWtQd
-// @updateURL    https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/iwara.js
-// @downloadURL  https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/iwara.js
-// @grant        GM_setValue
-// @grant        GM_getValue
-// @grant        GM_setClipboard
-// @grant        window.onurlchange
-// @run-at       document-idle
-// @license      AGPL-3.0-or-later
-// @require      https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
-// @match        *://*.iwara.tv/*
+// @name               [Neko0] Iwara functional enhancements
+// @name:zh            [Neko0] Iwara 增强
+// @name:ja            [Neko0] Iwara 機能強化
+// @description        Provide  the function of "one-click copy name and like+follow+download" and the function of "copy name only" separately, which makes it convenient to save your favorite videos to your local device, so that you can still access them even if the author deletes their account. Automatically load the highest resolution video source. Detect resolution and frame rate, and low-quality videos will be marked with a red warning. Automatically click the "R18 warning button", eliminating the need to manually close the prompt every time.
+// @description:zh     提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能, 便捷地收藏自己喜欢的视频到本地, 以免作者销号后就看不到作品了。自动加载最高分辨率视频源。侦测分辨率和帧率，过低的质量会以红色警示。自动点击“R18警告按钮”，不再需要每次手动关闭提示。
+// @description:ja     「名前を一括コピーして、いいね＋フォロー＋ダウンロード」および「名前のみコピー」の機能を提供し、自分の好きな動画を手軽にローカルに保存できるようにしました。作者がアカウントを削除しても作品を見ることができます。最高解像度の動画ソースを自動的に読み込みます。解像度とフレームレートを検出し、低品質の動画は赤い警告で表示されます。自動的に「R18警告ボタン」をクリックし、毎回手動でプロンプトを閉じる必要がなくなります。
+// @version            1.2.9
+// @author             JoJunIori
+// @namespace          neko0-web-tools
+// @icon               https://www.iwara.tv/logo.png
+// @homepageURL        https://github.com/nekozero/neko0-web-tools
+// @supportURL         https://t.me/+URovzRdPTyHlWtQd
+// @updateURL          https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/iwara.js
+// @downloadURL        https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/automation/iwara.js
+// @grant              GM_setValue
+// @grant              GM_getValue
+// @grant              GM_setClipboard
+// @grant              window.onurlchange
+// @run-at             document-idle
+// @license            AGPL-3.0-or-later
+// @require            https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
+// @match              *://*.iwara.tv/*
 // ==/UserScript==
 /* global $ ClipboardJS */
+/* jshint esversion: 9 */
 
 /** 初始化设定 开始 */
 // 设置项默认值
@@ -252,7 +257,7 @@ async function videoPage() {
 		})
 
 		// 解决新版默认不以Source分辨率播放并无法记忆用户设置的问题
-		function checkSource() {
+		const checkSource = function () {
 			return new Promise((resolve, reject) => {
 				console.log('ƒ checkSource')
 				if (!video.src.match('_Source.mp4')) {
@@ -262,7 +267,7 @@ async function videoPage() {
 			})
 		}
 
-		function checkResolution() {
+		const checkResolution = function () {
 			console.log('ƒ checkResolution start')
 
 			// video可播放后将分辨率标注出来
