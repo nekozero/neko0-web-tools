@@ -1,7 +1,29 @@
 .btn-s {
-	background: rgb(7, 36, 43);
-	border: 2px solid rgb(5, 60, 72);
+	cursor: pointer;
+	border: 2px solid rgb(6, 75, 92);
+	border-radius: 4px;
+	background: rgb(6, 75, 92);
 	color: rgb(106, 227, 249);
+	padding: 5px;
+	box-sizing: border-box;
+	flex: 1 1 0%;
+	outline: none !important;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	&:hover {
+		border-color: rgb(8, 108, 132);
+	}
+	// &:nth-child(2) {
+	// 	margin-top: -0.5rem !important;
+	// }
+}
+.text-danger svg{
+	fill: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
 }
 
 .tippy-content {
@@ -293,6 +315,7 @@
 			z-index: 1001;
 			padding: 20px;
 			display: block;
+			width: 100%;
 			height: 100%;
 			background: rgb(0 0 0 / 75%);
 			opacity: 0;
@@ -303,4 +326,9 @@
 			opacity: 1;
 		}
 	}
+}
+
+// 模型详情页
+.col-xs-12.content-scroll .home-content .container .flex-wrap .m-2:nth-child(1) > div:nth-child(2) {
+	flex-direction: column;
 }

@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh     不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.0.9
+// @version            1.1.0
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -228,7 +228,7 @@ let limitless = avtr_id => {
 		store = store.filter(function (obj) {
 			return obj.id !== avtr_id
 		})
-		$('#collect').text(text.btn_collect).removeClass('text-danger border-danger')
+        $('#collect').removeClass('text-danger border-danger').children('span').text(text.btn_collect)
 		GM_setValue('VLAF_avatars', store)
 	} else {
 		console.log('不存在')
@@ -241,7 +241,7 @@ let limitless = avtr_id => {
 				data = response.data
 				data.addTime = getNowDate()
 				store.push(data)
-				$('#collect').text(text.btn_collect_r).addClass('text-danger border-danger')
+                $('#collect').addClass('text-danger border-danger').children('span').text(text.btn_collect_r)
 				GM_setValue('VLAF_avatars', store)
 			})
 			.catch(function (error) {
@@ -301,11 +301,13 @@ let pluginInject = () => {
 		let domAvatar = function () {
 			let html = GM_getResourceText('html-avatar-btn')
 			let output = html.format(text)
-			$('.col-xs-12.content-scroll  .home-content .row:nth-child(2) .col-4 .btn-group-vertical')
+
+			$('.col-xs-12.content-scroll  .home-content .container .flex-wrap .m-2:nth-child(1) >div:nth-child(2)')
 				.attr('id', 'neko0')
-				.append(output)
+				.append(output).children('div:nth-child(1)').remove()
+
 			if (isInVLAF(current_avtr_id)) {
-				$('#collect').text(text.btn_collect_r).addClass('text-danger border-danger')
+				$('#collect').addClass('text-danger border-danger').children('span').text(text.btn_collect_r)
 			}
 
 			tippy('#transmit', {

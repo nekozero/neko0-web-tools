@@ -20,21 +20,23 @@
 					<div class="img" :style="'background-image:url('+item.thumbnailImageUrl+')'"></div>
 					<span class="name">{{item.name}}</span>
 					<div class="btn_list flex-column btn-group-vertical">
-						<div
-							class="neko0 btn btn-s text-center transmit mb-2"
-							:dat-a="item.id"
-							@click="favorites(item.id)"
-						>
-							{{text.btn_transmit}}
+						<div class="neko0 btn-s text-center transmit mb-2" :dat-a="item.id" @click="favorites(item.id)">
+							<!-- prettier-ignore -->
+							<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="star" class="svg-inline--fa fa-star me-1 css-1efeorg e9fqopp0" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.6 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"></path></svg>
+							<span>{{text.btn_transmit}}</span>
 						</div>
-						<div class="neko0 btn btn-s text-center use mb-2" @click="select(item.id)">
-							{{text.btn_use}}
+						<div class="neko0 btn-s text-center use mb-2" @click="select(item.id)">
+							<!-- prettier-ignore -->
+							<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="child" class="svg-inline--fa fa-child me-1 css-1efeorg e9fqopp0" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M96 64a64 64 0 1 1 128 0A64 64 0 1 1 96 64zm48 320v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V287.8L59.1 321c-9.4 15-29.2 19.4-44.1 10S-4.5 301.9 4.9 287l39.9-63.3C69.7 184 113.2 160 160 160s90.3 24 115.2 63.6L315.1 287c9.4 15 4.9 34.7-10 44.1s-34.7 4.9-44.1-10L240 287.8V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V384H144z"></path></svg>
+							<span>{{text.btn_use}}</span>
 						</div>
 						<div
-							class="neko0 btn btn-s text-center collect text-danger border-danger"
+							class="neko0 btn-s text-center collect text-danger border-danger"
 							@click="limitless(item.id)"
 						>
-							{{text.btn_collect_r}}
+							<!-- prettier-ignore -->
+							<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" class="me-1" style="fill: #6ae3f9;"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 241.1C0 161 65 96 145.1 96c38.5 0 75.4 15.3 102.6 42.5L320 210.7l72.2-72.2C419.5 111.3 456.4 96 494.9 96C575 96 640 161 640 241.1v29.7C640 351 575 416 494.9 416c-38.5 0-75.4-15.3-102.6-42.5L320 301.3l-72.2 72.2C220.5 400.7 183.6 416 145.1 416C65 416 0 351 0 270.9V241.1zM274.7 256l-72.2-72.2c-15.2-15.2-35.9-23.8-57.4-23.8C100.3 160 64 196.3 64 241.1v29.7c0 44.8 36.3 81.1 81.1 81.1c21.5 0 42.2-8.5 57.4-23.8L274.7 256zm90.5 0l72.2 72.2c15.2 15.2 35.9 23.8 57.4 23.8c44.8 0 81.1-36.3 81.1-81.1V241.1c0-44.8-36.3-81.1-81.1-81.1c-21.5 0-42.2 8.5-57.4 23.8L365.3 256z"/></svg>
+							<span>{{text.btn_collect_r}}</span>
 						</div>
 					</div>
 				</div>

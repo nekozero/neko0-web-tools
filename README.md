@@ -45,6 +45,8 @@
 
 <video src='https://user-images.githubusercontent.com/3481868/235583564-ddd31658-d206-45d1-a56e-bb1ac5b5483b.mp4' width='100%'></video>
 
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat.png)
+
 追加Avatar被封禁检测: 原版收藏夹里Avatar被封后就无法进行任何操作了，甚至无法联系作者，这里会留下收藏时Avatar的信息，并且可以通过作者的url去联系作者获取新的公开模型(如果有的话？) be like:
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrc-broke-demo.png)
