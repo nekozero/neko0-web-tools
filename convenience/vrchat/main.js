@@ -112,6 +112,7 @@ if (!String.prototype.format) {
 		let output = html.format(text)
 		$('.leftbar .btn-group-vertical').prepend(output)
 	}
+
 	// 检测页面内容置入插件DOM
 	let timer_left = setInterval(detection, 300)
 	detection()
@@ -122,6 +123,32 @@ if (!String.prototype.format) {
 		} else {
 			clearInterval(timer_left)
 			alertify.success(text.mounted)
+		}
+	}
+
+	// 检测页面内容置入插件DOM
+	let timer_class = setInterval(detection_class, 100)
+	detection_class()
+	function detection_class() {
+		// 获取具有 title="locations" 属性的元素
+		var $locationsElement = $('[title="locations"]')
+		if ($locationsElement.length > 0) {
+			// 检查是否找到了匹配的元素
+			if ($locationsElement.length > 0) {
+				// 获取第三个到最后一个类名
+				var classNamesArray = $locationsElement.attr('class').split(' ')
+				var startIndex = 2 // 第三个类名的索引
+				var endIndex = classNamesArray.length // 最后一个类名的索引
+
+				// 提取第三个到最后一个类名并拼接成字符串
+				var extractedClassNames = classNamesArray.slice(startIndex, endIndex).join(' ')
+
+				// 将提取的类名添加到 .limitless 元素上
+				$('.limitless').addClass(extractedClassNames)
+				$('.limitless').css('display', 'flex')
+			}
+
+			clearInterval(timer_class)
 		}
 	}
 
@@ -176,7 +203,7 @@ let detectError = msg => {
 	if (msg == 'You already have that avatar favorited') return alertify.error(text.avatars_added)
 	if (msg == 'This avatar is unavailableǃ') return alertify.error(text.error_unavailable)
 	if (msg == "avatar isn't public and avatar is also not owned by you") return alertify.error(text.error_private)
-	if (msg == "Can't find avatarǃ") return alertify.error(text.error_deleted)
+	if (msg == "Can't find avatarǃ" || msg == 'Avatar Not Found') return alertify.error(text.error_deleted)
 	return alertify.error(text.operation_failed)
 }
 
@@ -228,7 +255,7 @@ let limitless = avtr_id => {
 		store = store.filter(function (obj) {
 			return obj.id !== avtr_id
 		})
-        $('#collect').removeClass('text-danger border-danger').children('span').text(text.btn_collect)
+		$('#collect').removeClass('text-danger border-danger').children('span').text(text.btn_collect)
 		GM_setValue('VLAF_avatars', store)
 	} else {
 		console.log('不存在')
@@ -241,7 +268,7 @@ let limitless = avtr_id => {
 				data = response.data
 				data.addTime = getNowDate()
 				store.push(data)
-                $('#collect').addClass('text-danger border-danger').children('span').text(text.btn_collect_r)
+				$('#collect').addClass('text-danger border-danger').children('span').text(text.btn_collect_r)
 				GM_setValue('VLAF_avatars', store)
 			})
 			.catch(function (error) {
@@ -304,7 +331,9 @@ let pluginInject = () => {
 
 			$('.col-xs-12.content-scroll  .home-content .container .flex-wrap .m-2:nth-child(1) >div:nth-child(2)')
 				.attr('id', 'neko0')
-				.append(output).children('div:nth-child(1)').remove()
+				.append(output)
+				.children('div:nth-child(1)')
+				.remove()
 
 			if (isInVLAF(current_avtr_id)) {
 				$('#collect').addClass('text-danger border-danger').children('span').text(text.btn_collect_r)
