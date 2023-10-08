@@ -37,7 +37,7 @@
 // @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/language.json
 // ==/UserScript==
 /* jshint expr: true */
-console.log('VLAF Start')
+
 /** 初始化设定 开始 */
 // 设置项默认值
 let setting = {
@@ -63,8 +63,68 @@ let avatars = [{"id":"avtr_bc6c06ec-fda2-4490-8db2-946f618dba2d","name":"贴贴�
 if (GM_getValue('VLAF_avatars') === undefined) {
 	GM_setValue('VLAF_avatars', avatars)
 }
-
 /** 初始化设定 结束 */
+
+// 打印相关
+window.log = function (...args) {
+	// if (ENV.PRODUCTION) {
+	// 	return false
+	// }
+	// 设定样式
+	let style = 'color:#fff;border-radius:4px;padding:2px 4px;'
+	const colors = {
+		log: '#39485c',
+		warn: '#face51',
+		error: '#ea3324',
+		success: '#64b587',
+	}
+	const log_functions = {
+		log: console.log,
+		warn: console.warn,
+		error: console.error,
+		success: console.info,
+	}
+	// 设定打印内容
+	if (args.length > 1 && args[0] in colors) {
+		style += 'background:' + colors[args[0]] + ';'
+		if (
+			window.clientType === 'wechat' ||
+			window.clientType === 'miniprogram' ||
+			window.clientType === 'uapp' ||
+			Window.clientType === 'screen'
+		) {
+			let log_function = args[0] in log_functions ? log_functions[args[0]] : log_functions['log']
+			log_function('[' + args[1] + ']', ...args.slice(2))
+		} else {
+			console.log('%c' + args[1], style, ...args.slice(2))
+		}
+	} else {
+		console.log(...args)
+	}
+}
+window.logRes = function (response) {
+	// if (ENV.PRODUCTION) {
+	// 	return false
+	// }
+	console.log('============')
+	console.log('请求URL: ' + response.request.responseURL)
+	console.log('返回Data: ')
+	console.log(response.data)
+	console.log('============')
+}
+window.logError = function (error, alert) {
+	// if (ENV.PRODUCTION) {
+	// 	return false
+	// }
+	console.log('============')
+	console.log('请求数据: ')
+	console.log(error.request)
+	console.log('返回Error: ')
+	console.log(error)
+	console.log('返回Data: ')
+	console.log(error.response)
+	console.log('============')
+}
 
 // 提示框位置
 alertify.set('notifier', 'position', 'top-center')
@@ -83,12 +143,12 @@ let setSet = (key, value) => {
 let getAvtrs = () => {
 	return GM_getValue('VLAF_avatars')
 }
+log('success', '模型列表', JSON.stringify(getAvtrs()))
 
 // 文本内容多语言替换
 let text = JSON.parse(GM_getResourceText('language'))[getSet().lang]
-console.log('getSet()', getSet())
-console.log('lang', getSet().lang)
-console.log('text', text)
+log('success', '当前设定', JSON.stringify(getSet()))
+log('success', '语言文本', JSON.stringify(text))
 
 // 置入Style
 GM_addStyle(GM_getResourceText('IMPORTED_CSS_1'))
@@ -161,7 +221,6 @@ if (!String.prototype.format) {
 	// setTimeout(() => {
 	// alertify.success("You've clicked OK")
 	// window.alertify = alertify
-	// console.log('alertify')
 	// }, 1000)
 })()
 
@@ -198,7 +257,7 @@ let getNowDate = () => {
 
 // Detect error types
 let detectError = msg => {
-	console.log('detectError', msg)
+	log('error', 'ERROR', msg)
 	if (msg == "You already have 50 favorite avatars in group 'avatars1'") return alertify.error(text.avatars_full)
 	if (msg == 'You already have that avatar favorited') return alertify.error(text.avatars_added)
 	if (msg == 'This avatar is unavailableǃ') return alertify.error(text.error_unavailable)
@@ -213,11 +272,11 @@ let select = avtr_id => {
 	axios
 		.put(url)
 		.then(function (response) {
-			console.log(response)
+			log('success', 'ƒ Select', response)
 			alertify.success(text.operation_succeeded)
 		})
 		.catch(function (error) {
-			console.log(error)
+			log('error', 'ƒ Select', error)
 			detectError(error.response.data.error.message)
 		})
 		.finally(function () {})
@@ -233,37 +292,37 @@ let favorites = avtr_id => {
 	axios
 		.post(url, val)
 		.then(function (response) {
-			console.log(response)
+			log('success', 'ƒ Favorites', response)
 			alertify.success(text.operation_succeeded)
 		})
 		.catch(function (error) {
-			console.log(error)
+			log('error', 'ƒ Favorites', error)
 			detectError(error.response.data.error.message)
 		})
 		.finally(function () {})
 }
 // 收藏到无限收藏夹
 let limitless = avtr_id => {
-	console.log('ƒ limitless')
+	log('log', 'ƒ Limitless', 'START')
 	url = window.location.origin + '/api/1/avatars/' + avtr_id
 
 	let store = getAvtrs()
 	const result = isInVLAF(avtr_id)
 
 	if (result) {
-		console.log('存在')
+		log('log', 'ƒ Limitless', 'Avatar 已存在')
 		store = store.filter(function (obj) {
 			return obj.id !== avtr_id
 		})
 		$('#collect').removeClass('text-danger border-danger').children('span').text(text.btn_collect)
 		GM_setValue('VLAF_avatars', store)
 	} else {
-		console.log('不存在')
+		log('log', 'ƒ Limitless', 'Avatar 不存在')
 		let data = null
 		axios
 			.get(url)
 			.then(function (response) {
-				console.log('limitless', response)
+				log('success', 'ƒ Limitless', response)
 				alertify.success(text.operation_succeeded)
 				data = response.data
 				data.addTime = getNowDate()
@@ -272,7 +331,7 @@ let limitless = avtr_id => {
 				GM_setValue('VLAF_avatars', store)
 			})
 			.catch(function (error) {
-				console.log(error)
+				log('error', 'ƒ Limitless', error)
 			})
 			.finally(function () {})
 	}
@@ -294,7 +353,7 @@ let pluginInject = () => {
 		$('.neko0.limitless-list.row')[0].remove()
 	}
 	if (page_is_avtr_own()) {
-		console.log('page_is_avtr_own')
+		log('log', '个人Avatar页', 'START')
 		// 当前使用Avatar
 		// let current_avtr_id = document.querySelector('[data-scrollkey]').getAttribute('data-scrollkey')
 		// console.log(current_avtr_id)
@@ -321,8 +380,7 @@ let pluginInject = () => {
 	} else if (page_is_avtr_details()) {
 		// 当前浏览Avatar
 		let current_avtr_id = window.location.pathname.substring(13)
-
-		console.log('page_is_avtr_details', isInVLAF(current_avtr_id), getAvtrs())
+		log('log', 'Avatar详情页', 'START', isInVLAF(current_avtr_id), getAvtrs())
 
 		// 置入DOM
 		let domAvatar = function () {
@@ -371,9 +429,10 @@ let pluginInject = () => {
 		}
 		let timer = setInterval(detection, 300)
 		detection()
-		console.log(text.mounted)
+		log('log', 'Avatar详情页', 'END')
 	} else if (page_is_limitless()) {
-		console.log('page_is_limitless', getAvtrs())
+		log('log', '无限Avatar页面', getAvtrs())
+
 		// 置入DOM
 		let domLimitless = function () {
 			let html = GM_getResourceText('html-avatar-list')
@@ -409,12 +468,12 @@ let pluginInject = () => {
 						link.click()
 					},
 					importList: function () {
-						console.log('ƒ importList')
+						log('log', 'ƒ importList')
 						const fileInput = document.getElementById('file-input')
 						fileInput.click()
 					},
 					fileUpload: function () {
-						console.log('ƒ fileUpload')
+						log('log', 'ƒ fileUpload', start)
 						const fileInput = document.getElementById('file-input')
 						const file = fileInput.files[0]
 						const reader = new FileReader()
@@ -422,7 +481,8 @@ let pluginInject = () => {
 						reader.onload = event => {
 							const fileContent = event.target.result
 							const jsonData = JSON.parse(fileContent)
-							console.log('import:', jsonData)
+
+							log('log', 'ƒ fileUpload', 'import:', jsonData)
 
 							const A = getAvtrs()
 							const B = jsonData
@@ -430,7 +490,8 @@ let pluginInject = () => {
 							const diff = _.differenceBy(B, A, 'id')
 							const merge = _.concat(A, diff)
 
-							console.log('merge:', merge)
+							log('log', 'ƒ fileUpload', 'merge:', merge)
+
 							GM_setValue('VLAF_avatars', merge)
 							this.items = merge
 						}
@@ -448,7 +509,8 @@ let pluginInject = () => {
 						const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day
 							.toString()
 							.padStart(2, '0')}`
-						console.log(formattedDate)
+
+						// log('log', 'ƒ formattedDate', formattedDate)
 						return formattedDate
 					},
 					hasWindows: function (obj) {
@@ -518,17 +580,18 @@ let pluginInject = () => {
 
 					// 检测Avatar的图片是否加载失败
 					const divs = document.querySelectorAll('.neko0 .img')
-					console.log('divs', divs)
+					log('log', '检测Avatar的图片是否加载失败', divs)
+
 					for (let i = 0; i < divs.length; i++) {
 						const div = divs[i]
 						const img = new Image()
 						img.src = div.style.backgroundImage.replace(/url\(['"]?([^'"]+)['"]?\)/i, '$1')
 						img.addEventListener('load', () => {
-							console.log(`Avatar image loaded successfully.`)
+							log('success', 'Avatar image loaded successfully.')
 						})
 						img.addEventListener('error', () => {
 							// 打印错误位置
-							console.log(`Avatar image in div ${i + 1} failed to load.`)
+							log('error', `Avatar image in div ${i + 1} failed to load.`)
 							// 更改图示
 							div.style.backgroundImage = `url("${text.broken_image}")`
 							// 更改描述
@@ -554,7 +617,7 @@ let pluginInject = () => {
 		}
 		let timer = setInterval(detection, 300)
 		detection()
-		console.log(text.mounted)
+		log('log', '无限Avatar页面', 'END')
 	}
 }
 
@@ -574,9 +637,9 @@ const _historyWrap = function (type) {
 history.pushState = _historyWrap('pushState')
 history.replaceState = _historyWrap('replaceState')
 window.addEventListener('pushState', function (e) {
-	console.log('change pushState')
+	log('log', 'change pushState')
 	pluginInject()
 })
 window.addEventListener('replaceState', function (e) {
-	console.log('change replaceState')
+	log('log', 'change replaceState')
 })
