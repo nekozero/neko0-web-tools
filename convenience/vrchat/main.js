@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh     不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.1
+// @version            1.1.2
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -30,11 +30,11 @@
 // @require            https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource           IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match              *://vrchat.com/*
-// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/style.css
-// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-avatar-btn.html
-// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-avatar-list.html
-// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/html-btn-group.html
-// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.6/convenience/vrchat/language.json
+// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/style.css
+// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/html-avatar-btn.html
+// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/html-avatar-list.html
+// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/html-btn-group.html
+// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/language.json
 // ==/UserScript==
 /* jshint expr: true */
 
