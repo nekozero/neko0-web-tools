@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh     不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.0
+// @version            1.1.1
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -143,12 +143,12 @@ let setSet = (key, value) => {
 let getAvtrs = () => {
 	return GM_getValue('VLAF_avatars')
 }
-log('success', '模型列表', JSON.stringify(getAvtrs()))
+log('success', '模型列表', getAvtrs())
 
 // 文本内容多语言替换
 let text = JSON.parse(GM_getResourceText('language'))[getSet().lang]
-log('success', '当前设定', JSON.stringify(getSet()))
-log('success', '语言文本', JSON.stringify(text))
+log('success', '当前设定', getSet())
+log('success', '语言文本', text)
 
 // 置入Style
 GM_addStyle(GM_getResourceText('IMPORTED_CSS_1'))
@@ -346,6 +346,9 @@ let page_is_avtr_details = () => {
 }
 let page_is_limitless = () => {
 	return document.location.pathname === '/home/limitless'
+}
+let page_is_favorite_avtr = () => {
+	return document.location.pathname.includes('/home/favorites/avatar')
 }
 
 let pluginInject = () => {
@@ -618,6 +621,48 @@ let pluginInject = () => {
 		let timer = setInterval(detection, 300)
 		detection()
 		log('log', '无限Avatar页面', 'END')
+	} else if (page_is_favorite_avtr()) {
+		log('log', '系统Avatar收藏夹', 'START')
+
+		function checkForAvatarCard() {
+			const avatarCardElements = document.querySelectorAll('[aria-label="Avatar Card"]')
+			if (avatarCardElements.length > 0) {
+				// 存在 Avatar Card 元素，执行后续内容
+				clearInterval(checkInterval) // 停止定时检测
+				log('log', '个人Avatar页', '已经加载 Avatar Card，执行后续内容')
+
+				// 获取页面中所有具有 aria-label="Avatar Card" 的元素
+				const avatarCards = document.querySelectorAll('[aria-label="Avatar Card"]')
+
+				// 给定的数组
+				const dataArray = getAvtrs()
+				// 遍历页面中的元素
+				avatarCards.forEach(avatarCard => {
+					// 获取当前元素的 data-scrollkey 值
+					const scrollKey = avatarCard.getAttribute('data-scrollkey')
+					log('log', 'scrollKey', scrollKey)
+
+					// 检查 scrollKey 是否存在于给定数组中的对象 id 属性中
+					const match = dataArray.some(item => item.id === scrollKey)
+
+					// 如果匹配成功，则添加类名 "in-vlaf"
+					if (match) {
+						avatarCard.classList.add('in-vlaf')
+					}
+				})
+			} else {
+				log('log', '个人Avatar页', '尚未加载出 Avatar Card')
+			}
+		}
+
+		// 设置定时检测的时间间隔（毫秒）
+		const checkIntervalMs = 1000 // 1秒钟
+		const checkInterval = setInterval(checkForAvatarCard, checkIntervalMs)
+
+		// 初始时执行一次检测
+		checkForAvatarCard()
+
+		log('log', '系统Avatar收藏夹', 'END')
 	}
 }
 
