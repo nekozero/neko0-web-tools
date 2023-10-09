@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh     不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.2
+// @version            1.1.3
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -25,16 +25,17 @@
 // @require            https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
 // @require            https://cdn.jsdelivr.net/npm/axios@1.1.3/dist/axios.min.js
 // @require            https://cdn.jsdelivr.net/npm/vue@2.7.14
+// @require            https://cdn.jsdelivr.net/npm/vue-lazyload@1.3.3/vue-lazyload.min.js
 // @require            https://unpkg.com/@popperjs/core@2
 // @require            https://unpkg.com/tippy.js@6
 // @require            https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource           IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match              *://vrchat.com/*
-// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/style.css
-// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/html-avatar-btn.html
-// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/html-avatar-list.html
-// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/html-btn-group.html
-// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.7/convenience/vrchat/language.json
+// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/style.css
+// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/html-avatar-btn.html
+// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/html-avatar-list.html
+// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/html-btn-group.html
+// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/language.json
 // ==/UserScript==
 /* jshint expr: true */
 
@@ -442,6 +443,22 @@ let pluginInject = () => {
 			let output = html
 			$('.home-content').append(output)
 
+			Vue.use(VueLazyload, {
+				preLoad: 1.6,
+				attempt: 1,
+				adapter: {
+					error(listender, Init) {
+						log('error', 'error', $(listender.el).attr('img-avtr-id'), listender.el, listender, Init)
+						// 追加标识
+						listender.el.parentElement.parentElement.parentElement.classList.add('broken')
+						// 更改描述
+						listender.el.parentElement.parentElement.nextElementSibling.querySelector(
+							'.description .value'
+						).textContent = text.broken_description
+					},
+				},
+			})
+
 			new Vue({
 				el: '#neko0',
 				data: {
@@ -580,31 +597,6 @@ let pluginInject = () => {
 					tippy('.import', {
 						content: text.tippy_import,
 					})
-
-					// 检测Avatar的图片是否加载失败
-					const divs = document.querySelectorAll('.neko0 .img')
-					log('log', '检测Avatar的图片是否加载失败', divs)
-
-					for (let i = 0; i < divs.length; i++) {
-						const div = divs[i]
-						const img = new Image()
-						img.src = div.style.backgroundImage.replace(/url\(['"]?([^'"]+)['"]?\)/i, '$1')
-						img.addEventListener('load', () => {
-							log('success', 'Avatar image loaded successfully.')
-						})
-						img.addEventListener('error', () => {
-							// 打印错误位置
-							log('error', `Avatar image in div ${i + 1} failed to load.`)
-							// 更改图示
-							div.style.backgroundImage = `url("${text.broken_image}")`
-							// 更改描述
-							div.parentElement.parentElement.nextElementSibling.querySelector(
-								'.description .value'
-							).textContent = text.broken_description
-							// 增加Class
-							div.parentElement.parentElement.parentElement.classList.add('broken')
-						})
-					}
 				},
 			})
 		}

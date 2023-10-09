@@ -17,7 +17,11 @@
 		<li class="avatar-li" v-for="item in items" :key="item.message">
 			<div class="head">
 				<div class="image">
-					<div class="img" :style="'background-image:url('+item.thumbnailImageUrl+')'"></div>
+					<div
+						class="img lazy-image"
+						v-lazy:background-image="{src:item.thumbnailImageUrl,error:text.broken_image}"
+						:img-avtr-id="item.id"
+					></div>
 					<span class="name">{{item.name}}</span>
 					<div class="btn_list flex-column btn-group-vertical">
 						<div class="neko0 btn-s text-center transmit mb-2" :dat-a="item.id" @click="favorites(item.id)">

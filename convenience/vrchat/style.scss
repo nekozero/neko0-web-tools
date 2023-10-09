@@ -343,6 +343,12 @@
 			}
 		}
 	}
+
+	.lazy-background {
+		background-image: none; /* 移除默认背景图 */
+		transition: background-image 0.3s ease-in-out; /* 添加渐变效果 */
+        
+	}
 }
 
 // 模型详情页
