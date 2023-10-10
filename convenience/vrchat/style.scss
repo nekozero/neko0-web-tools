@@ -357,7 +357,7 @@
 }
 
 // 系统原生收藏夹
-.in-vlaf [aria-label='Avatar Image']:before {
+.in-vlaf[aria-label='Avatar Image']:before {
 	content: '♾️';
 	position: absolute;
 	top: 0.75rem;

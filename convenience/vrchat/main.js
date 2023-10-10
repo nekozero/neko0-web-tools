@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name               [Neko0] VRChat Limitless Favorite Avatar
-// @name:zh            [Neko0] VRChat 无限虚拟形象收藏夹
+// @name:zh-CN         [Neko0] VRChat 无限虚拟形象收藏夹
 // @name:ja            [Neko0] VRChat 無制限の「Avatar」ブックマークフォルダ
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
-// @description:zh     不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
+// @description:zh-CN  不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.3
+// @version            1.1.4
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -31,11 +31,11 @@
 // @require            https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource           IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match              *://vrchat.com/*
-// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/style.css
-// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/html-avatar-btn.html
-// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/html-avatar-list.html
-// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/html-btn-group.html
-// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.8/convenience/vrchat/language.json
+// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/style.css
+// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/html-avatar-btn.html
+// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/html-avatar-list.html
+// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/html-btn-group.html
+// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/language.json
 // ==/UserScript==
 /* jshint expr: true */
 
@@ -632,14 +632,20 @@ let pluginInject = () => {
 				avatarCards.forEach(avatarCard => {
 					// 获取当前元素的 data-scrollkey 值
 					const scrollKey = avatarCard.getAttribute('data-scrollkey')
-					log('log', 'scrollKey', scrollKey)
 
 					// 检查 scrollKey 是否存在于给定数组中的对象 id 属性中
 					const match = dataArray.some(item => item.id === scrollKey)
 
 					// 如果匹配成功，则添加类名 "in-vlaf"
 					if (match) {
-						avatarCard.classList.add('in-vlaf')
+						// 获取[aria-label="Avatar Image"]子元素
+						const avatarImage = avatarCard.querySelector('[aria-label="Avatar Image"]')
+
+						// 检查是否找到 avatarImage 元素
+						if (avatarImage) {
+							// 如果找到 avatarImage 元素，则添加类名 "in-vlaf"
+							avatarImage.classList.add('in-vlaf')
+						}
 					}
 				})
 			} else {
