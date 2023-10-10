@@ -108,7 +108,7 @@
 		display: grid;
 		gap: 1rem;
 		grid-template-columns: repeat(1, 1fr);
-		padding-right: 2rem;
+		padding: 0 2rem !important;
 		justify-items: center;
 		@media (min-width: 576px) {
 			padding-right: 0;
@@ -133,7 +133,8 @@
 			background-color: rgb(24, 27, 31);
 			transition: border-color 0.2s ease-in-out 0s;
 			position: relative;
-			width: min-content;
+			// width: min-content;
+			width: 100%;
 
 			&:hover {
 				box-shadow: inset 0 0 0 3px rgb(5 77 94);
@@ -163,7 +164,7 @@
 				border-radius: 8px;
 
 				.image {
-					max-width: 256px;
+					// max-width: 256px;
 					margin: 16px;
 					border-radius: 12px;
 					overflow: hidden;
@@ -184,28 +185,12 @@
 
 					.img {
 						width: 100%;
-						/* min-width: 200px; */
 						min-height: 176px;
-						/* 原图宽高 */
-						/* max-width: 256px; */
-						/* max-height: 168px; */
-						height: 9vw;
-						width: 60vw;
+						padding-top: 75%;
+						height: 0px;
 						background-repeat: no-repeat;
 						background-size: cover;
 						background-position: center;
-
-						@media (min-width: 576px) {
-							width: 29vw;
-						}
-
-						@media (min-width: 992px) {
-							width: 18vw;
-						}
-
-						@media (min-width: 1200px) {
-							width: 12vw;
-						}
 					}
 				}
 
@@ -347,7 +332,6 @@
 	.lazy-background {
 		background-image: none; /* 移除默认背景图 */
 		transition: background-image 0.3s ease-in-out; /* 添加渐变效果 */
-        
 	}
 }
 
