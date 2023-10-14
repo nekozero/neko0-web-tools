@@ -22,7 +22,7 @@
 
 ---
 
-🎮 VRChat 无限 Avatar 收藏夹 | [安装](https://greasyfork.org/zh-CN/scripts/461702)  
+🎮 VRChat 无限 Avatar 收藏夹 | 安装: [油叉](https://greasyfork.org/zh-CN/scripts/461702) | [备用](https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/vrchat.user.js)  
 `不止300个！将收藏夹扩展到无限！`
 <details>
 <summary>介绍</summary>

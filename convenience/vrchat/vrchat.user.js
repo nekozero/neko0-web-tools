@@ -11,8 +11,8 @@
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
 // @homepageURL        https://github.com/nekozero/neko0-web-tools
 // @supportURL         https://t.me/+FANQrUGRV7A0YmM9
-// @updateURL          https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
-// @downloadURL        https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/main.js
+// @updateURL          https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/vrchat.user.js
+// @downloadURL        https://raw.githubusercontent.com/nekozero/neko0-web-tools/master/convenience/vrchat/vrchat.user.js
 // @grant              GM_addStyle
 // @grant              GM_setValue
 // @grant              GM_getValue
