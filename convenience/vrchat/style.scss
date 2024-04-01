@@ -157,6 +157,17 @@
 				align-items: center;
 			}
 
+			&.private {
+				.head {
+					.name {
+						background: rgba(239, 54, 54, 0.624);
+					}
+					.image:after {
+						box-shadow: inset 0 0 0 3px rgba(239, 54, 54, 0.624);
+					}
+				}
+			}
+
 			.head {
 				position: relative;
 				background-color: rgb(37, 42, 48);
@@ -209,7 +220,7 @@
 					font-size: large;
 					padding: 3px 0;
 					margin: 3px;
-					border-radius: 0 0 12px 12px;
+					border-radius: 0 0 9px 9px;
 				}
 
 				.addTime {
