@@ -480,6 +480,30 @@ let pluginInject = () => {
 						location.reload()
 					},
 
+					// 格式化时间
+					getFormattedDate :() => {
+						// 使用现有的补齐两位数的函数
+						function pad(num) {
+							return num < 10 ? '0' + num : num;
+						}
+					
+						// 获取当前时间的 Date 对象
+						let date = new Date();
+					
+						// 获取年月日时分
+						let year = date.getFullYear();
+						let month = pad(date.getMonth() + 1);
+						let day = pad(date.getDate());
+						let hour = pad(date.getHours());
+						let minute = pad(date.getMinutes());
+					
+						// 拼接成 YYYY-MM-DD-HH-mm 这种格式
+						let formatted = `${year}${month}${day}-${hour}${minute}`;
+					
+						// 返回结果
+						return formatted;
+					},
+
 					// 导出导入
 					exportList: function () {
 						// 将 JSON 数据转换为字符串
@@ -489,7 +513,8 @@ let pluginInject = () => {
 						// 创建一个下载链接
 						const link = document.createElement('a')
 						link.href = URL.createObjectURL(blob)
-						link.download = 'LimitlessAvatars.json'
+						const time = this.getFormattedDate()
+						link.download = `LimitlessAvatars-${time}.json`
 						// 模拟点击链接下载文件
 						document.body.appendChild(link)
 						link.click()
