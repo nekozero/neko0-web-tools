@@ -500,7 +500,7 @@ let pluginInject = () => {
 						fileInput.click()
 					},
 					fileUpload: function () {
-						log('log', 'ƒ fileUpload', start)
+						log('log', 'ƒ fileUpload', 'start')
 						const fileInput = document.getElementById('file-input')
 						const file = fileInput.files[0]
 						const reader = new FileReader()
