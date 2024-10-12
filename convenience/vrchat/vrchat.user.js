@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh-CN  不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.4
+// @version            1.1.5
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -192,23 +192,18 @@ if (!String.prototype.format) {
 	detection_class()
 	function detection_class() {
 		// 获取具有 title="locations" 属性的元素
-		var $locationsElement = $('[title="locations"]')
-		if ($locationsElement.length > 0) {
-			// 检查是否找到了匹配的元素
-			if ($locationsElement.length > 0) {
-				// 获取第三个到最后一个类名
-				var classNamesArray = $locationsElement.attr('class').split(' ')
-				var startIndex = 2 // 第三个类名的索引
-				var endIndex = classNamesArray.length // 最后一个类名的索引
+		if ($('[title="download"]').length > 0 && $('.limitless').length > 0) {
+			// 获取第三个到最后一个类名
+			var classNamesArray = $('[title="download"]').attr('class').split(' ')
+			var startIndex = 2 // 第三个类名的索引
+			var endIndex = classNamesArray.length // 最后一个类名的索引
 
-				// 提取第三个到最后一个类名并拼接成字符串
-				var extractedClassNames = classNamesArray.slice(startIndex, endIndex).join(' ')
-
-				// 将提取的类名添加到 .limitless 元素上
-				$('.limitless').addClass(extractedClassNames)
-				$('.limitless').css('display', 'flex')
-			}
-
+			// 提取第三个到最后一个类名并拼接成字符串
+			var extractedClassNames = classNamesArray.slice(startIndex, endIndex).join(' ')
+			log('log', 'extractedClassNames', extractedClassNames)
+			// 将提取的类名添加到 .limitless 元素上
+			$('.limitless').eq(0).addClass(extractedClassNames)
+			$('.limitless').eq(0).css('display', 'flex')
 			clearInterval(timer_class)
 		}
 	}
@@ -481,27 +476,27 @@ let pluginInject = () => {
 					},
 
 					// 格式化时间
-					getFormattedDate :() => {
+					getFormattedDate: () => {
 						// 使用现有的补齐两位数的函数
 						function pad(num) {
-							return num < 10 ? '0' + num : num;
+							return num < 10 ? '0' + num : num
 						}
-					
+
 						// 获取当前时间的 Date 对象
-						let date = new Date();
-					
+						let date = new Date()
+
 						// 获取年月日时分
-						let year = date.getFullYear();
-						let month = pad(date.getMonth() + 1);
-						let day = pad(date.getDate());
-						let hour = pad(date.getHours());
-						let minute = pad(date.getMinutes());
-					
+						let year = date.getFullYear()
+						let month = pad(date.getMonth() + 1)
+						let day = pad(date.getDate())
+						let hour = pad(date.getHours())
+						let minute = pad(date.getMinutes())
+
 						// 拼接成 YYYY-MM-DD-HH-mm 这种格式
-						let formatted = `${year}${month}${day}-${hour}${minute}`;
-					
+						let formatted = `${year}${month}${day}-${hour}${minute}`
+
 						// 返回结果
-						return formatted;
+						return formatted
 					},
 
 					// 导出导入
