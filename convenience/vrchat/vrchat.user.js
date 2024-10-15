@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh-CN  不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.5
+// @version            1.1.6
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -310,7 +310,8 @@ let limitless = avtr_id => {
 		store = store.filter(function (obj) {
 			return obj.id !== avtr_id
 		})
-		$('#collect').removeClass('text-danger border-danger').children('span').text(text.btn_collect)
+		$('#collect').removeClass('text-danger border-danger')
+		$('#collect span').eq(0).text(text.btn_collect)
 		GM_setValue('VLAF_avatars', store)
 	} else {
 		log('log', 'ƒ Limitless', 'Avatar 不存在')
@@ -330,7 +331,8 @@ let limitless = avtr_id => {
 				data.labels = []
 				data.addTime = getNowDate()
 				store.push(data)
-				$('#collect').addClass('text-danger border-danger').children('span').text(text.btn_collect_r)
+				$('#collect').addClass('text-danger border-danger')
+				$('#collect span').eq(0).text(text.btn_collect_r)
 				GM_setValue('VLAF_avatars', store)
 			})
 			.catch(function (error) {
@@ -393,32 +395,29 @@ let pluginInject = () => {
 			let html = GM_getResourceText('html-avatar-btn')
 			let output = html.format(text)
 
-			$('.col-xs-12.content-scroll  .home-content .container .flex-wrap .m-2:nth-child(1) >div:nth-child(2)')
-				.attr('id', 'neko0')
-				.append(output)
-				.children('div:nth-child(1)')
-				.remove()
+			$('.container > div.tw-flex-wrap > div:nth-child(2)').attr('id', 'neko0').prepend(output)
+			// .children('div:nth-child(1)')
+			// .remove()
+
+			// 获取第二个 div 的 class 并复制到第一个 div
+			var secondDivClass = $('#neko0 div:nth-child(2)').attr('class')
+			$('#collect').attr('class', secondDivClass)
+
+			// 获取第二个 div 里面 button 的第三和第四个 class
+			var buttonClasses = $('#neko0 div:nth-child(2) button').attr('class').split(' ')
+			var thirdAndFourthClass = buttonClasses.slice(2, 4).join(' ')
+
+			// 将第三和第四个 class 复制给第一个 div 里面的 button
+			$('#collect button').addClass(thirdAndFourthClass)
 
 			if (isInVLAF(current_avtr_id)) {
-				$('#collect').addClass('text-danger border-danger').children('span').text(text.btn_collect_r)
-			}
+				$('#collect').addClass('text-danger border-danger')
+				$('#collect span').eq(0).text(text.btn_collect_r)			}
 
-			tippy('#transmit', {
-				content: text.tippy_transmit,
-			})
-			tippy('#use', {
-				content: text.tippy_use,
-			})
 			tippy('#collect', {
 				content: text.tippy_collect,
 			})
 
-			$('#transmit').click(() => {
-				favorites(current_avtr_id)
-			})
-			$('#use').click(() => {
-				select(current_avtr_id)
-			})
 			$('#collect').click(() => {
 				limitless(current_avtr_id)
 			})
@@ -426,15 +425,21 @@ let pluginInject = () => {
 
 		// 检测页面内容置入插件DOM
 		let detection = function () {
-			var neko0 = document.querySelector('.neko0')
-			if (!neko0) {
-				domAvatar()
-			} else {
-				clearInterval(timer)
+			const avatarCardElements = document.querySelectorAll('[aria-label="Creation Date"]')
+			if (avatarCardElements.length > 0) {
+				var neko0 = document.querySelector('#neko0')
+				if (!neko0) {
+					domAvatar()
+					// 调整布局让按钮更方便点击
+					$('.container > div.tw-mb-3').eq(0).prependTo('.container > div.tw-flex-wrap > div:first-child')
+				} else {
+					clearInterval(timer)
+				}
 			}
 		}
 		let timer = setInterval(detection, 300)
 		detection()
+
 		log('log', 'Avatar详情页', 'END')
 	} else if (page_is_limitless()) {
 		log('log', '无限Avatar页面', getAvtrs())
