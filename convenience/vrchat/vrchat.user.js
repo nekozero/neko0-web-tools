@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh-CN  不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.6
+// @version            1.1.7
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -16,6 +16,7 @@
 // @grant              GM_addStyle
 // @grant              GM_setValue
 // @grant              GM_getValue
+// @grant              GM_xmlhttpRequest
 // @grant              GM_getResourceText
 // @run-at             document-idle
 // @license            AGPL-3.0-or-later
@@ -31,15 +32,15 @@
 // @require            https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource           IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match              *://vrchat.com/*
-// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/style.css
-// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/html-avatar-btn.html
-// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/html-avatar-list.html
-// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/html-btn-group.html
-// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.0.9/convenience/vrchat/language.json
+// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/style.css
+// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/html-avatar-btn.html
+// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/html-avatar-list.html
+// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/html-btn-group.html
+// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/language.json
 // ==/UserScript==
 /* jshint expr: true */
 
-/** 初始化设定 开始 */
+// #region 初始化设定
 // 设置项默认值
 let setting = {
 	lang: 'en',
@@ -64,8 +65,9 @@ let avatars = [{"id":"avtr_bc6c06ec-fda2-4490-8db2-946f618dba2d","name":"贴贴�
 if (GM_getValue('VLAF_avatars') === undefined) {
 	GM_setValue('VLAF_avatars', avatars)
 }
-/** 初始化设定 结束 */
+// #endregion
 
+// #region 预设函数
 // 打印相关
 window.log = function (...args) {
 	// if (ENV.PRODUCTION) {
@@ -165,7 +167,54 @@ if (!String.prototype.format) {
 	}
 }
 
-// 左侧导航栏
+// 格式化当前时间
+let getNowDate = () => {
+	// 定义一个函数来补齐两位数
+	function pad(num) {
+		return num < 10 ? '0' + num : num
+	}
+
+	// 获取当前时间的 Date 对象
+	let date = new Date()
+
+	// 获取年月日时分秒毫秒
+	let year = date.getFullYear()
+	let month = pad(date.getMonth() + 1)
+	let day = pad(date.getDate())
+	let hour = pad(date.getHours())
+	let minute = pad(date.getMinutes())
+	let second = pad(date.getSeconds())
+	let millisecond = pad(date.getMilliseconds())
+
+	// 拼接成 2022-07-19T20:50:50.033Z 这种格式
+	let formatted = `${year}-${month}-${day}T${hour}:${minute}:${second}.${millisecond}Z`
+
+	// 打印结果
+	return formatted
+}
+
+// 分页功能
+let pagination = function (currentPage, itemsPerPage, array) {
+	var offset = (currentPage - 1) * itemsPerPage
+	return offset + itemsPerPage >= array.length
+		? array.slice(offset, array.length)
+		: array.slice(offset, offset + itemsPerPage)
+}
+
+// Detect error types
+let detectError = msg => {
+	log('error', 'ERROR', msg)
+	if (msg == "You already have 50 favorite avatars in group 'avatars1'") return alertify.error(text.avatars_full)
+	if (msg == 'You already have that avatar favorited') return alertify.error(text.avatars_added)
+	if (msg == 'This avatar is unavailableǃ') return alertify.error(text.error_unavailable)
+	if (msg == "avatar isn't public and avatar is also not owned by you") return alertify.error(text.error_private)
+	if (msg == "Can't find avatarǃ" || msg == 'Avatar Not Found') return alertify.error(text.error_deleted)
+	return alertify.error(text.operation_failed)
+}
+
+// #endregion
+
+// #region 左侧导航栏
 ;(function () {
 	// 置入DOM
 	function domBtnGroup() {
@@ -219,49 +268,14 @@ if (!String.prototype.format) {
 	// window.alertify = alertify
 	// }, 1000)
 })()
+// #endregion
 
+// #region 功能函数
 // 判断已收藏
 let isInVLAF = avtr_id => {
 	let store = getAvtrs()
 	return store.find(obj => obj.id === avtr_id)
 }
-// 格式化当前时间
-let getNowDate = () => {
-	// 定义一个函数来补齐两位数
-	function pad(num) {
-		return num < 10 ? '0' + num : num
-	}
-
-	// 获取当前时间的 Date 对象
-	let date = new Date()
-
-	// 获取年月日时分秒毫秒
-	let year = date.getFullYear()
-	let month = pad(date.getMonth() + 1)
-	let day = pad(date.getDate())
-	let hour = pad(date.getHours())
-	let minute = pad(date.getMinutes())
-	let second = pad(date.getSeconds())
-	let millisecond = pad(date.getMilliseconds())
-
-	// 拼接成 2022-07-19T20:50:50.033Z 这种格式
-	let formatted = `${year}-${month}-${day}T${hour}:${minute}:${second}.${millisecond}Z`
-
-	// 打印结果
-	return formatted
-}
-
-// Detect error types
-let detectError = msg => {
-	log('error', 'ERROR', msg)
-	if (msg == "You already have 50 favorite avatars in group 'avatars1'") return alertify.error(text.avatars_full)
-	if (msg == 'You already have that avatar favorited') return alertify.error(text.avatars_added)
-	if (msg == 'This avatar is unavailableǃ') return alertify.error(text.error_unavailable)
-	if (msg == "avatar isn't public and avatar is also not owned by you") return alertify.error(text.error_private)
-	if (msg == "Can't find avatarǃ" || msg == 'Avatar Not Found') return alertify.error(text.error_deleted)
-	return alertify.error(text.operation_failed)
-}
-
 // 马上切换
 let select = avtr_id => {
 	url = window.location.origin + '/api/1/avatars/' + avtr_id + '/select'
@@ -341,8 +355,9 @@ let limitless = avtr_id => {
 			.finally(function () {})
 	}
 }
+// #endregion
 
-// 不同页面
+// #region 不同页面匹配逻辑
 let page_is_avtr_own = () => {
 	return document.location.pathname === '/home/avatars'
 }
@@ -355,12 +370,14 @@ let page_is_limitless = () => {
 let page_is_favorite_avtr = () => {
 	return document.location.pathname.includes('/home/favorites/avatar')
 }
+// #endregion
 
 let pluginInject = () => {
 	if (!page_is_limitless() && $('.neko0.limitless-list.row')[0]) {
 		$('.neko0.limitless-list.row')[0].remove()
 	}
 	if (page_is_avtr_own()) {
+		// #region 个人Avatar页
 		log('log', '个人Avatar页', 'START')
 		// 当前使用Avatar
 		// let current_avtr_id = document.querySelector('[data-scrollkey]').getAttribute('data-scrollkey')
@@ -385,7 +402,9 @@ let pluginInject = () => {
 		// 		})
 		// })()
 		// 算了暂时先不改这个
+		// endregion
 	} else if (page_is_avtr_details()) {
+		// #region Avatar详情页
 		// 当前浏览Avatar
 		let current_avtr_id = window.location.pathname.substring(13)
 		log('log', 'Avatar详情页', 'START', isInVLAF(current_avtr_id), getAvtrs())
@@ -412,7 +431,8 @@ let pluginInject = () => {
 
 			if (isInVLAF(current_avtr_id)) {
 				$('#collect').addClass('text-danger border-danger')
-				$('#collect span').eq(0).text(text.btn_collect_r)			}
+				$('#collect span').eq(0).text(text.btn_collect_r)
+			}
 
 			tippy('#collect', {
 				content: text.tippy_collect,
@@ -441,8 +461,10 @@ let pluginInject = () => {
 		detection()
 
 		log('log', 'Avatar详情页', 'END')
+		// #endregion
 	} else if (page_is_limitless()) {
-		log('log', '无限Avatar页面', getAvtrs())
+		// #region 无限Avatar页面
+		log('log', '无限Avatar页面', getAvtrs(), pagination(2, 12, getAvtrs()))
 
 		// 置入DOM
 		let domLimitless = function () {
@@ -470,7 +492,25 @@ let pluginInject = () => {
 				el: '#neko0',
 				data: {
 					text: text,
-					items: getAvtrs(),
+					searchQuery: '', // 用户输入的搜索内容
+					selectedSearchFields: ['name'], // 默认搜索 name 字段
+					itemsAll: [],
+					items: [],
+					// 排序顺序
+					order: 'desc',
+					// 排序字段
+					sortBy: 'addTime',
+					// 选择的标签
+					selectedTags: [],
+					// 是否仅安卓平台
+					androidOnly: false,
+					// 标签列表
+					allTags: ['tag1', 'tag2', 'tag3'],
+					selectedTags: [],
+					// 分页
+					currentPage: 1,
+					itemsPerPage: 12,
+					totalPages: 0,
 				},
 				methods: {
 					// 语言切换
@@ -581,19 +621,10 @@ let pluginInject = () => {
 						return hasWindows
 					},
 					hasAndroid: function (obj) {
-						// 定义一个变量来存储检查结果
-						let hasAndroid = false
-
-						// 遍历对象中的 unityPackages 数组
-						for (let package of obj.unityPackages) {
-							// 如果某个元素的 platform 属性等于 android，就将结果设为 true，并跳出循环
-							if (package.platform === 'android') {
-								hasAndroid = true
-								break
-							}
-						}
-
-						return hasAndroid
+						return _.some(
+							obj.unityPackages,
+							pkg => pkg.platform === 'android' && pkg.variant === 'standard'
+						)
 					},
 					favorites: function (avtr_id) {
 						favorites(avtr_id)
@@ -607,10 +638,228 @@ let pluginInject = () => {
 							.parents('.avatar-li')
 							.remove()
 					},
+
+					// #region 搜索栏函数
+
+					searchData: function (searchQuery, searchFields = ['name']) {
+						// 如果没有输入搜索关键词，则返回原始数据
+						if (!searchQuery.trim()) {
+							this.currentPage = 1 // 重置当前页数
+							this.loadPageData()
+							this.updateTotalPages()
+							return
+						}
+
+						// 搜索条件的字段（默认是name）
+						const fields = ['name', ...searchFields]
+
+						// 使用lodash过滤数据
+						const result = _.filter(getAvtrs(), item => {
+							// 遍历字段进行匹配
+							return fields.some(field => {
+								if (item[field] && item[field].toLowerCase().includes(searchQuery.toLowerCase())) {
+									return true // 如果匹配成功，返回true
+								}
+								return false
+							})
+						})
+
+						return result
+					},
+
+					// 搜索框输入时的事件处理
+					onSearchChange: function () {
+						// 去掉多余的空格
+						this.searchQuery = this.searchQuery.trim()
+						// 调用搜索函数更新数据
+						this.searchAndUpdate()
+					},
+
+					// 多选框变化时的事件处理
+					onSearchFieldsChange: function () {
+						// 如果字段选择变化，重新更新搜索
+						this.searchAndUpdate()
+					},
+
+					// 调用搜索功能并更新分页
+					searchAndUpdate: function () {
+						// 执行搜索
+						let searchResults = this.searchData(this.searchQuery, this.selectedSearchFields)
+
+						// 更新结果并分页
+						this.itemsAll = searchResults
+						this.currentPage = 1 // 重置当前页数
+						this.loadPageData(this.itemsAll)
+						this.updateTotalPages()
+					},
+					// #endregion
+
+					// #region 筛选栏函数
+					/**
+					 * 排序函数
+					 * @param {Array} data - 数据数组
+					 * @param {String} order - 排序顺序 ('asc'或'desc')
+					 * @param {String} sortBy - 排序字段 ('addTime'、'updated_at'、'name'、'authorName')
+					 * @return {Array} - 排序后的数据
+					 */
+					sortData: function (data, order = 'asc', sortBy = 'addTime') {
+						return _.orderBy(data, [sortBy], [order])
+					},
+
+					/**
+					 * 分类筛选函数
+					 * @param {Array} data - 数据数组
+					 * @param {Array} tags - 需要包含的tag列表
+					 * @return {Array} - 筛选后的数据
+					 */
+					filterByTags: function (data, tags = []) {
+						if (tags.length === 0) return data // 如果没有选择tag，则返回全部数据
+						return _.filter(data, item => _.intersection(item.tags, tags).length > 0)
+					},
+
+					/**
+					 * 安卓平台筛选函数
+					 * @param {Array} data - 数据数组
+					 * @param {Boolean} isAndroidSelected - 是否筛选安卓平台
+					 * @return {Array} - 筛选后的数据
+					 */
+					filterByPlatform: function (data, isAndroidSelected = false) {
+						if (!isAndroidSelected) return data // 如果未勾选安卓筛选，则返回全部数据
+						return _.filter(data, item =>
+							_.some(item.unityPackages, pkg => pkg.platform === 'android' && pkg.variant === 'standard')
+						)
+					},
+
+					/**
+					 * 组合函数：按条件筛选和排序数据
+					 * @param {Array} data - 数据数组
+					 * @param {Object} options - 筛选和排序选项
+					 * @param {Array} options.tags - 多选的tags筛选列表
+					 * @param {Boolean} options.isAndroidSelected - 是否筛选安卓平台
+					 * @param {String} options.order - 排序顺序 ('asc'或'desc')
+					 * @param {String} options.sortBy - 排序字段 ('addTime'、'updated_at'、'name'、'authorName')
+					 * @return {Array} - 经过筛选和排序后的数据
+					 */
+					getFilteredAndSortedData: function (data, options = {}) {
+						const { tags = [], isAndroidSelected = false, order = 'asc', sortBy = 'addTime' } = options
+
+						let result = _.cloneDeep(data)
+
+						// 按tags筛选
+						result = this.filterByTags(result, tags)
+
+						// 按平台筛选
+						result = this.filterByPlatform(result, isAndroidSelected)
+
+						// 排序
+						result = this.sortData(result, order, sortBy)
+
+						return result
+					},
+
+					loadPageData: function (list = getAvtrs()) {
+						options = {
+							tags: this.selectedTags, // 根据需要选择tag
+							isAndroidSelected: this.androidOnly, // 筛选安卓平台数据
+							order: this.order, // 排列
+							sortBy: this.sortBy, // 排序
+						}
+						let res = this.getFilteredAndSortedData(list, options)
+						this.itemsAll = res
+						console.log('getFilteredAndSortedData', res)
+						this.items = pagination(this.currentPage, this.itemsPerPage, res)
+					},
+
+					// #endregion
+
+					// #region 分页功能
+					// 更新总页数
+					updateTotalPages() {
+						this.totalPages = Math.ceil(this.itemsAll.length / this.itemsPerPage)
+						if (this.currentPage > this.totalPages) this.currentPage = this.totalPages
+					},
+					// 改变页码
+					changePage(page) {
+						if (page >= 1 && page <= this.totalPages) {
+							this.currentPage = page
+						}
+					},
+					// 上一页
+					prevPage() {
+						if (this.currentPage > 1) {
+							this.currentPage--
+						}
+					},
+					// 下一页
+					nextPage() {
+						if (this.currentPage < this.totalPages) {
+							this.currentPage++
+						}
+					},
+					// 改变每页显示数量
+					onItemsPerPageChange() {
+						this.currentPage = 1 // 改变显示数量后回到第一页
+						this.updateTotalPages()
+					},
+					// 分页函数（根据原始分页函数修改）
+					pagination(currentPage, itemsPerPage, array) {
+						const offset = (currentPage - 1) * itemsPerPage
+						return offset + itemsPerPage >= array.length
+							? array.slice(offset, array.length)
+							: array.slice(offset, offset + itemsPerPage)
+					},
+
+					// #endregion
 				},
+
+				watch: {
+					// 监听
+					// 监听 selectedTags 的变化
+					selectedTags: function () {
+						this.loadPageData()
+						this.updateTotalPages()
+					},
+					// 监听 androidOnly 的变化
+					androidOnly: function () {
+						this.loadPageData()
+						this.updateTotalPages()
+					},
+					// 监听 order 的变化
+					order: function () {
+						this.loadPageData()
+						this.updateTotalPages()
+					},
+					// 监听 sortBy 的变化
+					sortBy: function () {
+						this.loadPageData()
+						this.updateTotalPages()
+					},
+					// 监听 currentPage 的变化
+					currentPage: function () {
+						this.loadPageData(this.itemsAll)
+					},
+					itemsPerPage() {
+						this.loadPageData(this.itemsAll)
+						this.updateTotalPages()
+					},
+				},
+
 				created: function () {
 					let _this = this
 					window.add_data = _this.add_data
+				},
+				computed: {
+					// 可见的页码列表
+					visiblePages() {
+						const pages = []
+						const startPage = Math.max(1, this.currentPage - 2)
+						const endPage = Math.min(this.totalPages, this.currentPage + 2)
+
+						for (let i = startPage; i <= endPage; i++) {
+							pages.push(i)
+						}
+						return pages
+					},
 				},
 
 				mounted() {
@@ -629,6 +878,16 @@ let pluginInject = () => {
 					tippy('.import', {
 						content: text.tippy_import,
 					})
+					tippy('.minus-five', {
+						content: text.minus_five,
+					})
+					tippy('.plus-five', {
+						content: text.plus_five,
+					})
+
+					// 获取模型列表
+					this.loadPageData()
+					this.updateTotalPages()
 				},
 			})
 		}
@@ -645,7 +904,9 @@ let pluginInject = () => {
 		let timer = setInterval(detection, 300)
 		detection()
 		log('log', '无限Avatar页面', 'END')
+		// #endregion
 	} else if (page_is_favorite_avtr()) {
+		// #region 系统Avatar收藏夹
 		log('log', '系统Avatar收藏夹', 'START')
 
 		function checkForAvatarCard() {
@@ -693,6 +954,7 @@ let pluginInject = () => {
 		checkForAvatarCard()
 
 		log('log', '系统Avatar收藏夹', 'END')
+		// #endregion
 	}
 }
 

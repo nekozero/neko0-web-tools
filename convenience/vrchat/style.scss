@@ -88,14 +88,115 @@
 #app .neko0.limitless-list {
 	margin: -10px -20px 0px !important;
 
-	/* 模型列表 上方操作 */
-	.controller {
+	.sticky-top,
+	.sticky-bottom {
 		position: sticky;
-		top: 0;
 		z-index: 1010;
+		padding: 0;
+	}
+
+	.sticky-top {
+		top: 0;
+	}
+
+	.sticky-bottom {
+		bottom: 0;
+	}
+
+	/* 模型列表 上方操作 */
+	// 导出 导入 翻译
+	.controller {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 		background-color: rgba(5, 5, 5, 0.937);
 		border-bottom: 3px solid rgb(5, 60, 72);
-		padding: 10px 12px;
+		padding: 10px 24px;
+
+		&.functional {
+			.container>span {
+				background: #07242b;
+				border: 2px solid #053c48;
+				border-radius: 4px;
+				color: var(--bs-primary);
+				padding: 4px 8px;
+				transition: all .2s ease-in-out 0s;
+				outline: none !important;
+
+				select {
+					background: none;
+					border: 0;
+					color: var(--bs-primary);
+					padding: 0;
+					transition: all .2s ease-in-out 0s;
+				}
+			}
+		}
+
+		&.search-container {
+
+
+			.search-input {
+
+				padding: 0 6px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+			}
+
+			.span {
+				display: inline-block;
+			}
+
+			.search-options {
+
+
+				span {
+					margin-right: 10px;
+				}
+
+				label {
+					display: inline-block;
+
+				}
+			}
+
+			.search-button {
+				padding: 10px;
+				background-color: #007bff;
+				color: white;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+
+			.search-button:hover {
+				background-color: #0056b3;
+			}
+
+			.container {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 20px;
+			}
+
+			#results {
+				margin-top: 20px;
+			}
+
+		}
+
+		&.pagination {
+			display: flex;
+			/* 激活 flexbox 布局 */
+			justify-content: space-between;
+			/* 左中右分布，并在两者之间有间距 */
+			align-items: center;
+			/* 垂直居中对齐（如果高度大于内容，才会有作用） */
+
+		}
+
+		&.pagination.bottom {}
 
 		.btn {
 			background: rgb(7, 36, 43);
@@ -116,6 +217,98 @@
 		.left .btn {
 			margin-right: 10px;
 		}
+
+
+		.container {
+			max-width: 600px;
+			margin: auto;
+			// background: #ffffff;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+			label {
+				margin-right: 2px;
+			}
+
+			.sort-order,
+			.sort-by,
+			.filter-tags,
+			.filter-platform,
+			.actions {
+				margin-bottom: 20px;
+			}
+
+			input[type="checkbox"],
+			input[type="radio"] {
+				margin-right: 5px;
+			}
+
+			button {
+				padding: 8px 16px;
+				background-color: #007bff;
+				color: #fff;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+
+			button:hover {
+				background-color: #0056b3;
+			}
+
+			#result {
+				margin-top: 20px;
+			}
+
+			#resultList {
+				list-style-type: none;
+				padding: 0;
+			}
+
+			#resultList li {
+				padding: 8px;
+				background: #e9ecef;
+				margin-bottom: 8px;
+				border-radius: 4px;
+			}
+		}
+
+		.pagination-container {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+
+			button {
+				cursor: pointer;
+			}
+
+			button:disabled {
+				cursor: not-allowed;
+			}
+
+			span {
+				cursor: pointer;
+				padding: 0 5px;
+			}
+
+			span.active {
+				font-weight: bold;
+				color: white;
+
+				&:hover {
+					background: rgb(7, 36, 43);
+					border: 2px solid rgb(5, 60, 72);
+					transform: scale(1);
+				}
+			}
+
+			select {
+				margin-left: 10px;
+			}
+		}
+
+
 	}
 
 	/* 模型列表 */
