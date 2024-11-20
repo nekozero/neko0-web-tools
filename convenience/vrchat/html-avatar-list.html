@@ -99,8 +99,8 @@
 								@change="onSearchFieldsChange"
 							/>
 							<span>标签</span>
-						</label>
-					</span> -->
+				 		</label>-->
+					</span>
 				</span>
 
 				<input
@@ -225,13 +225,21 @@
 	<div class="sticky-bottom">
 		<div class="controller pagination bottom">
 			<div class="left">
-				<span class="btn" @click="prevPage" :disabled="currentPage === 1">←</span>
+				<span class="btn" @click="prevPage" :disabled="currentPage === 1" style="transform: rotateY(180deg)"
+					>➤</span
+				>
 			</div>
 			<div class="center">
 				<!-- 分页器 -->
 				<div class="pagination-container">
 					<span class="btn" v-if="currentPage > 3" @click="changePage(1)">1</span>
-					<span class="btn" v-if="currentPage > 4">…</span>
+					<span
+						class="btn"
+						:title="text.minus_five"
+						v-if="currentPage > 4"
+						@click="changePage(currentPage - 4)"
+						>…</span
+					>
 
 					<span
 						class="btn"
@@ -243,7 +251,13 @@
 						{{ page }}
 					</span>
 
-					<span class="btn" v-if="currentPage < totalPages - 3">…</span>
+					<span
+						class="btn"
+						:title="text.plus_five"
+						v-if="currentPage < totalPages - 3"
+						@click="changePage(currentPage + 4)"
+						>…</span
+					>
 					<span class="btn" v-if="currentPage < totalPages - 2" @click="changePage(totalPages)"
 						>{{ totalPages }}</span
 					>
@@ -259,7 +273,7 @@
 				>
 					<option v-for="size in [12, 24, 50, 100]" :key="size" :value="size">{{ size }}</option>
 				</select>
-				<span class="btn" @click="nextPage" :disabled="currentPage === totalPages">→</span>
+				<span class="btn" @click="nextPage" :disabled="currentPage === totalPages">➤</span>
 			</div>
 		</div>
 	</div>
