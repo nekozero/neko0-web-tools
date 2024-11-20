@@ -485,6 +485,10 @@ let pluginInject = () => {
 							'.description .value'
 						).textContent = text.broken_description
 					},
+					loaded({ bindType, el, naturalHeight, naturalWidth, $parent, src, loading, error, Init }) {
+						// 删除标识
+						el.parentElement.parentElement.parentElement.classList.remove('broken')
+					},
 				},
 			})
 
