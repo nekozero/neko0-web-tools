@@ -28,11 +28,23 @@
 		"version": "Version",
 		"authorName": "Author:",
 		"description": "Description:",
-		"confirm_delete": "Confirm"
+		"confirm_delete": "Confirm",
+		"sort_by": "Sort by",
+		"sort_by_add_time": "Add Time",
+		"sort_by_name": "Name",
+		"sort_by_author_name": "Author Name",
+		"filter_platform": "📱Only",
+		"sort_order": "Order",
+		"sort_order_desc": "Descending",
+		"sort_order_asc": "Ascending",
+		"total_results": "Total {count} results",
+		"search_author_name": "Author Name",
+		"search_description": "Description",
+		"search_placeholder": "Enter search content..."
 	},
 	"zh_cn": {
 		"broken_image": "https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrc-broke-cn.png",
-		"broken_description": "可能坏掉了，你可以点击 ↑ 作者 ↑ 联系作者以了解更多",
+		"broken_description": "可能坏掉了，可以以点击 ↑ 作者 ↑ 联系作者以了解更多",
 		"tippy_export": "备份列表或者与您的好友分享❤️",
 		"export": "📤 导出",
 		"tippy_import": "导入会仅把列表中不存在的添加进来",
@@ -59,6 +71,18 @@
 		"version": "版本",
 		"authorName": "作者:",
 		"description": "介绍:",
-		"confirm_delete": "确认删除"
+		"confirm_delete": "确认删除",
+		"sort_by": "排序方式",
+		"sort_by_add_time": "添加时间",
+		"sort_by_name": "模型名",
+		"sort_by_author_name": "作者名",
+		"filter_platform": "📱仅显示",
+		"sort_order": "排序",
+		"sort_order_desc": "倒序",
+		"sort_order_asc": "正序",
+		"total_results": "总计{count}个结果",
+		"search_author_name": "作者名",
+		"search_description": "描述",
+		"search_placeholder": "请输入搜索内容..."
 	}
 }

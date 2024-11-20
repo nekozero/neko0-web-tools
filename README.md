@@ -43,11 +43,11 @@
 
 <!-- ~~视频教程: [📺 Youtube]()　[📺 BiliBili]()~~   -->
 
-<video src='https://github.com/user-attachments/assets/40796bc4-4f65-4f0a-8a9e-e09450a74a30' width='100%'></video>
+<video src='https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat.webm' width='100%'></video>
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat-desktop-1.png)
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat-desktop-2.png)
-![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat-mobile.png)
+![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat.webm)
 
 追加Avatar被封禁检测: 原版收藏夹里Avatar被封后就无法进行任何操作了，甚至无法联系作者，这里会留下收藏时Avatar的信息，并且可以通过作者的url去联系作者获取新的公开模型(如果有的话？) be like:
 

@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh-CN  不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.9
+// @version            1.2.0
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico

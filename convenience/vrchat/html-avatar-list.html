@@ -12,26 +12,26 @@
 				<div class="btn sort-by">
 					<label>🗂️ </label>
 					<select v-model="sortBy">
-						<option value="addTime">添加时间</option>
+						<option value="addTime">{{text.sort_by_add_time}}</option>
 						<!-- <option value="updated_at">模型更新时间</option> -->
-						<option value="name">模型名</option>
-						<option value="authorName">作者名</option>
+						<option value="name">{{text.sort_by_name}}</option>
+						<option value="authorName">{{text.sort_by_author_name}}</option>
 					</select>
 				</div>
 
 				<!-- 移动端过滤 -->
 				<div class="btn filter-platform">
 					<input type="checkbox" id="androidOnly" v-model="androidOnly" />
-					<label for="androidOnly">📱Only</label>
+					<label for="androidOnly">{{text.filter_platform}}</label>
 				</div>
 
 				<!-- #region 排序方式选择 -->
 				<div class="btn sort-order">
 					<label>↕️ </label>
 					<input type="radio" id="desc" value="desc" v-model="order" />
-					<label for="desc">倒序</label>
+					<label for="desc">{{text.sort_order_desc}}</label>
 					<input type="radio" id="asc" value="asc" v-model="order" />
-					<label for="asc">正序</label>
+					<label for="asc">{{text.sort_order_asc}}</label>
 				</div>
 
 				<!-- #endregion -->
@@ -53,7 +53,7 @@
 		</div>
 		<!-- #region 搜索 -->
 		<div class="controller search-container">
-			<div class="left">🗃️ 总计{{itemsAll.length}}个结果</div>
+			<div class="left">🗃️ {{text.total_results.replace('{count}', itemsAll.length)}}</div>
 			<div class="right">
 				<span class="search-options">
 					<span>
@@ -64,7 +64,7 @@
 								value="authorName"
 								@change="onSearchFieldsChange"
 							/>
-							作者名
+							{{text.search_author_name}}
 						</label>
 					</span>
 					<span>
@@ -75,7 +75,7 @@
 								value="description"
 								@change="onSearchFieldsChange"
 							/>
-							描述
+							{{text.search_description}}
 						</label>
 					</span>
 					<span>
@@ -94,7 +94,7 @@
 				<input
 					type="text"
 					v-model="searchQuery"
-					placeholder="请输入搜索内容..."
+					:placeholder="text.search_placeholder"
 					@input="onSearchChange"
 					class="search-input"
 				/>
