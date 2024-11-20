@@ -27,7 +27,8 @@
 		"updated_at": "Updated",
 		"version": "Version",
 		"authorName": "Author:",
-		"description": "Description:"
+		"description": "Description:",
+		"confirm_delete": "Confirm"
 	},
 	"zh_cn": {
 		"broken_image": "https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrc-broke-cn.png",
@@ -57,6 +58,7 @@
 		"updated_at": "更新",
 		"version": "版本",
 		"authorName": "作者:",
-		"description": "介绍:"
+		"description": "介绍:",
+		"confirm_delete": "确认删除"
 	}
 }

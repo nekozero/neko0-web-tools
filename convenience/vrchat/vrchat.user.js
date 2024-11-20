@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh-CN  不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.1.7
+// @version            1.1.8
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -32,11 +32,11 @@
 // @require            https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource           IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match              *://vrchat.com/*
-// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/style.css
-// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/html-avatar-btn.html
-// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/html-avatar-list.html
-// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/html-btn-group.html
-// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.0/convenience/vrchat/language.json
+// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.8/convenience/vrchat/style.css
+// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.8/convenience/vrchat/html-avatar-btn.html
+// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.8/convenience/vrchat/html-avatar-list.html
+// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.8/convenience/vrchat/html-btn-group.html
+// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.8/convenience/vrchat/language.json
 // ==/UserScript==
 /* jshint expr: true */
 
@@ -324,9 +324,11 @@ let limitless = avtr_id => {
 		store = store.filter(function (obj) {
 			return obj.id !== avtr_id
 		})
-		$('#collect').removeClass('text-danger border-danger')
-		$('#collect span').eq(0).text(text.btn_collect)
 		GM_setValue('VLAF_avatars', store)
+		if ($('#collect').length) {
+			$('#collect').removeClass('text-danger confirm-delete').children('button').removeClass('border-danger')
+			$('#collect span').eq(0).text(text.btn_collect)
+		}
 	} else {
 		log('log', 'ƒ Limitless', 'Avatar 不存在')
 		let data = null
@@ -345,9 +347,11 @@ let limitless = avtr_id => {
 				data.labels = []
 				data.addTime = getNowDate()
 				store.push(data)
-				$('#collect').addClass('text-danger border-danger')
-				$('#collect span').eq(0).text(text.btn_collect_r)
 				GM_setValue('VLAF_avatars', store)
+				if ($('#collect').length) {
+					$('#collect').addClass('text-danger').children('button').addClass('border-danger')
+					$('#collect span').eq(0).text(text.btn_collect_r)
+				}
 			})
 			.catch(function (error) {
 				log('error', 'ƒ Limitless', error)
@@ -418,19 +422,19 @@ let pluginInject = () => {
 			// .children('div:nth-child(1)')
 			// .remove()
 
-			// 获取第二个 div 的 class 并复制到第一个 div
-			var secondDivClass = $('#neko0 div:nth-child(2)').attr('class')
+			// 获取第下面 div 的 class 并复制到第一个 div
+			var secondDivClass = $('#neko0 div:nth-child(3)').attr('class')
 			$('#collect').attr('class', secondDivClass)
 
-			// 获取第二个 div 里面 button 的第三和第四个 class
-			var buttonClasses = $('#neko0 div:nth-child(2) button').attr('class').split(' ')
+			// 获取第下面 div 里面 button 的第三和第四个 class
+			var buttonClasses = $('#neko0 div:nth-child(3) button').attr('class').split(' ')
 			var thirdAndFourthClass = buttonClasses.slice(2, 4).join(' ')
 
 			// 将第三和第四个 class 复制给第一个 div 里面的 button
 			$('#collect button').addClass(thirdAndFourthClass)
 
 			if (isInVLAF(current_avtr_id)) {
-				$('#collect').addClass('text-danger border-danger')
+				$('#collect').addClass('text-danger').children('button').addClass('border-danger')
 				$('#collect span').eq(0).text(text.btn_collect_r)
 			}
 
@@ -439,7 +443,26 @@ let pluginInject = () => {
 			})
 
 			$('#collect').click(() => {
-				limitless(current_avtr_id)
+				const item = $('#collect')
+				console.log(item)
+				console.log(item.hasClass('text-danger') && !item.hasClass('confirm-delete'))
+
+				if (item.hasClass('text-danger') && !item.hasClass('confirm-delete')) {
+					item.addClass('confirm-delete')
+					item.removeClass('text-danger')
+					$('#collect span').eq(0).text(text.confirm_delete)
+					console.log(4)
+				} else {
+					limitless(current_avtr_id)
+				}
+			})
+			$('.confirm-delete-cancel').click(() => {
+				$('#collect')
+					.removeClass('confirm-delete')
+					.addClass('text-danger')
+					.children('button')
+					.addClass('border-danger')
+				$('#collect span').eq(0).text(text.btn_collect_r)
 			})
 		}
 
@@ -452,6 +475,8 @@ let pluginInject = () => {
 					domAvatar()
 					// 调整布局让按钮更方便点击
 					$('.container > div.tw-mb-3').eq(0).prependTo('.container > div.tw-flex-wrap > div:first-child')
+					// 插入css标识
+					$('.home-content').addClass('page_is_avtr_details')
 				} else {
 					clearInterval(timer)
 				}
@@ -636,11 +661,31 @@ let pluginInject = () => {
 					select: function (avtr_id) {
 						select(avtr_id)
 					},
-					limitless: function (avtr_id) {
+					limitless: function (event, avtr_id) {
+						const button = event.currentTarget
+						console.log(button)
+						console.log(
+							button.classList.contains('text-danger') && !button.classList.contains('confirm-delete')
+						)
+
+						if (button.classList.contains('text-danger') && !button.classList.contains('confirm-delete')) {
+							button.classList.add('confirm-delete')
+							button.classList.remove('text-danger')
+							button.querySelector('span').textContent = text.confirm_delete
+							console.log(4)
+						} else {
+							this.limitless_doit(button, avtr_id)
+						}
+					},
+					limitless_doit: function (button, avtr_id) {
+						// 执行删除数据操作
 						limitless(avtr_id)
-						$('[dat-a="' + avtr_id + '"]')
-							.parents('.avatar-li')
-							.remove()
+						// 在页面上刪除该元素
+						button.closest('.avatar-li').remove()
+					},
+					limitless_cancel: function () {
+						$('.confirm-delete').removeClass('confirm-delete').addClass('text-danger border-danger')
+						$('.confirm-delete span').eq(0).text(text.btn_collect_r)
 					},
 
 					// #region 搜索栏函数
