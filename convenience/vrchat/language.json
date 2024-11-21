@@ -23,7 +23,7 @@
 		"error_unavailable": "This avatar is unavailableǃ <br> <small>If the image is still there, it was set as a private by the author</small>",
 		"error_private": "avatar isn't public and avatar is also not owned by you",
 		"error_deleted": "Can't find avatarǃ",
-		"addTime": "added time",
+		"addTime": "Added on",
 		"updated_at": "Updated",
 		"version": "Version",
 		"authorName": "Author:",
