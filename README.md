@@ -43,7 +43,7 @@
 
 <!-- ~~视频教程: [📺 Youtube]()　[📺 BiliBili]()~~   -->
 
-<video src='https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat.webm' width='100%'></video>
+<video src='https://github.com/user-attachments/assets/40796bc4-4f65-4f0a-8a9e-e09450a74a30' width='100%'></video>
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat-desktop-1.png)
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/vrchat-desktop-2.png)
@@ -95,7 +95,8 @@
 
 <summary>介绍</summary>
 
-###
+### 用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱
+
 [![github](https://shields.io/badge/open-source-24292f?logo=github&style=flat)](https://github.com/nekozero/neko0-web-tools/)
 [![telegram](https://shields.io/badge/chat-support-informational?logo=telegram&style=flat)](https://t.me/+URovzRdPTyHlWtQd)
 [![twitter](https://shields.io/badge/profile-photos-ff69b4?logo=twitter&style=flat)](https://twitter.com/jojuniori/media)
@@ -120,9 +121,9 @@
 **自定义功能在评价页右下角有小齿轮用来设置**  
 **输入框右上角的数字是字数统计**  
 
-<video src='https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-ai-1.webm' width='100%'></video>
+<video src='https://github.com/user-attachments/assets/311f399a-77c8-4b19-b465-de410b761e79' width='100%'></video>
 
-<video src='https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-ai-2.webm' width='100%'></video>
+<video src='https://github.com/user-attachments/assets/3da89db5-67e0-4500-9b3a-7e88d95ee59f' width='100%'></video>
 
 ▲当使用了AI评论的时候  
 
@@ -164,6 +165,9 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 [2023-04-17] 加入使用 ChatGPT 进行 AI评语 功能 by [@Cp0204](https://github.com/Cp0204)：
 
 ![](https://user-images.githubusercontent.com/5239753/232384165-9d4135c4-68d7-408b-bf38-d9a690931181.gif)
+
+[2024-11-23] 追加 Geimini 支持
+
 </details>
 
 ----
