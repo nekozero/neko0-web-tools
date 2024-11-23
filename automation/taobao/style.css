@@ -1,5 +1,12 @@
+.clearfix::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
 /* 设置框 */
 .n-box {
+	-webkit-user-select: none;
 	user-select: none;
 	position: fixed;
 	right: 40px;
@@ -18,8 +25,15 @@
 	overflow: hidden;
 }
 .n-box.open {
-	width: 296px;
-	height: 266px;
+	width: 300px;
+	height: 430px;
+}
+.n-box hr {
+	display: block;
+	margin: 10px 0;
+	border: none;
+	height: 1px;
+	background: #ccc;
 }
 .n-box > *:not(.switch) {
 	opacity: 0;
@@ -33,8 +47,8 @@
 	position: absolute;
 	right: 0;
 	bottom: 0;
-	width: 56px;
-	height: 56px;
+	width: 52px;
+	height: 52px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -74,18 +88,16 @@
 }
 /* 开关 */
 .n-box .toggle {
-	float: left;
 	padding: 6px;
 	box-sizing: border-box;
-	margin-top: 6px;
+	/* margin-top: 6px; */
 }
 .n-box .toggle.auto-sort > span {
 	display: none;
 }
 /* 输入框 */
 .n-box .input.auto-del {
-	float: left;
-	margin-top: 6px;
+	/* margin-top: 6px; */
 }
 .n-box .input.auto-del input {
 	border: none;
@@ -93,13 +105,32 @@
 	padding: 6px;
 	width: 30px;
 	text-align: center;
-	float: left;
 	box-shadow: inset 0 0 0 1px #888888;
 	border-radius: 6px;
 }
 .n-box .input.auto-del label {
-	float: left;
 	padding: 6px;
+}
+
+/* 左对齐 */
+.n-box .toggle,
+.n-box .input.auto-del,
+.n-box .input.auto-del input,
+.n-box .input.auto-del label {
+	float: left;
+}
+
+.n-box .input.openai-apikey,
+.n-box .input.openai-apikey input,
+.n-box .input.gemini-apikey,
+.n-box .input.gemini-apikey input,
+.n-box .input.aitext-count,
+.n-box .input.aitext-count input {
+	width: 100%;
+}
+.n-box .input.openai-apikey,
+.n-box .input.gemini-apikey {
+	margin-bottom: 6px;
 }
 
 /* 一键评价 */
@@ -107,9 +138,14 @@
 	text-align: center;
 	padding: 20px 0 6px !important;
 }
-.submitboxplus {
+.submitboxplus,
+.submitboxplusai {
+	-webkit-user-select: none;
 	user-select: none;
 	text-align: center;
+}
+.submitboxplusai {
+	margin-top: 6px;
 }
 .tb-btn {
 	color: #fff;
@@ -131,12 +167,14 @@
 	background-color: #5dade2;
 	border-color: #5dade2;
 }
-.tb-btn.haoping {
+.tb-btn.haoping,
+.tb-btn.haoping-ai {
 	background-color: #f40;
 	border-color: #f40;
 }
 
 .tm-btn {
+	-webkit-user-select: none;
 	user-select: none;
 	display: inline-block;
 	padding: 0 10px;
@@ -152,7 +190,9 @@
 	background-color: #fff;
 	box-shadow: inset 0 0 0 1px;
 }
-.tm-btn.haoping {
+.tm-btn.haoping,
+.tm-btn.haoping-ai {
+	-webkit-user-select: none;
 	user-select: none;
 	color: #fff;
 	background-color: #c40000;

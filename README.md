@@ -99,23 +99,32 @@
 [![github](https://shields.io/badge/open-source-24292f?logo=github&style=flat)](https://github.com/nekozero/neko0-web-tools/)
 [![telegram](https://shields.io/badge/chat-support-informational?logo=telegram&style=flat)](https://t.me/+URovzRdPTyHlWtQd)
 [![twitter](https://shields.io/badge/profile-photos-ff69b4?logo=twitter&style=flat)](https://twitter.com/jojuniori/media)
-[![wechat](https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7-%E9%9B%AA%E4%B9%8B%E6%A2%A6%E6%8A%80%E6%9C%AF%E9%A9%BF%E7%AB%99-brightgreen.svg)](http://weixin.qq.com/r/cy5CWvvE5Kabrb8593th)
 
+### 🎉 追加了AI评论的全新版本，评论自然得一批！
+### 🎉 再也不用担心被淘宝发邮件警告啦！
+### 🎉 可自行选用ChatGPT或Gemini
 
 ![](https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-Anti-detection.gif)
-
+▲当未使用AI评论的时候  
 已更新写入评语时按全角句号(中文句号)分割已存储的评语并进行随机排序的功能选项  
 随机抽取3个内容进行删除处理  
 以此规避淘宝那套“滥用评价功能惩罚”的自动检测  
 默认开启此功能
 
-### ⚠️虽然有随机功能来规避
-### ⚠️但是用的人多了后有些组合还是会被淘宝记录检测的  
-### ⚠️所以追求完美的请务必使用自定义评语功能  
-### ⚠️评价完一条后等几秒钟再评价下一条，不然被检测几率很高  
+### ⚠️ 当未使用AI评论的时候
+### ⚠️ 虽然有随机功能来规避
+### ⚠️ 但是用的人多了后有些组合还是会被淘宝记录检测的  
+### ⚠️ 所以追求完美的请务必使用自定义评语功能  
+### ⚠️ 评价完一条后等几秒钟再评价下一条，不然被检测几率很高  
 
 **自定义功能在评价页右下角有小齿轮用来设置**  
 **输入框右上角的数字是字数统计**  
+
+<video src='https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-ai-1.webm' width='100%'></video>
+
+<video src='https://raw.githubusercontent.com/jojuniori/neko0-web-tools/master/img/taobao-ai-2.webm' width='100%'></video>
+
+▲当使用了AI评论的时候  
 
 关于评价查看：
 
