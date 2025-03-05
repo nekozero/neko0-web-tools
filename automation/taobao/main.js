@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall AI AI评价 AI评语
-// @version      1.8.0
+// @version      1.8.1
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -51,6 +51,11 @@ if (GM_getValue('taobaorate') === undefined) {
 		}
 	})
 	GM_setValue('taobaorate', store)
+}
+
+const AIUrl = {
+	openai: 'https://api.openai.com/v1/chat/completions',
+	gemini: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=',
 }
 
 /** 初始化设定 结束 */
@@ -254,7 +259,7 @@ async function Gemini(aitext_commit) {
 		'Content-Type': 'application/json',
 		Authorization: 'Bearer ' + GeminiApiKey,
 	}
-	const url = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GeminiApiKey}`
+	const url = AIUrl.gemini + GeminiApiKey
 
 	// Data
 	const data = {
@@ -386,7 +391,7 @@ async function taobaoMsg_Gemini() {
 	// 回复框
 	var tbRateMsg = document.querySelectorAll('.rate-msg')
 
-	const url = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GeminiApiKey}`
+	const url = AIUrl.gemini + GeminiApiKey
 	const aitext_count = GM_getValue('taobaorate').aitextCount
 
 	// 商品名
