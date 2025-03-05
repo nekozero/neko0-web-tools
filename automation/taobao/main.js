@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall AI AI评价 AI评语
-// @version      1.8.1
+// @version      1.8.2
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -226,7 +226,7 @@ async function taobaoMsg_AI() {
 		// 评价商品
 		var response = await axios
 			.post(
-				'https://api.openai.com/v1/chat/completions',
+				AIUrl.openai,
 				{
 					model: 'gpt-3.5-turbo',
 					max_tokens: 200,
@@ -243,6 +243,11 @@ async function taobaoMsg_AI() {
 			)
 			.then(response => {
 				tbRateMsg[i].value = response.data.choices[0].message.content.trim()
+			})
+			.catch(error => {
+				console.log(error.response.data.error.message)
+				alert(error.response.data.error.message)
+				return 404
 			})
 	}
 }
@@ -300,6 +305,8 @@ async function Gemini(aitext_commit) {
 			return ai_res
 		})
 		.catch(error => {
+			console.log(error.response.data.error.message)
+			alert(error.response.data.error.message)
 			return 404
 		})
 	return response
@@ -432,7 +439,9 @@ async function taobaoMsg_Gemini() {
 					tbRateMsg[i].value = ai_res
 				})
 				.catch(error => {
-					console.error(error)
+					console.log(error.response.data.error.message)
+					alert(error.response.data.error.message)
+					return 404
 				})
 		}
 	}
@@ -529,7 +538,7 @@ async function tmallMsg_AI() {
 	// 评价商品
 	var response = await axios
 		.post(
-			'https://api.openai.com/v1/chat/completions',
+			AIUrl.openai,
 			{
 				model: 'gpt-3.5-turbo',
 				max_tokens: 200,
@@ -558,6 +567,11 @@ async function tmallMsg_AI() {
 					.replace('商品评价：', '')
 					.trim()
 			}
+		})
+		.catch(error => {
+			console.log(error.response.data.error.message)
+			alert(error.response.data.error.message)
+			return 404
 		})
 }
 
