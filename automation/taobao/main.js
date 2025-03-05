@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall AI AI评价 AI评语
-// @version      1.8.2
+// @version      1.8.5
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -20,8 +20,8 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js
-// @resource     style https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.0/automation/taobao/style.css
-// @resource     html-n-box https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.0/automation/taobao/n-box.html
+// @resource     style https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.1/automation/taobao/style.css
+// @resource     html-n-box https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.1/automation/taobao/n-box.html
 // @include      *://rate.taobao.com/*
 // @include      *://ratewrite.tmall.com/*
 // @include      *://buyertrade.taobao.com/trade*
@@ -36,6 +36,7 @@ var taobaorate = {
 	autoSort: true,
 	autoDel: 3,
 	autoPraiseAll: false,
+	openaiApiModel: 'gpt-4o-mini',
 	openaiApiKey: '',
 	geminiApiKey: '',
 	aitextCount: 200,
@@ -98,6 +99,15 @@ $('#autoDel').bind('input propertychange', function () {
 	GM_setValue('taobaorate', store)
 })
 
+// Openai ChatGPT api model
+console.log('Openai ChatGPT api model', GM_getValue('taobaorate').openaiApiModel)
+$('#openaiApiModel').val(GM_getValue('taobaorate').openaiApiModel)
+$('#openaiApiModel').bind('input propertychange', function () {
+	let store = GM_getValue('taobaorate')
+	store.openaiApiModel = $(this).val()
+	GM_setValue('taobaorate', store)
+	console.log('Openai ChatGPT api model Update', GM_getValue('taobaorate').openaiApiModel)
+})
 // Openai ChatGPT api key
 console.log('Openai ChatGPT api key', GM_getValue('taobaorate').openaiApiKey)
 $('#openaiApiKey').val(GM_getValue('taobaorate').openaiApiKey)
@@ -228,7 +238,7 @@ async function taobaoMsg_AI() {
 			.post(
 				AIUrl.openai,
 				{
-					model: 'gpt-3.5-turbo',
+					model: GM_getValue('taobaorate').openaiApiModel,
 					max_tokens: 200,
 					messages: [
 						{
@@ -540,7 +550,7 @@ async function tmallMsg_AI() {
 		.post(
 			AIUrl.openai,
 			{
-				model: 'gpt-3.5-turbo',
+				model: GM_getValue('taobaorate').openaiApiModel,
 				max_tokens: 200,
 				messages: [
 					{
