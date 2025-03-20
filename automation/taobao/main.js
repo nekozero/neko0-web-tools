@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall AI AI评价 AI评语
-// @version      1.8.5
+// @version      1.8.6
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -744,15 +744,13 @@ if (isList) {
 	taobaoFun()
 	autorate()
 } else if (isTM) {
-	var timer = setInterval(detection, 1000)
-	detection()
-}
-function detection() {
-	var haoping = document.querySelector('.haoping')
-	if (!haoping) {
-		tmallFun()
-		autorate()
-	} else {
-		clearInterval(timer)
-	}
+    new MutationObserver((_, observer) => {
+        const haoping = document.querySelector('.haoping');
+        if (!haoping) {
+            tmallFun();
+            autorate();
+        } else {
+            observer.disconnect();
+        }
+    }).observe(document.body, { childList: true, subtree: true });
 }
