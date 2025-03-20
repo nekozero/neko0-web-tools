@@ -744,15 +744,13 @@ if (isList) {
 	taobaoFun()
 	autorate()
 } else if (isTM) {
-	var timer = setInterval(detection, 1000)
-	detection()
-}
-function detection() {
-	var haoping = document.querySelector('.haoping')
-	if (!haoping) {
-		tmallFun()
-		autorate()
-	} else {
-		clearInterval(timer)
-	}
+    new MutationObserver((_, observer) => {
+        const haoping = document.querySelector('.haoping');
+        if (!haoping) {
+            tmallFun();
+            autorate();
+        } else {
+            observer.disconnect();
+        }
+    }).observe(document.body, { childList: true, subtree: true });
 }
