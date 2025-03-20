@@ -200,7 +200,7 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ----
 
-📺 Iwara增强 | [安装](https://greasyfork.org/zh-CN/scripts/382345)  
+📺 Iwara增强 | [安装](https://sleazyfork.org/zh-CN/scripts/382345)  
 `增加了两个一键执行的操作`
 <details>
 <summary>介绍</summary>
@@ -258,7 +258,7 @@ https://rate.taobao.com/myRate.htm "评价管理" -> "给他人的评价"
 
 ----
 
-🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [安装](https://greasyfork.org/zh-CN/scripts/387907)  
+🖼 图站增强Danbooru/Gelbooru/Konachan/Yande | [安装](https://sleazyfork.org/zh-CN/scripts/387907)  
 `快捷键操作与样式修改`
 <details>
 <summary>介绍</summary>

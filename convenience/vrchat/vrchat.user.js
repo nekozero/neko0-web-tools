@@ -5,7 +5,7 @@
 // @description        More than 300! Expand your VRChat avatar collection to infinity!
 // @description:zh-CN  不止300个！将您的VRChat Avatar虚拟形象收藏夹扩展到无限！
 // @description:ja     300以上！あなたのVRChatアバターコレクションを無限に拡張しましょう！
-// @version            1.2.0
+// @version            1.2.1
 // @author             Mitsuki Joe
 // @namespace          neko0-web-tools
 // @icon               https://assets.vrchat.com/www/favicons/favicon.ico
@@ -32,11 +32,11 @@
 // @require            https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js
 // @resource           IMPORTED_CSS_1 https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.rtl.min.css
 // @match              *://vrchat.com/*
-// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.9/convenience/vrchat/style.css
-// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.9/convenience/vrchat/html-avatar-btn.html
-// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.9/convenience/vrchat/html-avatar-list.html
-// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.9/convenience/vrchat/html-btn-group.html
-// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.1.9/convenience/vrchat/language.json
+// @resource           IMPORTED_CSS_2 https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.1/convenience/vrchat/style.css
+// @resource           html-avatar-btn https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.1/convenience/vrchat/html-avatar-btn.html
+// @resource           html-avatar-list https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.1/convenience/vrchat/html-avatar-list.html
+// @resource           html-btn-group https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.1/convenience/vrchat/html-btn-group.html
+// @resource           language https://cdn.jsdelivr.net/gh/nekozero/neko0-web-tools@1.2.1/convenience/vrchat/language.json
 // ==/UserScript==
 /* jshint expr: true */
 
@@ -418,7 +418,7 @@ let pluginInject = () => {
 			let html = GM_getResourceText('html-avatar-btn')
 			let output = html.format(text)
 
-			$('.container > div.tw-flex-wrap > div:nth-child(2)').attr('id', 'neko0').prepend(output)
+			$("h4:contains('Manage Avatar')").next().attr('id', 'neko0').prepend(output)
 			// .children('div:nth-child(1)')
 			// .remove()
 
@@ -428,7 +428,7 @@ let pluginInject = () => {
 
 			// 获取第下面 div 里面 button 的第三和第四个 class
 			var buttonClasses = $('#neko0 div:nth-child(3) button').attr('class').split(' ')
-			var thirdAndFourthClass = buttonClasses.slice(2, 4).join(' ')
+			var thirdAndFourthClass = buttonClasses.slice(0, 1).join(' ')
 
 			// 将第三和第四个 class 复制给第一个 div 里面的 button
 			$('#collect button').addClass(thirdAndFourthClass)
@@ -467,23 +467,15 @@ let pluginInject = () => {
 		}
 
 		// 检测页面内容置入插件DOM
-		let detection = function () {
-			const avatarCardElements = document.querySelectorAll('[aria-label="Creation Date"]')
-			if (avatarCardElements.length > 0) {
-				var neko0 = document.querySelector('#neko0')
-				if (!neko0) {
-					domAvatar()
-					// 调整布局让按钮更方便点击
-					$('.container > div.tw-mb-3').eq(0).prependTo('.container > div.tw-flex-wrap > div:first-child')
-					// 插入css标识
-					$('.home-content').addClass('page_is_avtr_details')
-				} else {
-					clearInterval(timer)
-				}
+		new MutationObserver((_, observer) => {
+			if ($("h4:contains('Manage Avatar')").length > 0 && !$('#neko0').length) {
+				domAvatar()
+				// 调整布局让按钮更方便点击
+				$('.container > div.tw-mb-3').eq(0).prependTo('.container > div.tw-flex-wrap > div:first-child')
+				$('.home-content').addClass('page_is_avtr_details')
+				observer.disconnect()
 			}
-		}
-		let timer = setInterval(detection, 300)
-		detection()
+		}).observe(document.body, { childList: true, subtree: true })
 
 		log('log', 'Avatar详情页', 'END')
 		// #endregion
