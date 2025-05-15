@@ -5,7 +5,7 @@
 // @description        Provide  the function of "one-click copy name and like+follow+download" and the function of "copy name only" separately, which makes it convenient to save your favorite videos to your local device, so that you can still access them even if the author deletes their account. Automatically load the highest resolution video source. Detect resolution and frame rate, and low-quality videos will be marked with a red warning. Automatically click the "R18 warning button", eliminating the need to manually close the prompt every time.
 // @description:zh     提供 "一键复制名字 并 喜欢+关注+下载" 与单独 "复制名字" 的功能, 便捷地收藏自己喜欢的视频到本地, 以免作者销号后就看不到作品了。自动加载最高分辨率视频源。侦测分辨率和帧率，过低的质量会以红色警示。自动点击“R18警告按钮”，不再需要每次手动关闭提示。
 // @description:ja     「名前を一括コピーして、いいね＋フォロー＋ダウンロード」および「名前のみコピー」の機能を提供し、自分の好きな動画を手軽にローカルに保存できるようにしました。作者がアカウントを削除しても作品を見ることができます。最高解像度の動画ソースを自動的に読み込みます。解像度とフレームレートを検出し、低品質の動画は赤い警告で表示されます。自動的に「R18警告ボタン」をクリックし、毎回手動でプロンプトを閉じる必要がなくなります。
-// @version            1.2.9
+// @version            1.3.0
 // @author             JoJunIori
 // @namespace          neko0-web-tools
 // @icon               https://www.iwara.tv/logo.png
@@ -196,6 +196,10 @@ async function videoPage() {
     <svg class="svg-inline--fa fa-share-nodes " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path fill="currentColor" d="M160 64c0-8.8 7.2-16 16-16s16 7.2 16 16V200c0 10.3 6.6 19.5 16.4 22.8s20.6-.1 26.8-8.3c3-3.9 7.6-6.4 12.8-6.4c8.8 0 16 7.2 16 16c0 10.3 6.6 19.5 16.4 22.8s20.6-.1 26.8-8.3c3-3.9 7.6-6.4 12.8-6.4c7.8 0 14.3 5.6 15.7 13c1.6 8.2 7.3 15.1 15.1 18s16.7 1.6 23.3-3.6c2.7-2.1 6.1-3.4 9.9-3.4c8.8 0 16 7.2 16 16l0 16V392c0 39.8-32.2 72-72 72H272 212.3h-.9c-37.4 0-72.4-18.7-93.2-49.9L50.7 312.9c-4.9-7.4-2.9-17.3 4.4-22.2s17.3-2.9 22.2 4.4L116 353.2c5.9 8.8 16.8 12.7 26.9 9.7s17-12.4 17-23V320 64zM176 0c-35.3 0-64 28.7-64 64V261.7C91.2 238 55.5 232.8 28.5 250.7C-.9 270.4-8.9 310.1 10.8 339.5L78.3 440.8c29.7 44.5 79.6 71.2 133.1 71.2h.9H272h56c66.3 0 120-53.7 120-120V288l0-16c0-35.3-28.7-64-64-64c-4.5 0-8.8 .5-13 1.3c-11.7-15.4-30.2-25.3-51-25.3c-6.9 0-13.5 1.1-19.7 3.1C288.7 170.7 269.6 160 248 160c-2.7 0-5.4 .2-8 .5V64c0-35.3-28.7-64-64-64zm48 304c0-8.8-7.2-16-16-16s-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304zm48-16c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304c0-8.8-7.2-16-16-16zm80 16c0-8.8-7.2-16-16-16s-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304z"/></svg>
     </div>一键喜欢关注下载</div>
 </button>
+<button class="button s-cover button--primary button--solid" type="button"><div class="text text--small"><div class="icon mr-1">
+    <svg class="svg-inline--fa fa-share-nodes " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg>
+    </div>下载封面</div>
+</button>
 `
 		$('.container-fluid > .row > .col-12')[0].prepend($('.page-video__bottom')[0])
 		$('.page-video__actions').append(dom)
@@ -250,10 +254,23 @@ async function videoPage() {
 			// 喜欢
 			$('.page-video__actions svg.svg-inline--fa.fa-heart').parent().parent().parent().click()
 			// 关注
-			$('.page-video__byline__actions svg.svg-inline--fa.fa-heart').parent().parent().parent().click()
+			$('.page-video__byline__actions svg.svg-inline--fa.fa-check').parent().parent().parent().click()
 
 			// 下载
 			$('.dropdown__content a:contains("Source")')[0].click()
+		})
+		$('.s-cover').click(() => {
+			// 获取元素
+			var poster = document.querySelector('.videoPlayer .video-js .vjs-poster');
+			// 获取background-image样式
+			var bg = window.getComputedStyle(poster).backgroundImage;
+			// 提取url
+			var urlMatch = bg.match(/url\(["']?(.*?)["']?\)/);
+			if (urlMatch && urlMatch[1]) {
+				window.open(urlMatch[1], '_blank');
+			} else {
+				console.log('未找到背景图URL');
+			}
 		})
 
 		// 解决新版默认不以Source分辨率播放并无法记忆用户设置的问题
