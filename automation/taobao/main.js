@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall AI AI评价 AI评语
-// @version      1.8.6
+// @version      1.8.7
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -29,6 +29,7 @@
 
 /** 初始化设定 开始 */
 // 默认值
+		// 默认值
 var taobaorate = {
 	autorate: false,
 	rateMsgListText:
@@ -36,9 +37,23 @@ var taobaorate = {
 	autoSort: true,
 	autoDel: 3,
 	autoPraiseAll: false,
-	openaiApiModel: 'gpt-4o-mini',
-	openaiApiKey: '',
-	geminiApiKey: '',
+	modelType: 'GPT', // 'GPT', 'Gemini', 'Custom'
+	gpt_config: {
+		url: 'https://api.openai.com/v1/chat/completions',
+		headers:
+			'{\n  "Content-Type": "application/json",\n  "Authorization": "Bearer sk-..."\n}',
+		data: '{\n  "model": "gpt-4o-mini",\n  "messages": [\n    {\n      "role": "user",\n      "content": "{{aitext_commit}}"\n    }\n  ],\n  "max_tokens": 2000\n}',
+	},
+	gemini_config: {
+		url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIza...',
+		headers: '{\n  "Content-Type": "application/json"\n}',
+		data: '{\n  "contents": [\n    {\n      "role": "user",\n      "parts": [\n        {\n          "text": "{{aitext_commit}}"\n        }\n      ]\n    }\n  ],\n  "safetySettings": [\n    {\n      "category": "HARM_CATEGORY_HATE_SPEECH",\n      "threshold": "BLOCK_NONE"\n    },\n    {\n      "category": "HARM_CATEGORY_DANGEROUS_CONTENT",\n      "threshold": "BLOCK_NONE"\n    },\n    {\n      "category": "HARM_CATEGORY_HARASSMENT",\n      "threshold": "BLOCK_NONE"\n    },\n    {\n      "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",\n      "threshold": "BLOCK_NONE"\n    }\n  ]\n}',
+	},
+	custom_config: {
+		url: '',
+		headers: '',
+		data: '',
+	},
 	aitextCount: 200,
 }
 // 判断是否存在设定
@@ -51,13 +66,50 @@ if (GM_getValue('taobaorate') === undefined) {
 			store[i] = taobaorate[i]
 		}
 	})
-	GM_setValue('taobaorate', store)
+	
+	// Migration logic: Move old API keys to new config
+	let migrated = false
+	if (store.openaiApiKey && store.openaiApiKey.trim() !== '') {
+		console.log('Migrating OpenAI API Key...')
+		// Only migrate if we haven't already customized the headers (simple check: if headers contain the default placeholder)
+		if (store.gpt_config.headers.includes('Bearer sk-...')) {
+			store.gpt_config.headers = store.gpt_config.headers.replace('Bearer sk-...', 'Bearer ' + store.openaiApiKey)
+			migrated = true
+		}
+		// Clear old key
+		delete store.openaiApiKey
+		migrated = true
+	}
+	
+	if (store.geminiApiKey && store.geminiApiKey.trim() !== '') {
+		console.log('Migrating Gemini API Key...')
+		// Only migrate if url contains default placeholder
+		if (store.gemini_config.url.includes('key=AIza...')) {
+			store.gemini_config.url = store.gemini_config.url.replace('key=AIza...', 'key=' + store.geminiApiKey)
+			migrated = true
+		}
+		// Clear old key
+		delete store.geminiApiKey
+		migrated = true
+	}
+	
+	// Fix GPT max_tokens migration
+	if (store.gpt_config && store.gpt_config.data && store.gpt_config.data.includes('"max_tokens": 200')) {
+		console.log('Fixing GPT max_tokens...')
+		store.gpt_config.data = store.gpt_config.data.replace('"max_tokens": 200',('"max_tokens": 2000'))
+		migrated = true
+	}
+
+	if (migrated) {
+		GM_setValue('taobaorate', store)
+		console.log('Configuration Migration Complete')
+	} else {
+		GM_setValue('taobaorate', store)
+	}
 }
 
-const AIUrl = {
-	openai: 'https://api.openai.com/v1/chat/completions',
-	gemini: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=',
-}
+// Removed AIUrl object as it is now configurable
+
 
 /** 初始化设定 结束 */
 
@@ -77,6 +129,26 @@ $('.n-box .button.update.rate-msg-list-text').click(() => {
 	let store = GM_getValue('taobaorate')
 	store.rateMsgListText = $('#rateMsgListText').val()
 	GM_setValue('taobaorate', store)
+})
+// 切换 Tab
+function switchTab(tabId) {
+    $('.n-box .tab-item').removeClass('active');
+    $('.n-box .tab-item[data-tab="' + tabId + '"]').addClass('active');
+
+    $('.n-box-content').removeClass('active');
+    $('#tab-' + tabId).addClass('active');
+
+    // Update n-box class for height
+    $('.n-box').removeClass('tab-comment-settings tab-ai-config');
+    $('.n-box').addClass('tab-' + tabId);
+}
+
+// Init default tab
+switchTab('comment-settings');
+
+$('.n-box .tab-item').click(function() {
+    var tabId = $(this).data('tab');
+    switchTab(tabId);
 })
 // 切换自动打乱排序
 $('.n-box .toggle.auto-sort').click(() => {
@@ -99,33 +171,47 @@ $('#autoDel').bind('input propertychange', function () {
 	GM_setValue('taobaorate', store)
 })
 
-// Openai ChatGPT api model
-console.log('Openai ChatGPT api model', GM_getValue('taobaorate').openaiApiModel)
-$('#openaiApiModel').val(GM_getValue('taobaorate').openaiApiModel)
-$('#openaiApiModel').bind('input propertychange', function () {
+// AI Model Type
+console.log('AI Model Type', GM_getValue('taobaorate').modelType)
+$('#aiModelType').val(GM_getValue('taobaorate').modelType)
+function loadModelConfig(type) {
 	let store = GM_getValue('taobaorate')
-	store.openaiApiModel = $(this).val()
-	GM_setValue('taobaorate', store)
-	console.log('Openai ChatGPT api model Update', GM_getValue('taobaorate').openaiApiModel)
-})
-// Openai ChatGPT api key
-console.log('Openai ChatGPT api key', GM_getValue('taobaorate').openaiApiKey)
-$('#openaiApiKey').val(GM_getValue('taobaorate').openaiApiKey)
-$('#openaiApiKey').bind('input propertychange', function () {
+	let configName = type.toLowerCase() + '_config'
+	let config = store[configName]
+	if (config) {
+		$('#aiUrl').val(config.url)
+		$('#aiHeaders').val(config.headers)
+		$('#aiData').val(config.data)
+	}
+}
+loadModelConfig(GM_getValue('taobaorate').modelType)
+
+$('#aiModelType').change(function () {
+	let newType = $(this).val()
 	let store = GM_getValue('taobaorate')
-	store.openaiApiKey = $(this).val()
+	store.modelType = newType
 	GM_setValue('taobaorate', store)
-	console.log('Openai ChatGPT api key Update', GM_getValue('taobaorate').openaiApiKey)
+	loadModelConfig(newType)
+	console.log('AI Model Type Update', newType)
 })
-// Google Gemini api key
-console.log('Google Gemini api key', GM_getValue('taobaorate').geminiApiKey)
-$('#geminiApiKey').val(GM_getValue('taobaorate').geminiApiKey)
-$('#geminiApiKey').bind('input propertychange', function () {
+
+// Listeners for URL, Headers, Data to update current config
+function updateCurrentConfig() {
 	let store = GM_getValue('taobaorate')
-	store.geminiApiKey = $(this).val()
+	let type = $('#aiModelType').val()
+	let configName = type.toLowerCase() + '_config'
+	store[configName] = {
+		url: $('#aiUrl').val(),
+		headers: $('#aiHeaders').val(),
+		data: $('#aiData').val(),
+	}
 	GM_setValue('taobaorate', store)
-	console.log('Google Gemini api key Update', GM_getValue('taobaorate').geminiApiKey)
-})
+}
+
+$('#aiUrl').bind('input propertychange', updateCurrentConfig)
+$('#aiHeaders').bind('input propertychange', updateCurrentConfig)
+$('#aiData').bind('input propertychange', updateCurrentConfig)
+
 // 监听AI生成字数数
 console.log('监听AI生成字数数', GM_getValue('taobaorate').aitextCount)
 $('#aitextCount').val(GM_getValue('taobaorate').aitextCount)
@@ -215,248 +301,186 @@ function taobaoMsg() {
 	}
 }
 
-async function taobaoMsg_AI() {
-	if (!GM_getValue('taobaorate').openaiApiKey) {
-		alert('OpenAI key is missing')
-		return
-	}
-	var headers = {
-		'Content-Type': 'application/json',
-		Authorization: 'Bearer ' + GM_getValue('taobaorate').openaiApiKey,
-	}
-	var tbRateMsg = document.querySelectorAll('.rate-msg')
-	if (document.querySelector('.item-title a')) {
-		//首评
-		var tbTitle = document.querySelectorAll('.item-title a')
-	} else if (document.querySelector('.item-info h3 a')) {
-		//追评
-		var tbTitle = document.querySelectorAll('.item-info h3 a')
-	}
-	for (var i = 0; i < tbRateMsg.length; i++) {
-		// 评价商品
-		var response = await axios
-			.post(
-				AIUrl.openai,
-				{
-					model: GM_getValue('taobaorate').openaiApiModel,
-					max_tokens: 200,
-					messages: [
-						{
-							role: 'user',
-							content: tbTitle[i].textContent.trim() + '\n\n写出商品评价。简短、口语化',
-						},
-					],
-				},
-				{
-					headers: headers,
-				}
-			)
-			.then(response => {
-				tbRateMsg[i].value = response.data.choices[0].message.content.trim()
-			})
-			.catch(error => {
-				console.log(error.response.data.error.message)
-				alert(error.response.data.error.message)
-				return 404
-			})
-	}
-}
+/**
+ * 通用AI调用函数
+ * @param {string} prompt - 提示词内容
+ * @returns {Promise<string|boolean>} - 返回生成的文本或false
+ */
+async function callAI(prompt) {
+	const store = GM_getValue('taobaorate')
+	const type = store.modelType
+	const configName = type.toLowerCase() + '_config'
+	const config = store[configName]
 
-// 只处理Gimini相关调用进行文字生成
-async function Gemini(aitext_commit) {
-	const GeminiApiKey = GM_getValue('taobaorate').geminiApiKey
-	if (!GeminiApiKey) {
-		alert('Gemini key is missing')
+	if (!config || !config.url) {
+		alert('AI Configuration Error: URL is missing')
 		return false
 	}
 
-	var headers = {
-		'Content-Type': 'application/json',
-		Authorization: 'Bearer ' + GeminiApiKey,
-	}
-	const url = AIUrl.gemini + GeminiApiKey
+	// 变量替换
+	let url = config.url
+		.replace(/{{openaiApiKey}}/g, store.openaiApiKey)
+		.replace(/{{geminiApiKey}}/g, store.geminiApiKey)
 
-	// Data
-	const data = {
-		safetySettings: [
-			{
-				category: 'HARM_CATEGORY_HATE_SPEECH',
-				threshold: 'BLOCK_NONE',
-			},
-			{
-				category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
-				threshold: 'BLOCK_NONE',
-			},
-			{
-				category: 'HARM_CATEGORY_HARASSMENT',
-				threshold: 'BLOCK_NONE',
-			},
-			{
-				category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
-				threshold: 'BLOCK_NONE',
-			},
-		],
-		contents: [
-			{
-				role: 'user',
-				parts: [{ text: aitext_commit }],
-			},
-		],
-	}
-	// 评价商品
-	var response = await axios
-		.post(url, data, {
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		})
-		.then(response => {
-			ai_res = response.data.candidates[0].content.parts[0].text
-			return ai_res
-		})
-		.catch(error => {
-			console.log(error.response.data.error.message)
-			alert(error.response.data.error.message)
-			return 404
-		})
-	return response
-}
-
-// 只处理Taobao相关页面中逻辑
-async function Msg_Gemini() {
-	const GeminiApiKey = GM_getValue('taobaorate').geminiApiKey
-	if (!GeminiApiKey) {
-		alert('Gemini key is missing')
-		return false
-	}
-
-	// 商品名
-	var product_name = ''
-	if (isTB) {
-		var tbTitle = ''
-		if (document.querySelector('.item-title a')) {
-			//首评
-			tbTitle = document.querySelectorAll('.item-title a')
-		} else if (document.querySelector('.item-info h3 a')) {
-			//追评
-			tbTitle = document.querySelectorAll('.item-info h3 a')
+	// Headers 处理
+	let headersStr = config.headers
+		.replace(/{{openaiApiKey}}/g, store.openaiApiKey)
+		.replace(/{{geminiApiKey}}/g, store.geminiApiKey)
+	
+	let headers = {}
+	try {
+		if (headersStr.trim()) {
+			headers = JSON.parse(headersStr)
 		}
-		product_name = tbTitle[i].textContent.trim()
-	} else if (isTM) {
-		product_name = document.querySelector('.ui-form-label h3').textContent.trim()
+	} catch (e) {
+		console.error('Headers JSON parse error', e)
+		alert('Headers JSON parse error: ' + e.message)
+		return false
 	}
 
-	// 字数
-	const aitext_count = GM_getValue('taobaorate').aitextCount
+	// Data 处理
+	// 为了兼容换行符和特殊字符，我们先对 prompt 进行转义处理
+	const escapedPrompt = prompt.replace(/[\r\n]/g, '\\n').replace(/"/g, '\\"')
+	
+	let dataStr = config.config || config.data 
+	dataStr = dataStr
+		.replace(/{{aitext_commit}}/g, escapedPrompt)
+		.replace(/{{openaiApiKey}}/g, store.openaiApiKey)
+		.replace(/{{geminiApiKey}}/g, store.geminiApiKey)
 
-	// 分别处理评价
+	let data = {}
+	try {
+		if (dataStr.trim()) {
+			data = JSON.parse(dataStr)
+		}
+	} catch (e) {
+		console.error('Data JSON parse error', e)
+		alert('Data JSON parse error: ' + e.message)
+		return false
+	}
+
+	try {
+		const response = await axios.post(url, data, { headers: headers })
+		
+		// 响应解析
+		let resultText = ''
+		
+		if (store.modelType === 'GPT') {
+			if (response.data.choices && response.data.choices[0]) {
+				resultText = response.data.choices[0].message.content
+			}
+		} else if (store.modelType === 'Gemini') {
+			if (response.data.candidates && response.data.candidates[0]) {
+				resultText = response.data.candidates[0].content.parts[0].text
+			}
+		} else {
+			// Custom: Try GPT then Gemini
+			if (response.data.choices && response.data.choices[0] && response.data.choices[0].message) {
+				resultText = response.data.choices[0].message.content
+			} else if (response.data.candidates && response.data.candidates[0] && response.data.candidates[0].content) {
+				resultText = response.data.candidates[0].content.parts[0].text
+			} else {
+				// 无法解析，返回整个JSON string供调试
+				console.log('Unique custom response', response.data)
+				resultText = JSON.stringify(response.data)
+			}
+		}
+		
+		return resultText.trim()
+	} catch (error) {
+		console.error('AI Request Error', error)
+		if (error.response && error.response.data && error.response.data.error) {
+			alert('AI Error: ' + error.response.data.error.message)
+		} else {
+			alert('AI Request Failed: ' + error.message)
+		}
+		return false
+	}
+}
+
+/**
+ * 填充评论主逻辑
+ */
+async function fillReviews() {
+	const store = GM_getValue('taobaorate')
+	const aitext_count = store.aitextCount
+	
 	if (isTB) {
-		// 提示词
-		const aitext_commit = `写一份关于网购买到的 “${product_name}” 的${aitext_count}字好评`
-
-		var tbRateMsg = document.querySelectorAll('.rate-msg')
-		for (var i = 0; i < tbRateMsg.length; i++) {
-			// 检测已经填写过的就跳过
+		// 淘宝逻辑
+		let tbTitleNodes
+		if (document.querySelector('.item-title a')) {
+			tbTitleNodes = document.querySelectorAll('.item-title a')
+		} else if (document.querySelector('.item-info h3 a')) {
+			tbTitleNodes = document.querySelectorAll('.item-info h3 a')
+		}
+		
+		let tbRateMsg = document.querySelectorAll('.rate-msg')
+		for (let i = 0; i < tbRateMsg.length; i++) {
 			if (!tbRateMsg[i].value) {
-				const result = await Gemini(aitext_commit)
-				console.log(result)
-				if (result !== 404) {
-					// 评价商品
+				let productName = tbTitleNodes[i].textContent.trim()
+				let prompt = `写一份关于网购买到的 “${productName}” 的${aitext_count}字好评。简短、口语化`
+				
+				let result = await callAI(prompt)
+				if (result) {
 					tbRateMsg[i].value = result
 				}
 			}
 		}
 	} else if (isTM) {
-		// 提示词
-		var aitext_commit
+		// 天猫逻辑
+		let productName = document.querySelector('.ui-form-label h3') ? document.querySelector('.ui-form-label h3').textContent.trim() : '商品'
+		
+		let prompt = ''
 		if (document.querySelector('.J_rateItem')) {
-			aitext_commit = `写一份关于网购买到的 “${product_name}” 的口语化好评。分别写出${aitext_count}字的商品评价和${aitext_count}字的服务评价。商品评价写完后再写服务评价，商品评价与服务评价之间一定要用|间隔！一定要用|间隔！一定要用|间隔！`
+			// 首评：需要商品评价和服务评价
+			prompt = `写一份关于网购买到的 “${productName}” 的口语化好评。分别写出${aitext_count}字的商品评价和${aitext_count}字的服务评价。商品评价写完后再写服务评价，商品评价与服务评价之间一定要用|间隔！一定要用|间隔！`
 		} else {
-			aitext_commit = `写一份关于网购买到的 “${product_name}” 的${aitext_count}字的一段时间使用后的追评好评`
+			// 追评
+			prompt = `写一份关于网购买到的 “${productName}” 的${aitext_count}字的一段时间使用后的追评好评`
 		}
-
-		const result = await Gemini(aitext_commit)
-		console.log(result)
-		if (result !== 404) {
-			// 评价商品
-			var rate_content = result.replace(/[\n*]/g, '').split('|')
-			console.log(rate_content)
+		
+		let result = await callAI(prompt)
+		if (result) {
 			if (document.querySelector('.J_rateItem')) {
-				//首评
-				document.querySelector('.J_rateItem').value = rate_content[0].replace('商品评价：', '').trim()
-				document.querySelector('.J_rateService').value = rate_content[1].replace('服务评价：', '').trim()
+				let parts = result.replace(/[\n*]/g, '').split('|')
+				if (parts.length >= 2) {
+					document.querySelector('.J_rateItem').value = parts[0].replace('商品评价：', '').trim()
+					document.querySelector('.J_rateService').value = parts[1].replace('服务评价：', '').trim()
+				} else {
+					// Fallback if separator missing
+					document.querySelector('.J_rateItem').value = result
+				}
 			} else if (document.querySelector('.ap-ct-textinput textarea')) {
-				//追评
 				document.querySelector('.ap-ct-textinput textarea').value = result
+			} else if (document.querySelector('.J_textInput')) { 
+				// 针对 tmallMsg 中的选择器逻辑覆盖
+				tmallMsgSet(result) // 复用或新建一个设置值的逻辑
 			}
 		}
 	}
-
-	return 202
+	return 202 // Success code
 }
 
-async function taobaoMsg_Gemini() {
-	const GeminiApiKey = GM_getValue('taobaorate').geminiApiKey
-	if (!GeminiApiKey) {
-		alert('Gemini key is missing')
-		return false
-	}
-	var headers = {
-		'Content-Type': 'application/json',
-		Authorization: 'Bearer ' + GeminiApiKey,
-	}
-	// 回复框
-	var tbRateMsg = document.querySelectorAll('.rate-msg')
-
-	const url = AIUrl.gemini + GeminiApiKey
-	const aitext_count = GM_getValue('taobaorate').aitextCount
-
-	// 商品名
-	if (document.querySelector('.item-title a')) {
-		//首评
-		var tbTitle = document.querySelectorAll('.item-title a')
-	} else if (document.querySelector('.item-info h3 a')) {
-		//追评
-		var tbTitle = document.querySelectorAll('.item-info h3 a')
-	}
-
-	for (var i = 0; i < tbRateMsg.length; i++) {
-		// 检测已经填写过的就跳过
-		if (!tbRateMsg[i].value) {
-			// 商品名
-			const product_name = tbTitle[i].textContent.trim()
-			// Data
-			const data = {
-				contents: [
-					{
-						role: 'user',
-						parts: [{ text: `写一份关于网购买到的 “${product_name}” 的${aitext_count}字好评` }],
-					},
-				],
-			}
-			// 评价商品
-			var response = await axios
-				.post(url, data, {
-					headers: {
-						'Content-Type': 'application/json',
-					},
-				})
-				.then(response => {
-					console.log(response.data.candidates[0].content.parts[0].text)
-					ai_res = response.data.candidates[0].content.parts[0].text
-
-					// 评价商品
-					tbRateMsg[i].value = ai_res
-				})
-				.catch(error => {
-					console.log(error.response.data.error.message)
-					alert(error.response.data.error.message)
-					return 404
-				})
+// 辅助函数：天猫设置值 (extracted from original tmallMsg)
+function tmallMsgSet(text) {
+	let textInputer
+	if (document.querySelector('.J_textInput')) textInputer = document.querySelectorAll('.J_textInput')
+	if (document.querySelector('.J_textEditorContent')) textInputer = document.querySelectorAll('.J_textEditorContent')
+	if (document.querySelector('.J_textInput') && document.querySelector('.J_textInput').shadowRoot) {
+		if (document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot) {
+			textInputer = document
+				.querySelector('.J_textInput')
+				.shadowRoot.querySelector('#textEditor')
+				.shadowRoot.querySelectorAll('#textEl')
 		}
 	}
-	return 202
+    if (textInputer) {
+        for (var i = 0, a; (a = textInputer[i++]); ) {
+            a.value = text
+        }
+    }
 }
+
 
 function taobaoFun() {
 	let elemStar = `<div class="submitboxplus">
@@ -466,8 +490,7 @@ function taobaoFun() {
         <div class="tb-btn haoping">一键提交好评</div>
     </div>
 	<div class="submitboxplusai">
-		<div class="tb-btn msg-ai">ChatGPT评语</div>
-		<div class="tb-btn msg-gemini">Gemini评语</div>
+		<div class="tb-btn msg-ai">AI评语</div>
 		<div class="tb-btn haoping-ai">一键满星AI好评</div>
     </div>
 	`
@@ -491,14 +514,11 @@ function taobaoFun() {
 	})
 
 	$('.tb-btn.msg-ai').click(() => {
-		taobaoMsg_AI()
-	})
-	$('.tb-btn.msg-gemini').click(() => {
-		taobaoMsg_Gemini()
+		fillReviews()
 	})
 
 	$('.tb-btn.haoping-ai').click(async () => {
-		const result = await taobaoMsg_Gemini()
+		const result = await fillReviews()
 		console.log(result)
 
 		if (result === 202) {
@@ -536,54 +556,7 @@ function tmallMsg() {
 	}
 }
 
-async function tmallMsg_AI() {
-	if (!GM_getValue('taobaorate').openaiApiKey) {
-		alert('OpenAI key is missing')
-		return
-	}
-	var headers = {
-		'Content-Type': 'application/json',
-		Authorization: 'Bearer ' + GM_getValue('taobaorate').openaiApiKey,
-	}
-	// 评价商品
-	var response = await axios
-		.post(
-			AIUrl.openai,
-			{
-				model: GM_getValue('taobaorate').openaiApiModel,
-				max_tokens: 200,
-				messages: [
-					{
-						role: 'user',
-						content:
-							document.querySelector('.ui-form-label h3').textContent.trim() +
-							'\n\n分别写出商品评价和服务评价，用|间隔。简短、口语化',
-					},
-				],
-			},
-			{
-				headers: headers,
-			}
-		)
-		.then(response => {
-			var rate_content = response.data.choices[0].message.content.split('|')
-			if (document.querySelector('.J_rateItem')) {
-				//首评
-				document.querySelector('.J_rateItem').value = rate_content[0].replace('商品评价：', '').trim()
-				document.querySelector('.J_rateService').value = rate_content[1].replace('服务评价：', '').trim()
-			} else if (document.querySelector('.ap-ct-textinput textarea')) {
-				//追评
-				document.querySelector('.ap-ct-textinput textarea').value = rate_content[0]
-					.replace('商品评价：', '')
-					.trim()
-			}
-		})
-		.catch(error => {
-			console.log(error.response.data.error.message)
-			alert(error.response.data.error.message)
-			return 404
-		})
-}
+
 
 function tmallFun() {
 	let elemStar = `<div class="submitboxplus">
@@ -592,8 +565,7 @@ function tmallFun() {
         <div class="tm-btn starmsg">一键满星+评语</div>
         <div class="tm-btn haoping">一键提交好评</div>
 		<br />
-        <div class="tm-btn msg-ai">ChatGPT评语</div>
-        <div class="tm-btn msg-gemini">Gemini评语</div>
+        <div class="tm-btn msg-ai">AI评语</div>
         <div class="tm-btn haoping-ai">一键提交AI好评</div>
     </div>`
 	$('.compose-submit').after(elemStar)
@@ -604,10 +576,7 @@ function tmallFun() {
 		tmallMsg()
 	})
 	$('.tm-btn.msg-ai').click(() => {
-		tmallMsg_AI()
-	})
-	$('.tm-btn.msg-gemini').click(() => {
-		Msg_Gemini()
+		fillReviews()
 	})
 	$('.tm-btn.starmsg').click(() => {
 		tmallMsg()
@@ -621,7 +590,7 @@ function tmallFun() {
 		}, 500)
 	})
 	$('.tm-btn.haoping-ai').click(async () => {
-		const result = await Msg_Gemini()
+		const result = await fillReviews()
 		console.log(result)
 
 		if (result === 202) {
@@ -704,10 +673,10 @@ if (isList) {
 		// 判断是否已开启开关
 		if (!GM_getValue('taobaorate').autoPraiseAll) {
 			/** 未开启 */
-			// 置入DOM
-			$(`div[class^='simple-pagination-mod__container']`).prepend(
-				'<button class="button-auto-praise-all">一键自动全部好评</button>'
-			)
+					// 置入DOM
+		$('.trade-button.trade-button-type-of-secondary.trade-button-size-of-middle:contains("打印")').after(
+			'<button class="button-auto-praise-all">一键自动全部好评</button>'
+		)
 			// 绑定Event
 			$('.button-auto-praise-all').click(() => {
 				// 开启全自动执行

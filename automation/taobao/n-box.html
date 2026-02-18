@@ -3,45 +3,58 @@
 		<i class="fas fa-cog fa-lg"></i>
 	</span>
 
-	<label for="rateMsgListText">随机用评价语<span class="word-count"></span></label>
-	<textarea rows="5" id="rateMsgListText"></textarea>
-	<span class="button update rate-msg-list-text"> <i class="fas fa-edit fa-lg"></i>&nbsp;&nbsp;更新 </span>
-	<hr />
-	<div class="clearfix">
-		<div class="toggle auto-sort">
-			<span class="on"><i class="fas fa-toggle-on fa-lg"></i> 自动打乱排序开启</span>
-			<span class="off"><i class="fas fa-toggle-off fa-lg"></i> 自动打乱排序关闭</span>
+	<div class="n-box-tabs clearfix">
+		<div class="tab-item active" data-tab="comment-settings">评语设定</div>
+		<div class="tab-item" data-tab="ai-config">AI配置</div>
+	</div>
+	
+	<div class="n-box-content active" id="tab-comment-settings">
+		<label for="rateMsgListText">随机用评价语<span class="word-count"></span></label>
+		<textarea rows="5" id="rateMsgListText"></textarea>
+		<span class="button update rate-msg-list-text"> <i class="fas fa-edit fa-lg"></i>&nbsp;&nbsp;更新 </span>
+		<hr />
+		<div class="clearfix">
+			<div class="toggle auto-sort">
+				<span class="on"><i class="fas fa-toggle-on fa-lg"></i> 自动打乱排序开启</span>
+				<span class="off"><i class="fas fa-toggle-off fa-lg"></i> 自动打乱排序关闭</span>
+			</div>
+			<div class="input auto-del"><input id="autoDel" /> <label for="autoDel">个内容随机删除</label></div>
 		</div>
-		<div class="input auto-del"><input id="autoDel" /> <label for="autoDel">个内容随机删除</label></div>
 	</div>
-	<hr />
-	<div class="input openai-apimodel">
-		<label for="openaiApiModel">
-			Openai API Model
-		</label>
-		<input id="openaiApiModel" />
+
+	<div class="n-box-content" id="tab-ai-config">
+		<div class="input ai-model-type">
+			<label for="aiModelType">AI Model Type</label>
+			<select id="aiModelType">
+				<option value="GPT">GPT</option>
+				<option value="Gemini">Gemini</option>
+				<option value="Custom">Custom</option>
+			</select>
+		</div>
+		<div class="input ai-url">
+			<label for="aiUrl">
+				URL
+				<a
+					rel="noopener"
+					href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key"
+					title="如何申请 GPT API"
+					target="_blank"
+					>(GPT?)</a
+				>
+				<a rel="noopener" href="https://ai.google.dev/tutorials/setup?hl=zh-cn" title="如何申请 Gemini API" target="_blank"
+					>(Gemini?)</a
+				>
+			</label>
+			<input id="aiUrl" />
+		</div>
+		<div class="input ai-headers">
+			<label for="aiHeaders">Headers</label>
+			<textarea rows="3" id="aiHeaders"></textarea>
+		</div>
+		<div class="input ai-data">
+			<label for="aiData">Data</label>
+			<textarea rows="5" id="aiData"></textarea>
+		</div>
+		<div class="input aitext-count"><label for="aitextCount">AI生成字数</label> <input id="aitextCount" /></div>
 	</div>
-	<div class="input openai-apikey">
-		<label for="openaiApiKey">
-			Openai API KEY
-			<a
-				rel="noopener"
-				href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key"
-				title="如何申请API"
-				target="_blank"
-				>(?)</a
-			>
-		</label>
-		<input id="openaiApiKey" />
-	</div>
-	<div class="input gemini-apikey">
-		<label for="geminiApiKey">
-			Gemini API KEY
-			<a rel="noopener" href="https://ai.google.dev/tutorials/setup?hl=zh-cn" title="如何申请API" target="_blank"
-				>(?)</a
-			>
-		</label>
-		<input id="geminiApiKey" />
-	</div>
-	<div class="input aitext-count"><label for="aitextCount">AI生成字数</label> <input id="aitextCount" /></div>
 </div>
