@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         [Neko0] 淘宝天猫一键好评
 // @description  用于方便地积攒淘气值，以享用高淘气值的低价88VIP等特殊权益来省钱 taobao tmall AI AI评价 AI评语
-// @version      1.8.7
+// @version      1.8.8
 // @author       JoJunIori
 // @namespace    neko0-web-tools
 // @icon         https://www.taobao.com/favicon.ico
@@ -29,7 +29,7 @@
 
 /** 初始化设定 开始 */
 // 默认值
-		// 默认值
+
 var taobaorate = {
 	autorate: false,
 	rateMsgListText:
@@ -45,7 +45,7 @@ var taobaorate = {
 		data: '{\n  "model": "gpt-4o-mini",\n  "messages": [\n    {\n      "role": "user",\n      "content": "{{aitext_commit}}"\n    }\n  ],\n  "max_tokens": 2000\n}',
 	},
 	gemini_config: {
-		url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIza...',
+		url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent?key=AIza...',
 		headers: '{\n  "Content-Type": "application/json"\n}',
 		data: '{\n  "contents": [\n    {\n      "role": "user",\n      "parts": [\n        {\n          "text": "{{aitext_commit}}"\n        }\n      ]\n    }\n  ],\n  "safetySettings": [\n    {\n      "category": "HARM_CATEGORY_HATE_SPEECH",\n      "threshold": "BLOCK_NONE"\n    },\n    {\n      "category": "HARM_CATEGORY_DANGEROUS_CONTENT",\n      "threshold": "BLOCK_NONE"\n    },\n    {\n      "category": "HARM_CATEGORY_HARASSMENT",\n      "threshold": "BLOCK_NONE"\n    },\n    {\n      "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",\n      "threshold": "BLOCK_NONE"\n    }\n  ]\n}',
 	},
@@ -418,7 +418,7 @@ async function fillReviews() {
 		for (let i = 0; i < tbRateMsg.length; i++) {
 			if (!tbRateMsg[i].value) {
 				let productName = tbTitleNodes[i].textContent.trim()
-				let prompt = `写一份关于网购买到的 “${productName}” 的${aitext_count}字好评。简短、口语化`
+				let prompt = `写一份关于网购买到的 “${productName}” 的${aitext_count}字好评。简短、口语化。（只出最终评语内容，不要任何多余的废话）`
 				
 				let result = await callAI(prompt)
 				if (result) {
@@ -433,10 +433,10 @@ async function fillReviews() {
 		let prompt = ''
 		if (document.querySelector('.J_rateItem')) {
 			// 首评：需要商品评价和服务评价
-			prompt = `写一份关于网购买到的 “${productName}” 的口语化好评。分别写出${aitext_count}字的商品评价和${aitext_count}字的服务评价。商品评价写完后再写服务评价，商品评价与服务评价之间一定要用|间隔！一定要用|间隔！`
+			prompt = `写一份关于网购买到的 “${productName}” 的口语化好评。分别写出${aitext_count}字的商品评价和${aitext_count}字的服务评价。商品评价写完后再写服务评价，商品评价与服务评价之间一定要用|间隔！一定要用|间隔！（只出最终评语内容，不要任何多余的废话）`
 		} else {
 			// 追评
-			prompt = `写一份关于网购买到的 “${productName}” 的${aitext_count}字的一段时间使用后的追评好评`
+			prompt = `写一份关于网购买到的 “${productName}” 的${aitext_count}字的一段时间使用后的追评好评。（只出最终评语内容，不要任何多余的废话）`
 		}
 		
 		let result = await callAI(prompt)
@@ -462,18 +462,26 @@ async function fillReviews() {
 }
 
 // 辅助函数：天猫设置值 (extracted from original tmallMsg)
-function tmallMsgSet(text) {
+function getTmallInputElements() {
 	let textInputer
-	if (document.querySelector('.J_textInput')) textInputer = document.querySelectorAll('.J_textInput')
-	if (document.querySelector('.J_textEditorContent')) textInputer = document.querySelectorAll('.J_textEditorContent')
-	if (document.querySelector('.J_textInput') && document.querySelector('.J_textInput').shadowRoot) {
-		if (document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot) {
-			textInputer = document
-				.querySelector('.J_textInput')
-				.shadowRoot.querySelector('#textEditor')
-				.shadowRoot.querySelectorAll('#textEl')
+	const textInput = document.querySelector('.J_textInput')
+	if (textInput) {
+		textInputer = document.querySelectorAll('.J_textInput')
+		if (textInput.shadowRoot) {
+			const textEditor = textInput.shadowRoot.querySelector('#textEditor')
+			if (textEditor && textEditor.shadowRoot) {
+				textInputer = textEditor.shadowRoot.querySelectorAll('#textEl')
+			}
 		}
+	} else if (document.querySelector('.J_textEditorContent')) {
+		textInputer = document.querySelectorAll('.J_textEditorContent')
 	}
+	return textInputer
+}
+
+// 辅助函数：天猫设置值 (extracted from original tmallMsg)
+function tmallMsgSet(text) {
+	let textInputer = getTmallInputElements()
     if (textInputer) {
         for (var i = 0, a; (a = textInputer[i++]); ) {
             a.value = text
@@ -540,19 +548,11 @@ function tmallStar() {
 
 function tmallMsg() {
 	// 写入评价
-	let textInputer
-	if (document.querySelector('.J_textInput')) textInputer = document.querySelectorAll('.J_textInput')
-	if (document.querySelector('.J_textEditorContent')) textInputer = document.querySelectorAll('.J_textEditorContent')
-	if (document.querySelector('.J_textInput').shadowRoot) {
-		if (document.querySelector('.J_textInput').shadowRoot.querySelector('#textEditor').shadowRoot) {
-			textInputer = document
-				.querySelector('.J_textInput')
-				.shadowRoot.querySelector('#textEditor')
-				.shadowRoot.querySelectorAll('#textEl')
+	let textInputer = getTmallInputElements()
+	if (textInputer) {
+		for (var i = 0, a; (a = textInputer[i++]); ) {
+			a.value = processedText()
 		}
-	}
-	for (var i = 0, a; (a = textInputer[i++]); ) {
-		a.value = processedText()
 	}
 }
 
@@ -619,7 +619,7 @@ let autorate = () => {
 	}
 }
 
-function test(i) {}
+
 
 // 判断页面后添加对应页面元素
 if (isList) {
